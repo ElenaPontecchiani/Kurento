@@ -1,340 +1,335 @@
 /*
- * Copyright 2018 Kurento (https://www.kurento.org)
+ * (C) Copyright 2014 Kurento (http://kurento.org/)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
  */
 
-const ws = new WebSocket('wss://' + location.host + '/helloworld');
+var ws = new WebSocket('wss://' + location.host + '/call');
+var videoInput;
+var videoOutput;
+var webRtcPeer;
+var response;
+var callerMessage;
+var from;
 
-let webRtcPeer;
+var registerName = null;
+var registerState = null;
+const NOT_REGISTERED = 0;
+const REGISTERING = 1;
+const REGISTERED = 2;
 
-// UI
-let uiLocalVideo;
-let uiRemoteVideo;
-let uiState = null;
-const UI_IDLE = 0;
-const UI_STARTING = 1;
-const UI_STARTED = 2;
-
-window.onload = function()
-{
-  console = new Console();
-  console.log("Page loaded");
-  uiLocalVideo = document.getElementById('uiLocalVideo');
-  uiRemoteVideo = document.getElementById('uiRemoteVideo');
-  uiSetState(UI_IDLE);
+function setRegisterState(nextState) {
+	switch (nextState) {
+	case NOT_REGISTERED:
+		enableButton('#register', 'register()');
+		setCallState(NO_CALL);
+		break;
+	case REGISTERING:
+		disableButton('#register');
+		break;
+	case REGISTERED:
+		disableButton('#register');
+		setCallState(NO_CALL);
+		break;
+	default:
+		return;
+	}
+	registerState = nextState;
 }
 
-window.onbeforeunload = function()
-{
-  console.log("Page unload - Close WebSocket");
-  ws.close();
+var callState = null;
+const NO_CALL = 0;
+const PROCESSING_CALL = 1;
+const IN_CALL = 2;
+
+function setCallState(nextState) {
+	switch (nextState) {
+	case NO_CALL:
+		enableButton('#call', 'call()');
+		disableButton('#terminate');
+		disableButton('#play');
+		break;
+	case PROCESSING_CALL:
+		disableButton('#call');
+		disableButton('#terminate');
+		disableButton('#play');
+		break;
+	case IN_CALL:
+		disableButton('#call');
+		enableButton('#terminate', 'stop()');
+		disableButton('#play');
+		break;
+	default:
+		return;
+	}
+	callState = nextState;
 }
 
-function explainUserMediaError(err)
-{
-  const n = err.name;
-  if (n === 'NotFoundError' || n === 'DevicesNotFoundError') {
-    return "Missing webcam for required tracks";
-  }
-  else if (n === 'NotReadableError' || n === 'TrackStartError') {
-    return "Webcam is already in use";
-  }
-  else if (n === 'OverconstrainedError' || n === 'ConstraintNotSatisfiedError') {
-    return "Webcam doesn't provide required tracks";
-  }
-  else if (n === 'NotAllowedError' || n === 'PermissionDeniedError') {
-    return "Webcam permission has been denied by the user";
-  }
-  else if (n === 'TypeError') {
-    return "No media tracks have been requested";
-  }
-  else {
-    return "Unknown error: " + err;
-  }
+window.onload = function() {
+	console = new Console();
+	setRegisterState(NOT_REGISTERED);
+	var drag = new Draggabilly(document.getElementById('videoSmall'));
+	videoInput = document.getElementById('videoInput');
+	videoOutput = document.getElementById('videoOutput');
+	document.getElementById('name').focus();
 }
 
-function sendError(message)
-{
-  console.error(message);
-
-  sendMessage({
-    id: 'ERROR',
-    message: message,
-  });
+window.onbeforeunload = function() {
+	ws.close();
 }
 
-function sendMessage(message)
-{
-  if (ws.readyState !== ws.OPEN) {
-    console.warn("[sendMessage] Skip, WebSocket session isn't open");
-    return;
-  }
+ws.onmessage = function(message) {
+	var parsedMessage = JSON.parse(message.data);
+	console.info('Received message: ' + message.data);
 
-  const jsonMessage = JSON.stringify(message);
-  console.log("[sendMessage] message: " + jsonMessage);
-  ws.send(jsonMessage);
+	switch (parsedMessage.id) {
+	case 'registerResponse':
+		registerResponse(parsedMessage);
+		break;
+	case 'callResponse':
+		callResponse(parsedMessage);
+		break;
+	case 'incomingCall':
+		incomingCall(parsedMessage);
+		break;
+	case 'startCommunication':
+		startCommunication(parsedMessage);
+		break;
+	case 'stopCommunication':
+		console.info('Communication ended by remote peer');
+		stop(true);
+		break;
+	case 'iceCandidate':
+		webRtcPeer.addIceCandidate(parsedMessage.candidate, function(error) {
+			if (error)
+				return console.error('Error adding candidate: ' + error);
+		});
+		break;
+	default:
+		console.error('Unrecognized message', parsedMessage);
+	}
 }
 
-
-
-/* ============================= */
-/* ==== WebSocket signaling ==== */
-/* ============================= */
-
-ws.onmessage = function(message)
-{
-  const jsonMessage = JSON.parse(message.data);
-  console.log("[onmessage] Received message: " + message.data);
-
-  switch (jsonMessage.id) {
-    case 'PROCESS_SDP_ANSWER':
-      handleProcessSdpAnswer(jsonMessage);
-      break;
-    case 'ADD_ICE_CANDIDATE':
-      handleAddIceCandidate(jsonMessage);
-      break;
-    case 'ERROR':
-      handleError(jsonMessage);
-      break;
-    default:
-      // Ignore the message
-      console.warn("[onmessage] Invalid message, id: " + jsonMessage.id);
-      break;
-  }
+function registerResponse(message) {
+	if (message.response == 'accepted') {
+		setRegisterState(REGISTERED);
+	} else {
+		setRegisterState(NOT_REGISTERED);
+		var errorMessage = message.message ? message.message
+				: 'Unknown reason for register rejection.';
+		console.log(errorMessage);
+		alert('Error registering user. See console for further information.');
+	}
 }
 
-// PROCESS_SDP_ANSWER ----------------------------------------------------------
-
-function handleProcessSdpAnswer(jsonMessage)
-{
-  console.log("[handleProcessSdpAnswer] SDP Answer from Kurento, process in WebRTC Peer");
-
-  if (webRtcPeer == null) {
-    console.warn("[handleProcessSdpAnswer] Skip, no WebRTC Peer");
-    return;
-  }
-
-  webRtcPeer.processAnswer(jsonMessage.sdpAnswer, (err) => {
-    if (err) {
-      sendError("[handleProcessSdpAnswer] Error: " + err);
-      stop();
-      return;
-    }
-
-    console.log("[handleProcessSdpAnswer] SDP Answer ready; start remote video");
-    startVideo(uiRemoteVideo);
-
-    uiSetState(UI_STARTED);
-  });
+function callResponse(message) {
+	if (message.response != 'accepted') {
+		console.info('Call not accepted by peer. Closing call');
+		var errorMessage = message.message ? message.message
+				: 'Unknown reason for call rejection.';
+		console.log(errorMessage);
+		stop();
+	} else {
+		setCallState(IN_CALL);
+		webRtcPeer.processAnswer(message.sdpAnswer, function(error) {
+			if (error)
+				return console.error(error);
+		});
+	}
 }
 
-// ADD_ICE_CANDIDATE -----------------------------------------------------------
-
-function handleAddIceCandidate(jsonMessage)
-{
-  if (webRtcPeer == null) {
-    console.warn("[handleAddIceCandidate] Skip, no WebRTC Peer");
-    return;
-  }
-
-  webRtcPeer.addIceCandidate(jsonMessage.candidate, (err) => {
-    if (err) {
-      console.error("[handleAddIceCandidate] " + err);
-      return;
-    }
-  });
+function startCommunication(message) {
+	setCallState(IN_CALL);
+	webRtcPeer.processAnswer(message.sdpAnswer, function(error) {
+		if (error)
+			return console.error(error);
+	});
 }
 
-// STOP ------------------------------------------------------------------------
+function incomingCall(message) {
+	// If bussy just reject without disturbing user
+	if (callState != NO_CALL) {
+		var response = {
+			id : 'incomingCallResponse',
+			from : message.from,
+			callResponse : 'reject',
+			message : 'bussy'
+		};
+		return sendMessage(response);
+	}
 
-function stop()
-{
-  if (uiState == UI_IDLE) {
-    console.log("[stop] Skip, already stopped");
-    return;
-  }
+	setCallState(PROCESSING_CALL);
+	if (confirm('User ' + message.from
+			+ ' is calling you. Do you accept the call?')) {
+		showSpinner(videoInput, videoOutput);
 
-  console.log("[stop]");
+		from = message.from;
+		var options = {
+			localVideo : videoInput,
+			remoteVideo : videoOutput,
+			onicecandidate : onIceCandidate,
+			onerror : onError
+		}
+		webRtcPeer = new kurentoUtils.WebRtcPeer.WebRtcPeerSendrecv(options,
+				function(error) {
+					if (error) {
+						return console.error(error);
+					}
+					webRtcPeer.generateOffer(onOfferIncomingCall);
+				});
 
-  if (webRtcPeer) {
-    webRtcPeer.dispose();
-    webRtcPeer = null;
-  }
-
-  uiSetState(UI_IDLE);
-  hideSpinner(uiLocalVideo, uiRemoteVideo);
-
-  sendMessage({
-    id: 'STOP',
-  });
+	} else {
+		var response = {
+			id : 'incomingCallResponse',
+			from : message.from,
+			callResponse : 'reject',
+			message : 'user declined'
+		};
+		sendMessage(response);
+		stop();
+	}
 }
 
-// ERROR -----------------------------------------------------------------------
-
-function handleError(jsonMessage)
-{
-  const errMessage = jsonMessage.message;
-  console.error("Kurento error: " + errMessage);
-
-  console.log("Assume that the other side stops after an error...");
-  stop();
+function onOfferIncomingCall(error, offerSdp) {
+	if (error)
+		return console.error("Error generating the offer");
+	var response = {
+		id : 'incomingCallResponse',
+		from : from,
+		callResponse : 'accept',
+		sdpOffer : offerSdp
+	};
+	sendMessage(response);
 }
 
+function register() {
+	var name = document.getElementById('name').value;
+	if (name == '') {
+		window.alert('You must insert your user name');
+		return;
+	}
+	setRegisterState(REGISTERING);
 
-
-/* ==================== */
-/* ==== UI actions ==== */
-/* ==================== */
-
-// Start -----------------------------------------------------------------------
-
-function uiStart()
-{
-  console.log("[start] Create WebRtcPeerSendrecv");
-  uiSetState(UI_STARTING);
-  showSpinner(uiLocalVideo, uiRemoteVideo);
-
-  const options = {
-    localVideo: uiLocalVideo,
-    remoteVideo: uiRemoteVideo,
-    mediaConstraints: { audio: true, video: true },
-    onicecandidate: (candidate) => sendMessage({
-      id: 'ADD_ICE_CANDIDATE',
-      candidate: candidate,
-    }),
-  };
-
-  webRtcPeer = new kurentoUtils.WebRtcPeer.WebRtcPeerSendrecv(options,
-      function(err)
-  {
-    if (err) {
-      sendError("[start/WebRtcPeerSendrecv] Error: "
-          + explainUserMediaError(err));
-      stop();
-      return;
-    }
-
-    console.log("[start/WebRtcPeerSendrecv] Created; start local video");
-    startVideo(uiLocalVideo);
-
-    console.log("[start/WebRtcPeerSendrecv] Generate SDP Offer");
-    webRtcPeer.generateOffer((err, sdpOffer) => {
-      if (err) {
-        sendError("[start/WebRtcPeerSendrecv/generateOffer] Error: " + err);
-        stop();
-        return;
-      }
-
-      sendMessage({
-        id: 'PROCESS_SDP_OFFER',
-        sdpOffer: sdpOffer,
-      });
-
-      console.log("[start/WebRtcPeerSendrecv/generateOffer] Done!");
-      uiSetState(UI_STARTED);
-    });
-  });
+	var message = {
+		id : 'register',
+		name : name
+	};
+	sendMessage(message);
+	document.getElementById('peer').focus();
 }
 
-// Stop ------------------------------------------------------------------------
+function call() {
+	if (document.getElementById('peer').value == '') {
+		window.alert('You must specify the peer name');
+		return;
+	}
+	setCallState(PROCESSING_CALL);
+	showSpinner(videoInput, videoOutput);
 
-function uiStop()
-{
-  stop();
+	var options = {
+		localVideo : videoInput,
+		remoteVideo : videoOutput,
+		onicecandidate : onIceCandidate,
+		onerror : onError
+	}
+	webRtcPeer = new kurentoUtils.WebRtcPeer.WebRtcPeerSendrecv(options,
+			function(error) {
+				if (error) {
+					return console.error(error);
+				}
+				webRtcPeer.generateOffer(onOfferCall);
+			});
 }
 
-// -----------------------------------------------------------------------------
-
-
-
-/* ================== */
-/* ==== UI state ==== */
-/* ================== */
-
-function uiSetState(newState)
-{
-  switch (newState) {
-    case UI_IDLE:
-      uiEnableElement('#uiStartBtn', 'uiStart()');
-      uiDisableElement('#uiStopBtn');
-      break;
-    case UI_STARTING:
-      uiDisableElement('#uiStartBtn');
-      uiDisableElement('#uiStopBtn');
-      break;
-    case UI_STARTED:
-      uiDisableElement('#uiStartBtn');
-      uiEnableElement('#uiStopBtn', 'uiStop()');
-      break;
-    default:
-      console.warn("[setState] Skip, invalid state: " + newState);
-      return;
-  }
-  uiState = newState;
+function onOfferCall(error, offerSdp) {
+	if (error)
+		return console.error('Error generating the offer');
+	console.log('Invoking SDP offer callback function');
+	var message = {
+		id : 'call',
+		from : document.getElementById('name').value,
+		to : document.getElementById('peer').value,
+		sdpOffer : offerSdp
+	};
+	sendMessage(message);
 }
 
-function uiEnableElement(id, onclickHandler)
-{
-  $(id).attr('disabled', false);
-  if (onclickHandler) {
-    $(id).attr('onclick', onclickHandler);
-  }
+function stop(message) {
+	setCallState(NO_CALL);
+	if (webRtcPeer) {
+		webRtcPeer.dispose();
+		webRtcPeer = null;
+
+		if (!message) {
+			var message = {
+				id : 'stop'
+			}
+			sendMessage(message);
+		}
+	}
+	hideSpinner(videoInput, videoOutput);
 }
 
-function uiDisableElement(id)
-{
-  $(id).attr('disabled', true);
-  $(id).removeAttr('onclick');
+function onError() {
+	setCallState(NO_CALL);
 }
 
-function showSpinner()
-{
-  for (let i = 0; i < arguments.length; i++) {
-    arguments[i].poster = './img/transparent-1px.png';
-    arguments[i].style.background = "center transparent url('./img/spinner.gif') no-repeat";
-  }
+function onIceCandidate(candidate) {
+	console.log("Local candidate" + JSON.stringify(candidate));
+
+	var message = {
+		id : 'onIceCandidate',
+		candidate : candidate
+	};
+	sendMessage(message);
 }
 
-function hideSpinner()
-{
-  for (let i = 0; i < arguments.length; i++) {
-    arguments[i].src = '';
-    arguments[i].poster = './img/webrtc.png';
-    arguments[i].style.background = '';
-  }
+function sendMessage(message) {
+	var jsonMessage = JSON.stringify(message);
+	console.log('Sending message: ' + jsonMessage);
+	ws.send(jsonMessage);
 }
 
-function startVideo(video)
-{
-  // Manually start the <video> HTML element
-  // This is used instead of the 'autoplay' attribute, because iOS Safari
-  // requires a direct user interaction in order to play a video with audio.
-  // Ref: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video
-  video.play().catch((err) => {
-    if (err.name === 'NotAllowedError') {
-      console.error("[start] Browser doesn't allow playing video: " + err);
-    }
-    else {
-      console.error("[start] Error in video.play(): " + err);
-    }
-  });
+function showSpinner() {
+	for (var i = 0; i < arguments.length; i++) {
+		arguments[i].poster = './img/transparent-1px.png';
+		arguments[i].style.background = 'center transparent url("./img/spinner.gif") no-repeat';
+	}
+}
+
+function hideSpinner() {
+	for (var i = 0; i < arguments.length; i++) {
+		arguments[i].src = '';
+		arguments[i].poster = './img/webrtc.png';
+		arguments[i].style.background = '';
+	}
+}
+
+function disableButton(id) {
+	$(id).attr('disabled', true);
+	$(id).removeAttr('onclick');
+}
+
+function enableButton(id, functionName) {
+	$(id).attr('disabled', false);
+	$(id).attr('onclick', functionName);
 }
 
 /**
  * Lightbox utility (to display media pipeline image in a modal dialog)
  */
 $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
-  event.preventDefault();
-  $(this).ekkoLightbox();
+	event.preventDefault();
+	$(this).ekkoLightbox();
 });

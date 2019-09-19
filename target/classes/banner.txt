@@ -6,5 +6,5 @@
    |   |_|\_\_,_|_| \___|_||_\__\___/   |
    |                                    |
    '------------------------------------'
-       Kurento Java Tutorial - Hello World
+       Kurento Java Tutorial - One2One Call
        Version 6.11.0

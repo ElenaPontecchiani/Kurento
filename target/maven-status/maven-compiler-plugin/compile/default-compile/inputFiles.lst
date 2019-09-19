@@ -1,3 +1,5 @@
-C:\Users\elepo\Desktop\kurento-tutorial-java\kurento-hello-world\src\main\java\org\kurento\tutorial\helloworld\Application.java
-C:\Users\elepo\Desktop\kurento-tutorial-java\kurento-hello-world\src\main\java\org\kurento\tutorial\helloworld\Handler.java
-C:\Users\elepo\Desktop\kurento-tutorial-java\kurento-hello-world\src\main\java\org\kurento\tutorial\helloworld\UserSession.java
+C:\Users\elepo\Desktop\kurento-tutorial-java\kurento-one2one-call\src\main\java\org\kurento\tutorial\one2onecall\One2OneCallApp.java
+C:\Users\elepo\Desktop\kurento-tutorial-java\kurento-one2one-call\src\main\java\org\kurento\tutorial\one2onecall\UserRegistry.java
+C:\Users\elepo\Desktop\kurento-tutorial-java\kurento-one2one-call\src\main\java\org\kurento\tutorial\one2onecall\CallMediaPipeline.java
+C:\Users\elepo\Desktop\kurento-tutorial-java\kurento-one2one-call\src\main\java\org\kurento\tutorial\one2onecall\UserSession.java
+C:\Users\elepo\Desktop\kurento-tutorial-java\kurento-one2one-call\src\main\java\org\kurento\tutorial\one2onecall\CallHandler.java
