@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--DEMO2-->
 <html>
 
 <head>
@@ -7,7 +8,7 @@
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="expires" content="0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="img/kurento.png" type="image/png" />
+    <link rel="shortcut icon" href="./img/kurento.png" type="image/png" />
 
     <link rel="stylesheet" href="webjars/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="webjars/ekko-lightbox/dist/ekko-lightbox.min.css">
@@ -21,9 +22,9 @@
     <script src="/webjars/webrtc-adapter/release/adapter.js"></script>
     <script src="webjars/demo-console/index.js"></script>
 
-    <script src="js/kurento-utils.js"></script>
-    <script src="js/index.js"></script>
-    <title>Kurento Tutorial 4: Video Call 1 to 1 with WebRTC</title>
+    <script src="./js/kurento-utils.js"></script>
+    <script src="./js/index.js"></script>
+    <title>Demo2</title>
 </head>
 
 <body>
@@ -32,7 +33,7 @@
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
-                    <a class="navbar-brand" href=".">Prima prova applicazione Kurento</a>
+                    <a class="navbar-brand" href="./">Demo 2</a>
                 </div>
 
             </div>
@@ -40,34 +41,52 @@
     </header>
     <div class="container">
         <div class="page-header">
-            <h1>Videochiamata tramite username</h1>
-            <p>
-                L'applicazione consiste in una videochiamata 1 a 1 effettuata tramite l'inserimento di un username
+            <h1>Demo applicazione: videochiamata e registrazione</h1>
+            <p>L'applicazione consente di videochiamare un utente e sucessivamente riprodurre le videochiamata effettuata. Come utilizzare l'app:
             </p>
-
+            <ol>
+                <li>Aprire la pagina con un broswer compatibile con WebRTC (Chrome, Firefox, Safari);</li>
+                <li>Inserisci l'username personale con il quale gli altri utenti ti possono contattare nel campo <i>Username personale</i>;
+                </li>
+                <li>Registrati con tale username cliccando su <i>Registrati</i>;
+                </li>
+                <li>Digita l'username di chi vuoi chiamare nel campo <i>Username destinatario</i>;
+                </li>
+                <li>Clicca su <i>Chiama</i> per inoltrare la richiesta;
+                </li>
+                <li> Consenti l'accesso al microfono e alla videocamera. Avverrà una negoziazione SDP e poi avverrà la chiamata;
+                </li>
+                <li>Il destinatario deve accettare la chiamata (gli compare un dialog che lo avverte della richiesta e gli consente di accettarla);</li>
+                <li>Quando vuoi finire la chiamata clicca <i>Stop</i>;
+                </li>
+                <li>Tutte le videochiamate sono registrate automaticamente. Se vuoi riprodurre una videochiamata fatta con l'app inserisci il nome del destinatario con cui hai fatto la chiamata nel campo <i>Username destinatario</i> e clicca su <i>Replay.</i>
+                </li>
+            </ol>
         </div>
         <div class="row">
             <div class="col-md-5">
                 <label class="control-label" for="name">Username personale</label>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <input id="name" name="name" class="form-control" type="text" onkeydown="if (event.keyCode == 13) register();" />
                     </div>
-                    <div class="col-md-6 text-right">
+                    <div class="col-md-7 text-right">
                         <a id="register" href="#" class="btn btn-primary"><span
 							class="glyphicon glyphicon-plus"></span> Registrati</a>
                     </div>
                 </div>
 
-                <br /> <br /> <label class="control-label" for="peer">Username di chi chiamo</label>
+                <br /> <br /> <label class="control-label" for="peer">Username destinatario</label>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <input id="peer" name="peer" class="form-control" type="text" onkeydown="if (event.keyCode == 13) call();">
                     </div>
-                    <div class="col-md-6 text-right">
+                    <div class="col-md-7 text-right">
                         <a id="call" href="#" class="btn btn-success"><span
 							class="glyphicon glyphicon-play"></span> Chiama</a> <a id="terminate" href="#" class="btn btn-danger"><span
-							class="glyphicon glyphicon-stop"></span> Stop</a>
+							class="glyphicon glyphicon-stop"></span> Stop</a> <a id="play" href="#" class="btn btn-warning"><span
+							class="glyphicon glyphicon-play-circle"></span>Replay</a>
+
                     </div>
                 </div>
                 <br /> <label class="control-label" for="console">Console</label><br>
@@ -78,13 +97,51 @@
             </div>
             <div class="col-md-7">
                 <div id="videoBig">
-                    <video id="videoOutput" autoplay width="640px" height="480px" poster="img/webrtc.png"></video>
+                    <video id="videoOutput" autoplay width="640px" height="480px" poster="./img/webrtc.png"></video>
                 </div>
                 <div id="videoSmall">
-                    <video id="videoInput" autoplay width="240px" height="180px" poster="img/webrtc.png"></video>
+                    <video id="videoInput" autoplay width="240px" height="180px" poster="./img/webrtc.png"></video>
                 </div>
             </div>
         </div>
+        <section>
+            <div>
+                <form id="fileInfo">
+                    <input type="file" id="fileInput" name="files" />
+                </form>
+                <button disabled id="sendFile">Send</button>
+                <button disabled id="abortButton">Abort</button>
+            </div>
+
+            <div class="progress">
+                <p class="label2">Send progress: </p>
+                <progress id="sendProgress" max="0" value="0"></progress>
+            </div>
+
+            <div class="progress">
+                <p class="label2">Receive progress: </p>
+                <progress id="receiveProgress" max="0" value="0"></progress>
+            </div>
+
+
+            <a id="download"></a>
+            <span id="status"></span>
+        </section>
+
+
+    </div>
+
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="js/main.js"></script>
+
+    <!--<script src="../../../js/lib/ga.js"></script>-->
+    <!--per ora messo in commento perchè prima non serviva-->
+
+
+
+
+
+    <!--segna come warning ma va bene così-->
     </div>
 
 

@@ -7,20 +7,20 @@
 	<parent>
 		<groupId>org.kurento.tutorial</groupId>
 		<artifactId>kurento-tutorial</artifactId>
-		<version>6.11.0</version>
+		<version>6.11.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>kurento-one2one-call</artifactId>
+	<artifactId>kurento-one2one-call-advanced</artifactId>
 	<packaging>jar</packaging>
 
 	<!-- Project-level information -->
-	<name>Kurento Java Tutorial - One2One Call</name>
-	<description>WebRTC one to one video call</description>
+	<name>Kurento Java Tutorial - One2One Call Advanced</name>
+	<description>WebRTC one to one video call with recording and filtering</description>
 
 	<!-- Project configuration -->
 
 	<properties>
 		<demo.port>8443</demo.port>
-		<start-class>org.kurento.tutorial.one2onecall.One2OneCallApp</start-class>
+		<start-class>org.kurento.tutorial.one2onecalladv.One2OneCallAdvApp</start-class>
 	</properties>
 
 	<dependencies>
@@ -52,16 +52,16 @@
 			<artifactId>demo-console</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>draggabilly</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.webjars.bower</groupId>
 			<artifactId>ekko-lightbox</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.webjars.bower</groupId>
 			<artifactId>webrtc-adapter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>draggabilly</artifactId>
 		</dependency>
 
 		<!-- Kurento -->
@@ -111,7 +111,9 @@
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-assembly-plugin</artifactId>
 						<configuration>
-							<descriptor>src/assembly/bin.xml</descriptor>
+							<descriptors>
+								<descriptor>src/assembly/bin.xml</descriptor>
+							</descriptors>
 							<finalName>${project.artifactId}-${project.version}</finalName>
 							<appendAssemblyId>false</appendAssemblyId>
 						</configuration>

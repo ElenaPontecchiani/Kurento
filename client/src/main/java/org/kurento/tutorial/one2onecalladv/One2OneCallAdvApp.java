@@ -15,7 +15,7 @@
  *
  */
 
-package org.kurento.tutorial.one2onecall;
+package org.kurento.tutorial.one2onecalladv;
 
 import org.kurento.client.KurentoClient;
 import org.springframework.boot.SpringApplication;
@@ -30,11 +30,13 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
  *
  * @author Boni Garcia (bgarcia@gsyc.es)
  * @author Micael Gallego (micael.gallego@gmail.com)
- * @since 4.3.1
+ * @since 5.0.0
  */
 @SpringBootApplication
 @EnableWebSocket
-public class One2OneCallApp implements WebSocketConfigurer {
+public class One2OneCallAdvApp implements WebSocketConfigurer {
+
+  static final String DEFAULT_APP_SERVER_URL = "https://localhost:8443";
 
   @Bean
   public CallHandler callHandler() {
@@ -57,6 +59,6 @@ public class One2OneCallApp implements WebSocketConfigurer {
   }
 
   public static void main(String[] args) throws Exception {
-    SpringApplication.run(One2OneCallApp.class, args);
+    SpringApplication.run(One2OneCallAdvApp.class, args);
   }
 }
