@@ -45,7 +45,7 @@ video,
 #console {
     overflow-y: auto;
     width: 100%;
-    height: 175px;
+    height: 245px;
 }
 
 #videoContainer {
@@ -81,7 +81,7 @@ div.dragged {
 
 div.progress,
 div#bitrate {
-    margin: 0 0 1em 0;
+    margin: 0.3em 0em 0em 0em;
 }
 
 div.progress p.label2 {
@@ -97,4 +97,38 @@ form {
 
 progress {
     width: calc(100% - 8.5em);
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.progress {
+    height: 30px;
+    background-color: #ffff;
+    webkit-box-shadow: inset 0 1px 2px rgb(255, 255, 255);
+    box-shadow: inset 0 1px 2px rgb(255, 255, 255);
+}
+
+#sendProgress {
+    vertical-align: middle;
+}
+
+#receiveProgress {
+    vertical-align: middle;
+}
+
+#contenitoreProgress {
+    margin: 1.5em 0em 0em 0em;
+}
+
+.col-md-5 {
+    display: block;
 }

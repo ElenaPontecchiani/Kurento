@@ -97,37 +97,50 @@
             </div>
             <div class="col-md-7">
                 <div id="videoBig">
-                    <video id="videoOutput" autoplay width="640px" height="480px" poster="./img/webrtc.png"></video>
+                    <video id="videoOutput" autoplay width="640px" height="500px" poster="./img/webrtc.png"></video>
                 </div>
                 <div id="videoSmall">
                     <video id="videoInput" autoplay width="240px" height="180px" poster="./img/webrtc.png"></video>
                 </div>
             </div>
+
+            <section class="col-md-5">
+                <div id="intestazioneFile">
+                    <label class="control-label">Condividi file</label>
+                    <p>Condividi con l'interlocutore i tuoi file. E' supportato qualsiasi tipo di file</p>
+
+                </div>
+                <div>
+                    <form id="fileInfo">
+                        <label class="custom-file-upload btn btn-primary" href="#">
+                                <input type="file" id="fileInput" name="files"  />
+                                <span class="glyphicon glyphicon-plus"></span>
+                                Sfoglia..
+                            </label>
+
+
+                    </form>
+                    <button disabled id="sendFile" href="#" class="btn btn-success"><span
+                    class="glyphicon glyphicon-play"></span> Invia</button>
+                    <button disabled id="abortButton" href="#" class="btn btn-danger"><span
+                    class="glyphicon glyphicon-stop"></span> Sospendi</button>
+                </div>
+                <div id="contenitoreProgress">
+                    <div class="progress">
+                        <p class="label2">Send progress: </p>
+                        <progress id="sendProgress" max="0" value="0"></progress>
+                    </div>
+
+                    <div class="progress">
+                        <p class="label2">Receive progress: </p>
+                        <progress id="receiveProgress" max="0" value="0"></progress>
+                    </div>
+                </div>
+
+                <a id="download"></a>
+                <span id="status"></span>
+            </section>
         </div>
-        <section>
-            <div>
-                <form id="fileInfo">
-                    <input type="file" id="fileInput" name="files" />
-                </form>
-                <button disabled id="sendFile">Send</button>
-                <button disabled id="abortButton">Abort</button>
-            </div>
-
-            <div class="progress">
-                <p class="label2">Send progress: </p>
-                <progress id="sendProgress" max="0" value="0"></progress>
-            </div>
-
-            <div class="progress">
-                <p class="label2">Receive progress: </p>
-                <progress id="receiveProgress" max="0" value="0"></progress>
-            </div>
-
-
-            <a id="download"></a>
-            <span id="status"></span>
-        </section>
-
 
     </div>
 
