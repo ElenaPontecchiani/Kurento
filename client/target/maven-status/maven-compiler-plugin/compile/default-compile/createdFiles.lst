@@ -1,11 +1,16 @@
 org\kurento\tutorial\one2onecalladv\PlayMediaPipeline.class
 org\kurento\tutorial\one2onecalladv\UserSession.class
 org\kurento\tutorial\one2onecalladv\One2OneCallAdvApp.class
+Test.class
 org\kurento\tutorial\one2onecalladv\CallHandler$2.class
 org\kurento\tutorial\one2onecalladv\CallMediaPipeline.class
 org\kurento\tutorial\one2onecalladv\CallHandler.class
+controller\ScreenSharing.class
 org\kurento\tutorial\one2onecalladv\PlayMediaPipeline$1.class
 org\kurento\tutorial\one2onecalladv\CallHandler$3.class
 org\kurento\tutorial\one2onecalladv\UserRegistry.class
+config\Config.class
+model\UserSessionOne2Many.class
+signaling\ScreenSharingWebSocket.class
 org\kurento\tutorial\one2onecalladv\CallHandler$1.class
 org\kurento\tutorial\one2onecalladv\CallHandler$4.class
