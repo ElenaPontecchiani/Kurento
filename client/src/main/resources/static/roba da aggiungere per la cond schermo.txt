@@ -1,0 +1,29 @@
+
+dentro row
+<div class="col-md-5">
+                <div class="row">
+                    <div class="col-md-12">
+                        <a id="presenter" href="#" class="btn btn-success"><span class="glyphicon glyphicon-play"></span> Presenter </a>
+                        <a id="viewer" href="#" class="btn btn-primary"><span class="glyphicon glyphicon-user"></span> Viewer</a>
+                        <a id="stop" href="#" class="btn btn-danger"><span class="glyphicon glyphicon-stop"></span> Stop</a>
+                    </div>
+                </div>
+                <br /> <label class="control-label" for="console">Console</label><br>
+                <br>
+                <div id="console2" class="democonsole">
+                    <ul></ul>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div id="videoBig2">
+                    <video id="video" autoplay width="640px" height="480px" poster="./img/webrtc.png"></video>
+                </div>
+                <div>
+                    <video id="webcam" autoplay width="640px" height="480px" poster="./img/webrtc.png"></video>
+                </div>
+            </div>
+
+
+
+<script src="js/getScreenId.js"></script>
+    <script src="js/screen-sharing.js"></script>

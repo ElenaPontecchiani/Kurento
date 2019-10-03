@@ -1,4 +1,5 @@
-(function(window){
+//DEMO2 
+(function(window) {
     /* jshint node: true */
     'use strict';
 
@@ -18,9 +19,8 @@
 
      **/
 
-    function Console(console)
-    {
-        if(!(this instanceof Console))
+    function Console(console) {
+        if (!(this instanceof Console))
             return new Console(console)
 
         console = console || window.console
@@ -28,13 +28,12 @@
         // ensure we have items
         var items = initConsole();
 
-        this.log   = log.bind(items, console, 'log')
-        this.info  = log.bind(items, console, 'info')
+        this.log = log.bind(items, console, 'log')
+        this.info = log.bind(items, console, 'info')
         this.error = log.bind(items, console, 'error')
-        this.warn  = log.bind(items, console, 'warn')
+        this.warn = log.bind(items, console, 'warn')
 
-        this.trace = function()
-        {
+        this.trace = function() {
             var stack = (new Error).stack
 
             log.apply(items, arguments.unshift(console, 'trace').push(stack));
@@ -103,8 +102,8 @@
             var hasSpace = reSpace.test(key);
             var quoteChar = hasSpace ? '\'' : '';
 
-            var content = span(quoteChar + key + quoteChar, 'key') + span(': ')
-                + renderData(data[key])
+            var content = span(quoteChar + key + quoteChar, 'key') + span(': ') +
+                renderData(data[key])
 
             return '<div data-type="object-key">' + content + '</div>';
         }
@@ -128,8 +127,7 @@
         }
         if (data instanceof Error) {
             return span(data.toString(), 'error');
-        }
-        else if (data instanceof Window) {
+        } else if (data instanceof Window) {
             return span('window', 'window');
         }
         if (data instanceof DocumentType) {
