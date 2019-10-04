@@ -1,20 +1,3 @@
-/*
- * (C) Copyright 2014 Kurento (http://kurento.org/)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
 package org.kurento.tutorial.one2onecalladv;
 
 import java.io.IOException;
@@ -40,11 +23,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 /**
- * Protocol handler for 1 to 1 video call communication.
- *
- * @author Boni Garcia (bgarcia@gsyc.es)
- * @author Micael Gallego (micael.gallego@gmail.com)
- * @since 5.0.0
+ * Gestore del protocollo per la videochiamata 1-1
+ * Data ultima modifica: 04.10.2019
  */
 public class CallHandler extends TextWebSocketHandler {
 
@@ -239,8 +219,8 @@ public class CallHandler extends TextWebSocketHandler {
   }
 
   public void stop(WebSocketSession session) throws IOException {
-    // Both users can stop the communication. A 'stopCommunication'
-    // message will be sent to the other peer.
+    // Entrambi gli user possono stoppare la comunicazione
+    // il mex di stop è inviato indipendentemente all'altro peer
     UserSession stopperUser = registry.getBySession(session);
     if (stopperUser != null) {
       UserSession stoppedUser =
@@ -260,7 +240,7 @@ public class CallHandler extends TextWebSocketHandler {
 
   public void releasePipeline(UserSession session) {
     String sessionId = session.getSessionId();
-    // set to null the endpoint of the other user
+    // per fare il rilascio della pipeline setto come nullo l'endpoint del tizietto che sto chiamando
 
     if (pipelines.containsKey(sessionId)) {
       pipelines.get(sessionId).release();

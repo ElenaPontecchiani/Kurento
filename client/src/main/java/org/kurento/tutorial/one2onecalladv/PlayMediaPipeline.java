@@ -1,20 +1,3 @@
-/*
- * (C) Copyright 2014 Kurento (http://kurento.org/)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
 package org.kurento.tutorial.one2onecalladv;
 
 import static org.kurento.tutorial.one2onecalladv.CallMediaPipeline.RECORDING_EXT;
@@ -36,11 +19,7 @@ import org.springframework.web.socket.WebSocketSession;
 import com.google.gson.JsonObject;
 
 /**
- * Media Pipeline (connection of Media Elements) for playing the recorded one to one video
- * communication.
- * 
- * @author Boni Garcia (bgarcia@gsyc.es)
- * @since 5.0.0
+ * Media pipeline che gestisce il replay della videochiamata
  */
 public class PlayMediaPipeline {
 
@@ -51,17 +30,17 @@ public class PlayMediaPipeline {
   private final PlayerEndpoint player;
 
   public PlayMediaPipeline(KurentoClient kurento, String user, final WebSocketSession session) {
-    // Media pipeline
+ 
     pipeline = kurento.createMediaPipeline();
 
-    // Media Elements (WebRtcEndpoint, PlayerEndpoint)
+    // Media Elements che servono alla pipeline:WebRtcEndpoint, PlayerEndpoint
     webRtc = new WebRtcEndpoint.Builder(pipeline).build();
     player = new PlayerEndpoint.Builder(pipeline, RECORDING_PATH + user + RECORDING_EXT).build();
 
-    // Connection
+    // connessione
     player.connect(webRtc);
 
-    // Player listeners
+
     player.addErrorListener(new EventListener<ErrorEvent>() {
       @Override
       public void onEvent(ErrorEvent event) {
@@ -80,7 +59,7 @@ public class PlayMediaPipeline {
       log.error("Error sending playEndOfStream message", e);
     }
 
-    // Release pipeline
+    // rilascio pipeline
     pipeline.release();
     this.webRtc = null;
   }

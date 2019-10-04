@@ -5,19 +5,6 @@
 
     const reSpace = /\s/;
 
-    /**
-     # demo-console
-
-     Show a demo console when working with [requirebin](http://requirebin.com/?gist=6079475). Just
-     include it in one of your require bin demos like this:
-
-     ## Example Usage
-
-     <<< demo/index.js
-
-     ## Reference
-
-     **/
 
     function Console(console) {
         if (!(this instanceof Console))
