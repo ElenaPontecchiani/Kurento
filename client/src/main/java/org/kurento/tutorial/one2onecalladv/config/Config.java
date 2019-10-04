@@ -4,9 +4,6 @@ import com.jfinal.config.*;
 import com.jfinal.template.Engine;
 import controller.ScreenSharing;
 
-/**
- * @author 木数难数
- */
 public class Config extends JFinalConfig{
 
     @Override

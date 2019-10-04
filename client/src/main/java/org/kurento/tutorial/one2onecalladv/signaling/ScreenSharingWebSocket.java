@@ -16,9 +16,6 @@ import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * @author 木数难数
- */
 @ServerEndpoint(value = "/screen-sharing-websocket")
 public class ScreenSharingWebSocket {
 

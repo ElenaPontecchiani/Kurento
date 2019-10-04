@@ -9,9 +9,6 @@ import org.slf4j.LoggerFactory;
 import javax.websocket.Session;
 import java.io.IOException;
 
-/**
- * @author 木数难数
- */
 public class UserSessionOne2Many {
     private static final Logger log = LoggerFactory.getLogger(UserSessionOne2Many.class);
 
