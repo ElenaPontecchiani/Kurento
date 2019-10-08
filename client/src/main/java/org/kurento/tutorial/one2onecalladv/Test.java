@@ -1,9 +1,5 @@
 import java.util.ArrayList;
-/**
- * Test per vedere sharing file
- * Data ultima modifica: 04.10.2019
 
-*/
 public class Test {
 
     private static ArrayList<Integer> a;

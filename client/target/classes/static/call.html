@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="webjars/demo-console/index.css">
     <link rel="stylesheet" href="css/kurento.css">
 
+
     <script src="webjars/jquery/dist/jquery.min.js"></script>
     <script src="webjars/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="webjars/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
@@ -191,10 +192,81 @@
 
         </div>
 
+        <div id="low_container">
+
+            <label class="control-label" for="name">Invia e ricevi messaggi</label>
+            <p>Manda messaggi real time al tuo interlocutore</p>
+            <div id="buttons">
+
+                <button id="startButton" class="btn btn-primary"><span
+                    class="glyphicon glyphicon-plus"></span>Inizia la chat</button>
+                <button id="sendButton" class="btn btn-success" disabled><span class="glyphicon glyphicon-play"></span>Invia</button>
+                <button id="closeButton" class="btn btn-danger" disabled><span class="glyphicon glyphicon-stop"></span>Chiudi la chat</button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+
+            <div id="sendReceive">
+                <div id="send">
+                    <p>Messaggi inviati:</p>
+                    <textarea id="dataChannelSend" disabled placeholder="Press Start, enter some text, then press Send."></textarea>
+                </div>
+                <div id="receive">
+                    <p>Messaggi ricevuti:</p>
+                    <textarea id="dataChannelReceive" disabled></textarea>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
 
     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
     <script src="js/main.js"></script>
+
+
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="js/main2.js" async></script>
+
+    <script src="js/ga.js"></script>
 
 
 

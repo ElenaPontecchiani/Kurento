@@ -1,3 +1,9 @@
+/*
+roba per il screen sharing
+ *
+ */
+
+
 /**stream per la condivisione schermo, diverso da quello per video chiamata */
 var ws2 = new WebSocket('wss://' + location.host + '/screen-sharing-websocket');
 var video;

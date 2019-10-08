@@ -1,3 +1,5 @@
+/* mia demo
+ */
 'use strict';
 
 let localConnection;
@@ -83,6 +85,7 @@ function sendData() {
     const file = fileInput.files[0];
     console.log(`File is ${[file.name, file.size, file.type, file.lastModified].join(' ')}`);
 
+    // Handle 0 size files.
     statusMessage.textContent = '';
     downloadAnchor.textContent = '';
     if (file.size === 0) {
@@ -128,7 +131,8 @@ function closeDataChannels() {
     localConnection = null;
     remoteConnection = null;
     console.log('Closed peer connections');
-    //per riabilitare il file select
+
+    // re-enable the file select
     fileInput.disabled = false;
     abortButton.disabled = true;
     sendFileButton.disabled = false;
@@ -177,7 +181,8 @@ function onReceiveMessageCallback(event) {
 
     receiveProgress.value = receivedSize;
 
-
+    // we are assuming that our signaling protocol told
+    // about the expected file size (and name, hash, etc).
     const file = fileInput.files[0];
     if (receivedSize === file.size) {
         const received = new Blob(receiveBuffer);
@@ -221,7 +226,7 @@ async function onReceiveChannelStateChange() {
     }
 }
 
-// display delle statistiche di trasmissione
+// display bitrate statistics.
 async function displayStats() {
     if (remoteConnection && remoteConnection.iceConnectionState === 'connected') {
         const stats = await remoteConnection.getStats();
@@ -235,7 +240,7 @@ async function displayStats() {
             if (timestampPrev === activeCandidatePair.timestamp) {
                 return;
             }
-            // calcolo bitrate corrente
+            // calculate current bitrate
             const bytesNow = activeCandidatePair.bytesReceived;
             const bitrate = Math.round((bytesNow - bytesPrev) * 8 /
                 (activeCandidatePair.timestamp - timestampPrev));
