@@ -14,9 +14,9 @@ const startButton = document.querySelector('button#startButton');
 const sendButton = document.querySelector('button#sendButton');
 const closeButton = document.querySelector('button#closeButton');
 
-startButton.onclick = createConnection;
-sendButton.onclick = sendData;
-closeButton.onclick = closeDataChannels;
+startButton.onclick = createConnection2;
+sendButton.onclick = sendData2;
+closeButton.onclick = closeDataChannels2;
 
 function enableStartButton() {
     startButton.disabled = false;
@@ -26,7 +26,7 @@ function disableSendButton() {
     sendButton.disabled = true;
 }
 
-function createConnection() {
+function createConnection2() {
     dataChannelSend.placeholder = '';
     const servers = null;
     window.localConnection2 = localConnection2 = new RTCPeerConnection(servers);
@@ -38,8 +38,8 @@ function createConnection() {
     localConnection2.onicecandidate = e => {
         onIceCandidate(localConnection2, e);
     };
-    sendChannel2.onopen = onSendChannelStateChange;
-    sendChannel2.onclose = onSendChannelStateChange;
+    sendChannel2.onopen = onSendChannelStateChange2;
+    sendChannel2.onclose = onSendChannelStateChange2;
 
     window.remoteConnection2 = remoteConnection2 = new RTCPeerConnection(servers);
     console.log('Created remote peer connection object remoteConnection2');
@@ -47,7 +47,7 @@ function createConnection() {
     remoteConnection2.onicecandidate = e => {
         onIceCandidate(remoteConnection2, e);
     };
-    remoteConnection2.ondatachannel = receiveChannelCallback;
+    remoteConnection2.ondatachannel = receiveChannelCallback2;
 
     localConnection2.createOffer().then(
         gotDescription1,
@@ -61,13 +61,13 @@ function onCreateSessionDescriptionError(error) {
     console.log('Failed to create session description: ' + error.toString());
 }
 
-function sendData() {
+function sendData2() {
     const data = dataChannelSend.value;
     sendChannel2.send(data);
     console.log('Sent Data: ' + data);
 }
 
-function closeDataChannels() {
+function closeDataChannels2() {
     console.log('Closing data channels');
     sendChannel2.close();
     console.log('Closed data channel with label: ' + sendChannel2.label);
@@ -130,20 +130,20 @@ function onAddIceCandidateError(error) {
     console.log(`Failed to add Ice Candidate: ${error.toString()}`);
 }
 
-function receiveChannelCallback(event) {
+function receiveChannelCallback2(event) {
     console.log('Receive Channel Callback');
     receiveChannel2 = event.channel;
-    receiveChannel2.onmessage = onReceiveMessageCallback;
-    receiveChannel2.onopen = onReceiveChannelStateChange;
-    receiveChannel2.onclose = onReceiveChannelStateChange;
+    receiveChannel2.onmessage = onReceiveMessageCallback2;
+    receiveChannel2.onopen = onReceiveChannelStateChange2;
+    receiveChannel2.onclose = onReceiveChannelStateChange2;
 }
 
-function onReceiveMessageCallback(event) {
+function onReceiveMessageCallback2(event) {
     console.log('Received Message');
     dataChannelReceive.value = event.data;
 }
 
-function onSendChannelStateChange() {
+function onSendChannelStateChange2() {
     const readyState = sendChannel2.readyState;
     console.log('Send channel state is: ' + readyState);
     if (readyState === 'open') {
@@ -158,7 +158,7 @@ function onSendChannelStateChange() {
     }
 }
 
-function onReceiveChannelStateChange() {
+function onReceiveChannelStateChange2() {
     const readyState = receiveChannel2.readyState;
     console.log(`Receive channel state is: ${readyState}`);
 }
