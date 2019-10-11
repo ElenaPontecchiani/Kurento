@@ -25,7 +25,7 @@
 
     <script src="js/lib/kurento-utils.js"></script>
     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
-    <script src="./js/registerProva.js"></script>
+    <script src="./js/all.js"></script>
 
     <title>Demo2</title>
 </head>
@@ -47,27 +47,30 @@
     <!-- Vertical navbar -->
 
     <div class="vertical-nav bg-white" id="sidebar">
-
-
         <ul class="nav flex-column bg-white mb-0">
             <li class="nav-item">
-                <a href="register.html" class="nav-link text-dark font-italic bg-light">
+                <a id="registerButton" href="#" class="nav-link text-dark font-italic bg-light" onclick="registerPage()">
                     <i class="fa fa-th-large mr-3 text-primary fa-fw"></i> Registrazione
                 </a>
             </li>
             <li class="nav-item">
-                <a href="videocall.html" class="nav-link text-dark font-italic">
+                <a id="callButton" href="#" class="nav-link text-dark font-italic bg-light" onclick="callPage()">
                     <i class="fa fa-address-card mr-3 text-primary fa-fw"></i> Videochiamata
                 </a>
             </li>
             <li class="nav-item">
-                <a href="shareFile.html" class="nav-link text-dark font-italic">
+                <a id="fileButton" href="#" class="nav-link text-dark font-italic" onclick="filePage()">
                     <i class="fa fa-cubes mr-3 text-primary fa-fw"></i> Condividi file
                 </a>
             </li>
             <li class="nav-item">
-                <a href="prova.html" class="nav-link text-dark font-italic">
+                <a id="chatButton" href="#" class="nav-link text-dark font-italic" onclick="chatPage()">
                     <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i> Chat
+                </a>
+            </li>
+            <li class="nav-item">
+                <a id="helpButton" href="#" class="nav-link text-dark font-italic" onclick="helpPage()">
+                    <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i> Help
                 </a>
             </li>
         </ul>
@@ -80,12 +83,27 @@
     <div class="page-content p-5" id="content">
         <!--CONTIENE LA PAGINA CON TUTTE LE INFORMAZIONI-->
 
+        <div id="intro">
+            <h3>Ciao, ti trovi nella sezione introduttiva</h3>
+            <p>Per richiedere il supporto di un tecnico attraverso l'applicazione, svolgi i seguenti passi:</p>
+            <ol>
+                <li>Registrati con un username, selezionando la sezione "registrati" del menù a sinistra. Con tale username riconoscibile all'interno del sistema</li>
+                <li>Ora puoi sfruttare le funzionalità dell'app: portati sulla sezione "videochiamata" per eseguire la tua prima videochiamata. Per videochiamare il tuo interlocutore basterà inserire il suo username quando richiesto.
+                </li>
+                <li>Le chiamate che effettui sono registrate automaticamente. Per riprodurle basterà premere "Replay" nella schermata della videochiamata</li>
+                <li>Per condividire file con il tuo interlocutore portati nella sezione "Condividi file" del menù a sinistra</li>
+                <li>Per iniziare una chat con il tuo interlocutore portati nella sezione "chat" del menù a sinistra</li>
+            </ol>
+
+
+        </div>
 
 
 
 
 
-        <div class="page-header">
+
+        <div id="registerForm" class="page-header">
             <h4>Registrazione</h4>
             <p>Compila il form di registrazione prima di procedere</p>
 
@@ -110,88 +128,82 @@
                             class="glyphicon glyphicon-plus"></span> Aggiungi </a>
                 </div>
             </div>
-            <!--METTO CONSOLE PER VEDERE ERR, DOPO ANDRA' TOLTA-->
-            <div id="console" class="democonsole">
-                <ul></ul>
-            </div>
-
-
-
-
-
 
         </div>
 
-        <!--
+
         <div class="row">
-
-            <div class="col-md-5">
-                <h4>Fornisci assistenza</h4>
-                <br /> <br /> <label class="control-label" for="peer">Username destinatario</label>
-                <div class="row">
-                    <div class="col-md-5">
-                        <input id="peer" name="peer" class="form-control" type="text" onkeydown="if (event.keyCode == 13) call();">
+            <div id="videocall">
+                <div class="col-md-5">
+                    <h4>Fornisci assistenza</h4>
+                    <br /> <br /> <label class="control-label" for="peer">Username destinatario</label>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <input id="peer" name="peer" class="form-control" type="text" onkeydown="if (event.keyCode == 13) call();">
+                        </div>
+                        <div class="col-md-7 text-right">
+                            <a id="call" href="#" class="btn btn-success">
+                                <span class="glyphicon glyphicon-play"></span> Chiama</a>
+                            <a id="terminate" href="#" class="btn btn-danger">
+                                <span class="glyphicon glyphicon-stop"></span> Stop</a>
+                            <a id="play" href="#" class="btn btn-warning">
+                                <span class="glyphicon glyphicon-play-circle"></span>Replay</a>
+                        </div>
                     </div>
-                    <div class="col-md-7 text-right">
-                        <a id="call" href="#" class="btn btn-success">
-                            <span class="glyphicon glyphicon-play"></span> Chiama</a>
-                        <a id="terminate" href="#" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-stop"></span> Stop</a>
-                        <a id="play" href="#" class="btn btn-warning">
-                            <span class="glyphicon glyphicon-play-circle"></span>Replay</a>
+                    <br /> <label class="control-label" for="console">Console</label><br>
+                    <br>
+
+                </div>
+                <div class="col-md-7">
+                    <div id="videoBig">
+                        <video id="videoOutput" autoplay width="640px" height="448px" poster="./img/webrtc.png"></video>
+                    </div>
+                    <div id="videoSmall">
+                        <video id="videoInput" autoplay width="240px" height="180px" poster="./img/webrtc.png"></video>
                     </div>
                 </div>
-                <br /> <label class="control-label" for="console">Console</label><br>
-                <br>
-                
-            </div>
-            <div class="col-md-7">
-                <div id="videoBig">
-                    <video id="videoOutput" autoplay width="640px" height="448px" poster="./img/webrtc.png"></video>
-                </div>
-                <div id="videoSmall">
-                    <video id="videoInput" autoplay width="240px" height="180px" poster="./img/webrtc.png"></video>
-                </div>
             </div>
 
-            <section id="file" class="col-md-5">
-                <div id="intestazioneFile">
-                    <h4>Condividi file</h4>
-                    <p>Condividi con l'interlocutore i tuoi file. E' supportato qualsiasi tipo di file</p>
+            <div id="file">
+                <section class="col-md-5">
+                    <div id="intestazioneFile">
+                        <h4>Condividi file</h4>
+                        <p>Condividi con l'interlocutore i tuoi file. E' supportato qualsiasi tipo di file</p>
 
-                </div>
-                <div>
-                    <form id="fileInfo">
-                        <label class="custom-file-upload btn btn-primary" href="#">
+                    </div>
+                    <div>
+                        <form id="fileInfo">
+                            <label class="custom-file-upload btn btn-primary" href="#">
                                     <input type="file" id="fileInput" name="files"  />
                                     <span class="glyphicon glyphicon-plus"></span>
                                     Sfoglia..
                                 </label>
-                    </form>
-                    <button disabled id="sendFile" href="#" class="btn btn-success"><span
+                        </form>
+                        <button disabled id="sendFile" href="#" class="btn btn-success"><span
                         class="glyphicon glyphicon-play"></span> Invia</button>
-                    <button disabled id="abortButton" href="#" class="btn btn-danger"><span
+                        <button disabled id="abortButton" href="#" class="btn btn-danger"><span
                         class="glyphicon glyphicon-stop"></span> Sospendi</button>
-                </div>
-
-            </section>
-
-            <section id="progress" class="col-md-7">
-
-                <div id="contenitoreProgress">
-                    <div class="progress">
-                        <p class="label2">Send progress: </p>
-                        <progress id="sendProgress" max="0" value="0"></progress>
                     </div>
-                    <div class="progress">
-                        <p class="label2">Receive progress: </p>
-                        <progress id="receiveProgress" max="0" value="0"></progress>
-                    </div>
-                </div>
 
-                <a id="download"></a>
-                <span id="status"></span>
-            </section>
+                </section>
+
+                <section id="progress" class="col-md-7">
+
+                    <div id="contenitoreProgress">
+                        <div class="progress">
+                            <p class="label2">Send progress: </p>
+                            <progress id="sendProgress" max="0" value="0"></progress>
+                        </div>
+                        <div class="progress">
+                            <p class="label2">Receive progress: </p>
+                            <progress id="receiveProgress" max="0" value="0"></progress>
+                        </div>
+                    </div>
+
+                    <a id="download"></a>
+                    <span id="status"></span>
+                </section>
+            </div>
 
 
 
@@ -219,8 +231,8 @@
                 </div>
             </div>
         </div>
-        -->
-        <p>ESTENDERE CON ROBA SUL CV PER TECNICI E ALTRA ROBA PER CHI CHIEDE</p>
+
+
     </div>
     <!--chiude container della pagina-->
 

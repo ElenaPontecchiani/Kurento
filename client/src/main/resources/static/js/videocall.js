@@ -161,6 +161,7 @@ function registerResponse(message) {
     if (message.response == 'accepted') {
         setRegisterState(REGISTERED);
         document.getElementById('skills').focus();
+        console.log(window.location);
     } else {
         setRegisterState(NOT_REGISTERED);
         var errorMessage = message.response ? message.response :

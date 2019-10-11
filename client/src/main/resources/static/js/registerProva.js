@@ -20,7 +20,7 @@ function setRegisterState(nextState) {
             break;
         case REGISTERING:
             disableButton('#register');
-            disableButton('#call');
+            /*disableButton('#call');*/
             enableButton('#skills_button', 'skills()');
             break;
         case REGISTERED:
@@ -109,9 +109,9 @@ function enableButton(id, functionName) {
 window.onload = function() {
     console = new Console();
     setRegisterState(NOT_REGISTERED);
-    var drag = new Draggabilly(document.getElementById('videoSmall'));
+  /*  var drag = new Draggabilly(document.getElementById('videoSmall'));
     videoInput = document.getElementById('videoInput');
-    videoOutput = document.getElementById('videoOutput');
+    videoOutput = document.getElementById('videoOutput');*/
     document.getElementById('name').focus();
 }
 
@@ -127,12 +127,14 @@ ws.onmessage = function(message) {
         case 'registerResponse':
             registerResponse(parsedMessage);
             break;
-        case 'callResponse':
-            callResponse(parsedMessage);
-            break;
+            
         case 'incomingCall':
             incomingCall(parsedMessage);
             break;
+       /* case 'callResponse':
+            callResponse(parsedMessage);
+            break;
+        
         case 'startCommunication':
             startCommunication(parsedMessage);
             break;
@@ -151,7 +153,7 @@ ws.onmessage = function(message) {
                 if (error)
                     return console.error('Error adding candidate: ' + error);
             });
-            break;
+            break;*/
         default:
             console.error('Unrecognized message', parsedMessage);
     }
@@ -161,7 +163,7 @@ function registerResponse(message) {
     if (message.response == 'accepted') {
         setRegisterState(REGISTERED);
         document.getElementById('skills').focus();
-        console.log(window.location);
+        
     } else {
         setRegisterState(NOT_REGISTERED);
         var errorMessage = message.response ? message.response :
@@ -214,7 +216,7 @@ function playResponse(message) {
 }
 
 function incomingCall(message) {
-    // If bussy just reject without disturbing user
+    //QUI DEVO REINDIRIZZARE ALLA PAGINA videocall.html
     if (callState != NO_CALL && callState != POST_CALL) {
         var response = {
             id: 'incomingCallResponse',
