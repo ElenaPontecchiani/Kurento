@@ -110,13 +110,10 @@ input[type="file"] {
     box-shadow: inset 0 1px 2px rgb(255, 255, 255);
 }
 
-#sendProgress {
-    vertical-align: middle;
-    width: 25em;
-}
-
+#sendProgress,
 #receiveProgress {
     vertical-align: middle;
+    width: 25em;
 }
 
 #contenitoreProgress {
@@ -262,18 +259,8 @@ nav #stdbar li {
     display: none;
 }
 
-#videocall {
-    display: none;
-    padding-bottom: 9px;
-    margin: 40px 0 20px;
-}
-
-#file {
-    display: none;
-    padding-bottom: 9px;
-    margin: 40px 0 20px;
-}
-
+#videocall,
+#file,
 #low_container {
     display: none;
     padding-bottom: 9px;
@@ -284,18 +271,12 @@ nav #stdbar li {
     border-bottom: 0px;
 }
 
-#name {
-    width: 198%;
-}
-
+#name,
 #skills {
     width: 198%;
 }
 
-#infoFile {
-    width: 100%;
-}
-
+#infoFile,
 #progress {
     width: 100%;
 }
