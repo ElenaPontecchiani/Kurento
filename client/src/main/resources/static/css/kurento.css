@@ -10,6 +10,9 @@ body {
     padding-top: 40px;
 }
 
+
+/*PARTE PER LA CONSOLE*/
+
 video,
 #console,
 .democonsole {
@@ -34,6 +37,9 @@ video,
     max-height: 245px;
 }
 
+
+/*VIDEO*/
+
 #videoContainer {
     position: absolute;
     float: left;
@@ -45,15 +51,6 @@ video,
     top: 0;
     left: 0;
     z-index: 1;
-}
-
-#videoBig2 {
-    width: 640px;
-    height: 480px;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    box-sizing: border-box;
 }
 
 div#videoSmall {
@@ -85,13 +82,12 @@ div.progress p.label2 {
     width: 8.2em;
 }
 
+
+/*FILE SHARING*/
+
 form {
     margin: 0 0 1em 0;
     white-space: nowrap;
-}
-
-progress {
-    width: calc(100% - 8.5em);
 }
 
 input[type="file"] {
@@ -105,6 +101,9 @@ input[type="file"] {
     cursor: pointer;
 }
 
+
+/*PROGRESS BAR*/
+
 .progress {
     height: 30px;
     background-color: #ffff;
@@ -113,6 +112,7 @@ input[type="file"] {
 
 #sendProgress {
     vertical-align: middle;
+    width: 25em;
 }
 
 #receiveProgress {
@@ -131,11 +131,6 @@ input[type="file"] {
     padding: 0;
 }
 
-#schermo {
-    padding-top: 20px;
-    padding-left: 15px;
-}
-
 #sharing {
     float: right;
 }
@@ -145,7 +140,15 @@ input[type="file"] {
 }
 
 div#send {
-    margin: 0 20px 1em 0;
+    margin: 2em 2em 1em 0;
+}
+
+#buttons {
+    margin-top: 1.6em;
+}
+
+#messageHeader {
+    margin-top: 1.6em;
 }
 
 div#sendReceive {
@@ -194,22 +197,6 @@ textarea {
     transition: all 0.4s;
 }
 
-.page-content {
-    width: calc(90% - 17rem);
-    margin-left: 15rem;
-    transition: all 0.4s;
-}
-
-.container {
-    width: 100% !important;
-}
-
-
-/*CSS PEER NAVABR DINAMICA PHP*/
-
-
-/*//////////////// nav ///////////////////*/
-
 nav {
     width: 17em;
     /*background-color: #c7c7c7;*/
@@ -245,6 +232,25 @@ nav #stdbar li {
     margin: 1px 0;
 }
 
+
+/*PAGINA PRINCIPALE*/
+
+.page-content {
+    width: calc(90% - 17rem);
+    margin-left: 15rem;
+    transition: all 0.4s;
+    padding: 0em 6em;
+    /*mette contenuto registrazione un po' più centrato*/
+}
+
+.superRow {
+    padding: 1em 8em 1em 0em;
+}
+
+.container {
+    width: 100% !important;
+}
+
 #fileShare {
     margin-top: 2em;
 }
@@ -276,4 +282,28 @@ nav #stdbar li {
 
 .page-header {
     border-bottom: 0px;
+}
+
+#name {
+    width: 198%;
+}
+
+#skills {
+    width: 198%;
+}
+
+#infoFile {
+    width: 100%;
+}
+
+#progress {
+    width: 100%;
+}
+
+#intro {
+    margin-top: 3em;
+}
+
+#indexButton {
+    margin: 0em;
 }

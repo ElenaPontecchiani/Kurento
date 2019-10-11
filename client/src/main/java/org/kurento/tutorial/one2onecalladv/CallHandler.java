@@ -25,11 +25,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 /**
- * Protocol handler for 1 to 1 video call communication.
- *
- * @author Boni Garcia (bgarcia@gsyc.es)
- * @author Micael Gallego (micael.gallego@gmail.com)
- * @since 5.0.0
+ * Gestore protocollo per la videochiamata 1 a 1
  */
 public class CallHandler extends TextWebSocketHandler {
 

@@ -45,7 +45,6 @@
 
 
     <!-- Vertical navbar -->
-
     <div class="vertical-nav bg-white" id="sidebar">
         <ul class="nav flex-column bg-white mb-0">
             <li class="nav-item">
@@ -84,7 +83,7 @@
 
         <!--INTRO-->
         <div id="intro">
-            <h3>Ciao, ti trovi nella sezione introduttiva</h3>
+            <h4>Ciao, ti trovi nella sezione introduttiva</h4>
             <p>Per richiedere il supporto di un tecnico attraverso l'applicazione, svolgi i seguenti passi:</p>
             <ol>
                 <li>Registrati con un username, selezionando la sezione "registrati" del menù a sinistra. Con tale username riconoscibile all'interno del sistema</li>
@@ -101,27 +100,36 @@
         <!--REGISTRAZIONE-->
         <div id="registerForm" class="page-header">
             <h4>Registrazione</h4>
-            <p>Compila il form di registrazione prima di procedere</p>
+            <p>Compila il form per registrarti nel sistema. Gli altri utenti potranno contattarti attraverso l'username che inserirai.</p>
 
-            <label class="control-label" for="name">Username personale</label>
-            <div class="row">
-                <div class="col-md-5">
-                    <input id="name" name="name" class="form-control" type="text" onkeydown="if (event.keyCode == 13) register();" />
+            <div class="superRow">
+                <label class="control-label" for="name">Username personale</label>
+                <div class="row">
+                    <div class="col-md-5">
+                        <input id="name" name="name" class="form-control" type="text" onkeydown="if (event.keyCode == 13) register();" />
+                    </div>
+                    <div class="col-md-7 text-right">
+                        <a id="register" href="#" class="btn btn-primary"><span
+                                    class="glyphicon glyphicon-plus"></span> Registrati</a>
+                    </div>
                 </div>
-                <div class="col-md-7 text-right">
-                    <a id="register" href="#" class="btn btn-primary"><span
-                                class="glyphicon glyphicon-plus"></span> Registrati</a>
-                </div>
-
             </div>
-            <label class="control-label" for="name">Competenze personali</label>
-            <div class="row">
-                <div class="col-md-5">
-                    <input id="skills" name="name" class="form-control" type="text" />
-                </div>
-                <div class="col-md-7 text-right">
-                    <a id="skills_button" href="#" class="btn btn-primary"><span
-                            class="glyphicon glyphicon-plus"></span> Aggiungi </a>
+
+            <div class="superRow">
+                <label class="control-label" for="name">Competenze personali</label>
+                <div class="row">
+                    <div class="col-md-5">
+                        <select id="skills" name="name" class="form-control">
+                            <option value="" disabled selected>Scegli l'opzione</option>
+                            <option value="1">Macchine edili</option>
+                            <option value="2">Macchine agricole</option>
+                            <option value="3">Macchinari industriali</option>
+                        </select>
+                    </div>
+                    <div class="col-md-7 text-right">
+                        <a id="skills_button" href="#" class="btn btn-primary"><span
+                                class="glyphicon glyphicon-plus"></span> Aggiungi </a>
+                    </div>
                 </div>
             </div>
 
@@ -162,7 +170,7 @@
 
             <!--FILE SHARING-->
             <div id="file">
-                <section class="col-md-5">
+                <div id="infoFile" class="col-md-5">
                     <div id="intestazioneFile">
                         <h4>Condividi file</h4>
                         <p>Condividi con l'interlocutore i tuoi file. E' supportato qualsiasi tipo di file</p>
@@ -182,9 +190,9 @@
                         class="glyphicon glyphicon-stop"></span> Sospendi</button>
                     </div>
 
-                </section>
+                </div>
 
-                <section id="progress" class="col-md-7">
+                <div id="progress" class="col-md-7">
 
                     <div id="contenitoreProgress">
                         <div class="progress">
@@ -199,7 +207,7 @@
 
                     <a id="download"></a>
                     <span id="status"></span>
-                </section>
+                </div>
             </div>
         </div>
         <!--CHAT-->
