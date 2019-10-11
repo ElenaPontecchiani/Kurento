@@ -1,13 +1,12 @@
-/*
-text sharing
+/* Javascript per la chat
  */
 
 'use strict';
 
-let localConnection2;
-let remoteConnection2;
-let sendChannel2;
-let receiveChannel2;
+let localConnectionForChat;
+let remoteConnectionForChat;
+let sendChannelForChat;
+let receiveChannelForChat;
 const dataChannelSend = document.querySelector('textarea#dataChannelSend');
 const dataChannelReceive = document.querySelector('textarea#dataChannelReceive');
 const startButton = document.querySelector('button#startButton');
@@ -29,27 +28,27 @@ function disableSendButton() {
 function createConnection2() {
     dataChannelSend.placeholder = '';
     const servers = null;
-    window.localConnection2 = localConnection2 = new RTCPeerConnection(servers);
+    window.localConnectionForChat = localConnectionForChat = new RTCPeerConnection(servers);
     console.log('Created local peer connection object localConnection');
 
-    sendChannel2 = localConnection2.createDataChannel('sendDataChannel');
+    sendChannelForChat = localConnectionForChat.createDataChannel('sendDataChannel');
     console.log('Created send data channel');
 
-    localConnection2.onicecandidate = e => {
-        onIceCandidate(localConnection2, e);
+    localConnectionForChat.onicecandidate = e => {
+        onIceCandidate(localConnectionForChat, e);
     };
-    sendChannel2.onopen = onSendChannelStateChange2;
-    sendChannel2.onclose = onSendChannelStateChange2;
+    sendChannelForChat.onopen = onSendChannelStateChange2;
+    sendChannelForChat.onclose = onSendChannelStateChange2;
 
-    window.remoteConnection2 = remoteConnection2 = new RTCPeerConnection(servers);
-    console.log('Created remote peer connection object remoteConnection2');
+    window.remoteConnectionForChat = remoteConnectionForChat = new RTCPeerConnection(servers);
+    console.log('Created remote peer connection object remoteConnectionForChat');
 
-    remoteConnection2.onicecandidate = e => {
-        onIceCandidate(remoteConnection2, e);
+    remoteConnectionForChat.onicecandidate = e => {
+        onIceCandidate(remoteConnectionForChat, e);
     };
-    remoteConnection2.ondatachannel = receiveChannelCallback2;
+    remoteConnectionForChat.ondatachannel = receiveChannelCallback2;
 
-    localConnection2.createOffer().then(
+    localConnectionForChat.createOffer().then(
         gotDescription1,
         onCreateSessionDescriptionError
     );
@@ -63,20 +62,20 @@ function onCreateSessionDescriptionError(error) {
 
 function sendData2() {
     const data = dataChannelSend.value;
-    sendChannel2.send(data);
+    sendChannelForChat.send(data);
     console.log('Sent Data: ' + data);
 }
 
 function closeDataChannels2() {
     console.log('Closing data channels');
-    sendChannel2.close();
-    console.log('Closed data channel with label: ' + sendChannel2.label);
-    receiveChannel2.close();
-    console.log('Closed data channel with label: ' + receiveChannel2.label);
-    localConnection2.close();
-    remoteConnection2.close();
-    localConnection2 = null;
-    remoteConnection2 = null;
+    sendChannelForChat.close();
+    console.log('Closed data channel with label: ' + sendChannelForChat.label);
+    receiveChannelForChat.close();
+    console.log('Closed data channel with label: ' + receiveChannelForChat.label);
+    localConnectionForChat.close();
+    remoteConnectionForChat.close();
+    localConnectionForChat = null;
+    remoteConnectionForChat = null;
     console.log('Closed peer connections');
     startButton.disabled = false;
     sendButton.disabled = true;
@@ -89,27 +88,27 @@ function closeDataChannels2() {
 }
 
 function gotDescription1(desc) {
-    localConnection2.setLocalDescription(desc);
-    console.log(`Offer from localConnection2\n${desc.sdp}`);
-    remoteConnection2.setRemoteDescription(desc);
-    remoteConnection2.createAnswer().then(
+    localConnectionForChat.setLocalDescription(desc);
+    console.log(`Offer from localConnectionForChat\n${desc.sdp}`);
+    remoteConnectionForChat.setRemoteDescription(desc);
+    remoteConnectionForChat.createAnswer().then(
         gotDescription2,
         onCreateSessionDescriptionError
     );
 }
 
 function gotDescription2(desc) {
-    remoteConnection2.setLocalDescription(desc);
-    console.log(`Answer from remoteConnection2\n${desc.sdp}`);
-    localConnection2.setRemoteDescription(desc);
+    remoteConnectionForChat.setLocalDescription(desc);
+    console.log(`Answer from remoteConnectionForChat\n${desc.sdp}`);
+    localConnectionForChat.setRemoteDescription(desc);
 }
 
 function getOtherPc(pc) {
-    return (pc === localConnection2) ? remoteConnection2 : localConnection2;
+    return (pc === localConnectionForChat) ? remoteConnectionForChat : localConnectionForChat;
 }
 
 function getName(pc) {
-    return (pc === localConnection2) ? 'localPeerConnection' : 'remotePeerConnection';
+    return (pc === localConnectionForChat) ? 'localPeerConnection' : 'remotePeerConnection';
 }
 
 function onIceCandidate(pc, event) {
@@ -132,10 +131,10 @@ function onAddIceCandidateError(error) {
 
 function receiveChannelCallback2(event) {
     console.log('Receive Channel Callback');
-    receiveChannel2 = event.channel;
-    receiveChannel2.onmessage = onReceiveMessageCallback2;
-    receiveChannel2.onopen = onReceiveChannelStateChange2;
-    receiveChannel2.onclose = onReceiveChannelStateChange2;
+    receiveChannelForChat = event.channel;
+    receiveChannelForChat.onmessage = onReceiveMessageCallback2;
+    receiveChannelForChat.onopen = onReceiveChannelStateChange2;
+    receiveChannelForChat.onclose = onReceiveChannelStateChange2;
 }
 
 function onReceiveMessageCallback2(event) {
@@ -144,7 +143,7 @@ function onReceiveMessageCallback2(event) {
 }
 
 function onSendChannelStateChange2() {
-    const readyState = sendChannel2.readyState;
+    const readyState = sendChannelForChat.readyState;
     console.log('Send channel state is: ' + readyState);
     if (readyState === 'open') {
         dataChannelSend.disabled = false;
@@ -159,6 +158,6 @@ function onSendChannelStateChange2() {
 }
 
 function onReceiveChannelStateChange2() {
-    const readyState = receiveChannel2.readyState;
+    const readyState = receiveChannelForChat.readyState;
     console.log(`Receive channel state is: ${readyState}`);
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!--DEMO2-->
+<!--FILE SHARING, CHAT-->
 <html>
 
 <head>
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="webjars/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="webjars/ekko-lightbox/dist/ekko-lightbox.min.css">
     <link rel="stylesheet" href="webjars/demo-console/index.css">
-    <link rel="stylesheet" href="css/kurento.css">
+    <link rel="stylesheet" href="././css/kurento.css">
 
 
     <script src="webjars/jquery/dist/jquery.min.js"></script>
@@ -25,7 +25,8 @@
 
     <script src="js/lib/kurento-utils.js"></script>
     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
-    <script src="./js/index.js"></script>
+    <script src="./js/videocall.js"></script>
+
     <title>Demo2</title>
 </head>
 
@@ -35,49 +36,88 @@
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
-                    <a class="navbar-brand" href="./">Demo 2</a>
+                    <a class="navbar-brand" href="./">Fornisci assitenza remota</a>
                 </div>
 
             </div>
         </div>
     </header>
-    <div class="container">
+
+    <!-- Vertical navbar -->
+    <div class="vertical-nav bg-white" id="sidebar">
+
+
+        <ul class="nav flex-column bg-white mb-0">
+            <li class="nav-item">
+                <a href="#" class="nav-link text-dark font-italic bg-light">
+                    <i class="fa fa-th-large mr-3 text-primary fa-fw"></i> Registrazione
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link text-dark font-italic">
+                    <i class="fa fa-address-card mr-3 text-primary fa-fw"></i> Videochiamata
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link text-dark font-italic">
+                    <i class="fa fa-cubes mr-3 text-primary fa-fw"></i> Condividi file
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link text-dark font-italic">
+                    <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i> Chat
+                </a>
+            </li>
+        </ul>
+
+
+    </div>
+    <!-- End vertical navbar -->
+
+    <div class="page-content p-5" id="content">
+        <!--CONTIENE LA PAGINA CON TUTTE LE INFORMAZIONI-->
+
+
+
+
+
+
         <div class="page-header">
-            <h1>Demo applicazione: videochiamata e registrazione</h1>
-            <p>L'applicazione consente di videochiamare un utente e sucessivamente riprodurre le videochiamata effettuata. Come utilizzare l'app:
-            </p>
-            <ol>
-                <li>Aprire la pagina con un broswer compatibile con WebRTC (Chrome, Firefox, Safari);</li>
-                <li>Inserisci l'username personale con il quale gli altri utenti ti possono contattare nel campo <i>Username personale</i>;
-                </li>
-                <li>Registrati con tale username cliccando su <i>Registrati</i>;
-                </li>
-                <li>Digita l'username di chi vuoi chiamare nel campo <i>Username destinatario</i>;
-                </li>
-                <li>Clicca su <i>Chiama</i> per inoltrare la richiesta;
-                </li>
-                <li> Consenti l'accesso al microfono e alla videocamera. Avverrà una negoziazione SDP e poi avverrà la chiamata;
-                </li>
-                <li>Il destinatario deve accettare la chiamata (gli compare un dialog che lo avverte della richiesta e gli consente di accettarla);</li>
-                <li>Quando vuoi finire la chiamata clicca <i>Stop</i>;
-                </li>
-                <li>Tutte le videochiamate sono registrate automaticamente. Se vuoi riprodurre una videochiamata fatta con l'app inserisci il nome del destinatario con cui hai fatto la chiamata nel campo <i>Username destinatario</i> e clicca su <i>Replay.</i>
-                </li>
-            </ol>
-        </div>
-        <div class="row">
-            <div class="col-md-5">
-                <label class="control-label" for="name">Username personale</label>
-                <div class="row">
-                    <div class="col-md-5">
-                        <input id="name" name="name" class="form-control" type="text" onkeydown="if (event.keyCode == 13) register();" />
-                    </div>
-                    <div class="col-md-7 text-right">
-                        <a id="register" href="#" class="btn btn-primary"><span
-							class="glyphicon glyphicon-plus"></span> Registrati</a>
-                    </div>
+            <h4>Registrazione</h4>
+            <p>Compila il form di registrazione prima di procedere</p>
+
+            <label class="control-label" for="name">Username personale</label>
+            <div class="row">
+                <div class="col-md-5">
+                    <input id="name" name="name" class="form-control" type="text" onkeydown="if (event.keyCode == 13) register();" />
+                </div>
+                <div class="col-md-7 text-right">
+                    <a id="register" href="#" class="btn btn-primary"><span
+                                class="glyphicon glyphicon-plus"></span> Registrati</a>
                 </div>
 
+            </div>
+            <label class="control-label" for="name">Competenze personali</label>
+            <div class="row">
+                <div class="col-md-5">
+                    <input id="skills" name="name" class="form-control" type="text" />
+                </div>
+                <div class="col-md-7 text-right">
+                    <a id="skills_button" href="#" class="btn btn-primary"><span
+                            class="glyphicon glyphicon-plus"></span> Aggiungi </a>
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
+        <div class="row">
+
+            <div class="col-md-5">
+                <h4>Fornisci assistenza</h4>
                 <br /> <br /> <label class="control-label" for="peer">Username destinatario</label>
                 <div class="row">
                     <div class="col-md-5">
@@ -109,24 +149,22 @@
 
             <section id="file" class="col-md-5">
                 <div id="intestazioneFile">
-                    <label class="control-label">Condividi file</label>
+                    <h4>Condividi file</h4>
                     <p>Condividi con l'interlocutore i tuoi file. E' supportato qualsiasi tipo di file</p>
 
                 </div>
                 <div>
                     <form id="fileInfo">
                         <label class="custom-file-upload btn btn-primary" href="#">
-                                <input type="file" id="fileInput" name="files"  />
-                                <span class="glyphicon glyphicon-plus"></span>
-                                Sfoglia..
-                            </label>
-
-
+                                    <input type="file" id="fileInput" name="files"  />
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                    Sfoglia..
+                                </label>
                     </form>
                     <button disabled id="sendFile" href="#" class="btn btn-success"><span
-                    class="glyphicon glyphicon-play"></span> Invia</button>
+                        class="glyphicon glyphicon-play"></span> Invia</button>
                     <button disabled id="abortButton" href="#" class="btn btn-danger"><span
-                    class="glyphicon glyphicon-stop"></span> Sospendi</button>
+                        class="glyphicon glyphicon-stop"></span> Sospendi</button>
                 </div>
 
             </section>
@@ -138,7 +176,6 @@
                         <p class="label2">Send progress: </p>
                         <progress id="sendProgress" max="0" value="0"></progress>
                     </div>
-
                     <div class="progress">
                         <p class="label2">Receive progress: </p>
                         <progress id="receiveProgress" max="0" value="0"></progress>
@@ -150,84 +187,39 @@
             </section>
 
 
-            <section id="schermo" class="col-md-5">
-                <div id="intestazioneSchermo">
-                    <label class="control-label">Condividi lo schermo</label>
-                    <p>Condividi con l'interlocutore la tua schermata</p>
 
-                </div>
-                <div class="col-md-12">
-                    <a id="presenter" href="#" class="btn btn-success"><span class="glyphicon glyphicon-play"></span> Condividi lo schermo </a>
-                    <!--  <a id="viewer" href="#" class="btn btn-primary"><span class="glyphicon glyphicon-user"></span> Viewer</a> -->
-                    <a id="stop" href="#" class="btn btn-danger"><span class="glyphicon glyphicon-stop"></span> Stop</a>
-                </div>
-                <br /> <label class="control-label" for="console">Console</label><br>
-                <br>
-                <div class="democonsole">
-                    <ul></ul>
-                </div>
-            </section>
-
-            <div id="sharing" class="col-md-7">
-                <div id="videoBig2">
-                    <video id="video" autoplay width="640px" height="480px" poster="./img/webrtc.png"></video>
-                </div>
-                <div>
-                    <video id="webcam" autoplay width="640px" height="480px" poster="./img/webrtc.png"></video>
-                </div>
-            </div>
 
 
         </div>
 
         <div id="low_container">
-
-            <label class="control-label" for="name">Invia e ricevi messaggi</label>
+            <h4>Invia e ricevi messaggi</h4>
             <p>Manda messaggi real time al tuo interlocutore</p>
             <div id="buttons">
-
                 <button id="startButton" class="btn btn-primary"><span
-                    class="glyphicon glyphicon-plus"></span>Inizia la chat</button>
+                        class="glyphicon glyphicon-plus"></span>Inizia la chat</button>
                 <button id="sendButton" class="btn btn-success" disabled><span class="glyphicon glyphicon-play"></span>Invia</button>
                 <button id="closeButton" class="btn btn-danger" disabled><span class="glyphicon glyphicon-stop"></span>Chiudi la chat</button>
-
             </div>
-
             <div id="sendReceive">
                 <div id="send">
                     <p>Messaggi inviati:</p>
-                    <textarea id="dataChannelSend" disabled placeholder="Press Start, enter some text, then press Send."></textarea>
+                    <textarea id="dataChannelSend" disabled placeholder="Premi inizia la chat per inivare messaggi"></textarea>
                 </div>
                 <div id="receive">
                     <p>Messaggi ricevuti:</p>
                     <textarea id="dataChannelReceive" disabled></textarea>
                 </div>
             </div>
-
-
         </div>
-
-
-
-
     </div>
+    <!--chiude container della pagina-->
 
-    <!--DA TENERE QUI-->
+    <!--chiude container generale-->
+    <!--SCRIPT CHE DEVONO ESSERE TENUTI QUI-->
     <script src="js/file_sharing.js"></script>
     <script src="js/chat.js" async></script>
     <script src="js/lib/ga.js"></script>
-    <script src="js/getScreenId.js"></script>
-
-
-    <!--
-         
-        <script src="js/screen-sharing.js"></script>
-    -->
-
-
-
-
-
 
 </body>
 

@@ -1,11 +1,11 @@
-/* mia demo
+/* javascript per il file sharing
  */
 'use strict';
 
-let localConnection;
-let remoteConnection;
-let sendChannel;
-let receiveChannel;
+let localConnectionForFileSharing;
+let remoteConnectionForFileSharing;
+let sendChannelForFileSharing;
+let receiveChannelForFileSharing;
 let fileReader;
 const bitrateDiv = document.querySelector('div#bitrate');
 const fileInput = document.querySelector('input#fileInput');
@@ -46,33 +46,33 @@ async function handleFileInputChange() {
 async function createConnection() {
     abortButton.disabled = false;
     sendFileButton.disabled = true;
-    localConnection = new RTCPeerConnection();
-    console.log('Created local peer connection object localConnection');
+    localConnectionForFileSharing = new RTCPeerConnection();
+    console.log('Created local peer connection object localConnectionForFileSharing');
 
-    sendChannel = localConnection.createDataChannel('sendDataChannel');
-    sendChannel.binaryType = 'arraybuffer';
+    sendChannelForFileSharing = localConnectionForFileSharing.createDataChannel('sendDataChannel');
+    sendChannelForFileSharing.binaryType = 'arraybuffer';
     console.log('Created send data channel');
 
-    sendChannel.addEventListener('open', onSendChannelStateChange);
-    sendChannel.addEventListener('close', onSendChannelStateChange);
-    sendChannel.addEventListener('error', error => console.error('Error in sendChannel:', error));
+    sendChannelForFileSharing.addEventListener('open', onSendChannelStateChange);
+    sendChannelForFileSharing.addEventListener('close', onSendChannelStateChange);
+    sendChannelForFileSharing.addEventListener('error', error => console.error('Error in sendChannel:', error));
 
-    localConnection.addEventListener('icecandidate', async event => {
+    localConnectionForFileSharing.addEventListener('icecandidate', async event => {
         console.log('Local ICE candidate: ', event.candidate);
-        await remoteConnection.addIceCandidate(event.candidate);
+        await remoteConnectionForFileSharing.addIceCandidate(event.candidate);
     });
 
-    remoteConnection = new RTCPeerConnection();
-    console.log('Created remote peer connection object remoteConnection');
+    remoteConnectionForFileSharing = new RTCPeerConnection();
+    console.log('Created remote peer connection object remoteConnectionForFileSharing');
 
-    remoteConnection.addEventListener('icecandidate', async event => {
+    remoteConnectionForFileSharing.addEventListener('icecandidate', async event => {
         console.log('Remote ICE candidate: ', event.candidate);
-        await localConnection.addIceCandidate(event.candidate);
+        await localConnectionForFileSharing.addIceCandidate(event.candidate);
     });
-    remoteConnection.addEventListener('datachannel', receiveChannelCallback);
+    remoteConnectionForFileSharing.addEventListener('datachannel', receiveChannelCallback);
 
     try {
-        const offer = await localConnection.createOffer();
+        const offer = await localConnectionForFileSharing.createOffer();
         await gotLocalDescription(offer);
     } catch (e) {
         console.log('Failed to create session description: ', e);
@@ -103,7 +103,7 @@ function sendData() {
     fileReader.addEventListener('abort', event => console.log('File reading aborted:', event));
     fileReader.addEventListener('load', e => {
         console.log('FileRead.onload ', e);
-        sendChannel.send(e.target.result);
+        sendChannelForFileSharing.send(e.target.result);
         offset += e.target.result.byteLength;
         sendProgress.value = offset;
         if (offset < file.size) {
@@ -120,16 +120,16 @@ function sendData() {
 
 function closeDataChannels() {
     console.log('Closing data channels');
-    sendChannel.close();
-    console.log(`Closed data channel with label: ${sendChannel.label}`);
-    if (receiveChannel) {
-        receiveChannel.close();
-        console.log(`Closed data channel with label: ${receiveChannel.label}`);
+    sendChannelForFileSharing.close();
+    console.log(`Closed data channel with label: ${sendChannelForFileSharing.label}`);
+    if (receiveChannelForFileSharing) {
+        receiveChannelForFileSharing.close();
+        console.log(`Closed data channel with label: ${receiveChannelForFileSharing.label}`);
     }
-    localConnection.close();
-    remoteConnection.close();
-    localConnection = null;
-    remoteConnection = null;
+    localConnectionForFileSharing.close();
+    remoteConnectionForFileSharing.close();
+    localConnectionForFileSharing = null;
+    remoteConnectionForFileSharing = null;
     console.log('Closed peer connections');
 
     // re-enable the file select
@@ -139,11 +139,11 @@ function closeDataChannels() {
 }
 
 async function gotLocalDescription(desc) {
-    await localConnection.setLocalDescription(desc);
-    console.log(`Offer from localConnection\n ${desc.sdp}`);
-    await remoteConnection.setRemoteDescription(desc);
+    await localConnectionForFileSharing.setLocalDescription(desc);
+    console.log(`Offer from localConnectionForFileSharing\n ${desc.sdp}`);
+    await remoteConnectionForFileSharing.setRemoteDescription(desc);
     try {
-        const answer = await remoteConnection.createAnswer();
+        const answer = await remoteConnectionForFileSharing.createAnswer();
         await gotRemoteDescription(answer);
     } catch (e) {
         console.log('Failed to create session description: ', e);
@@ -151,18 +151,18 @@ async function gotLocalDescription(desc) {
 }
 
 async function gotRemoteDescription(desc) {
-    await remoteConnection.setLocalDescription(desc);
-    console.log(`Answer from remoteConnection\n ${desc.sdp}`);
-    await localConnection.setRemoteDescription(desc);
+    await remoteConnectionForFileSharing.setLocalDescription(desc);
+    console.log(`Answer from remoteConnectionForFileSharing\n ${desc.sdp}`);
+    await localConnectionForFileSharing.setRemoteDescription(desc);
 }
 
 function receiveChannelCallback(event) {
     console.log('Receive Channel Callback');
-    receiveChannel = event.channel;
-    receiveChannel.binaryType = 'arraybuffer';
-    receiveChannel.onmessage = onReceiveMessageCallback;
-    receiveChannel.onopen = onReceiveChannelStateChange;
-    receiveChannel.onclose = onReceiveChannelStateChange;
+    receiveChannelForFileSharing = event.channel;
+    receiveChannelForFileSharing.binaryType = 'arraybuffer';
+    receiveChannelForFileSharing.onmessage = onReceiveMessageCallback;
+    receiveChannelForFileSharing.onopen = onReceiveChannelStateChange;
+    receiveChannelForFileSharing.onclose = onReceiveChannelStateChange;
 
     receivedSize = 0;
     bitrateMax = 0;
@@ -208,7 +208,7 @@ function onReceiveMessageCallback(event) {
 }
 
 function onSendChannelStateChange() {
-    const readyState = sendChannel.readyState;
+    const readyState = sendChannelForFileSharing.readyState;
     console.log(`Send channel state is: ${readyState}`);
     if (readyState === 'open') {
         sendData();
@@ -216,7 +216,7 @@ function onSendChannelStateChange() {
 }
 
 async function onReceiveChannelStateChange() {
-    const readyState = receiveChannel.readyState;
+    const readyState = receiveChannelForFileSharing.readyState;
     console.log(`Receive channel state is: ${readyState}`);
     if (readyState === 'open') {
         timestampStart = (new Date()).getTime();
@@ -228,8 +228,8 @@ async function onReceiveChannelStateChange() {
 
 // display bitrate statistics.
 async function displayStats() {
-    if (remoteConnection && remoteConnection.iceConnectionState === 'connected') {
-        const stats = await remoteConnection.getStats();
+    if (remoteConnectionForFileSharing && remoteConnectionForFileSharing.iceConnectionState === 'connected') {
+        const stats = await remoteConnectionForFileSharing.getStats();
         let activeCandidatePair;
         stats.forEach(report => {
             if (report.type === 'transport') {
