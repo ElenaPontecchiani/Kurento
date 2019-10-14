@@ -1,20 +1,3 @@
-//settaggio bottoni per navbar
-const registerButton = document.querySelector('a#registerButton');
-const callButton = document.querySelector('a#callButton');
-
-
-registerButton.onclick = registerPage;
-callButton.onclick = callPage;
-
-
-
-
-
-
-
-
-
-
 var ws = new WebSocket('wss://' + location.host + '/call');
 var videoInput;
 var videoOutput;
