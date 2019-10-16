@@ -1,5 +1,3 @@
-
-
 package org.kurento.tutorial.one2onecalladv;
 
 import org.kurento.client.KurentoClient;

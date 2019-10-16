@@ -110,13 +110,10 @@ input[type="file"] {
     box-shadow: inset 0 1px 2px rgb(255, 255, 255);
 }
 
-#sendProgress {
-    vertical-align: middle;
-    width: 25em;
-}
-
+#sendProgress,
 #receiveProgress {
     vertical-align: middle;
+    width: 25em;
 }
 
 #contenitoreProgress {
@@ -237,7 +234,7 @@ nav #stdbar li {
 
 .page-content {
     width: calc(90% - 17rem);
-    margin-left: 15rem;
+    margin-left: 10rem;
     transition: all 0.4s;
     padding: 0em 6em;
     /*mette contenuto registrazione un po' più centrato*/
@@ -262,18 +259,8 @@ nav #stdbar li {
     display: none;
 }
 
-#videocall {
-    display: none;
-    padding-bottom: 9px;
-    margin: 40px 0 20px;
-}
-
-#file {
-    display: none;
-    padding-bottom: 9px;
-    margin: 40px 0 20px;
-}
-
+#videocall,
+#file,
 #low_container {
     display: none;
     padding-bottom: 9px;
@@ -284,18 +271,12 @@ nav #stdbar li {
     border-bottom: 0px;
 }
 
-#name {
-    width: 198%;
-}
-
+#name,
 #skills {
     width: 198%;
 }
 
-#infoFile {
-    width: 100%;
-}
-
+#infoFile,
 #progress {
     width: 100%;
 }
@@ -306,4 +287,22 @@ nav #stdbar li {
 
 #indexButton {
     margin: 0em;
+}
+
+
+/*PER NASCONDERE DEMO CONSOLE, DA METTERE SOLO QUANDO VOGLIO VEDERE SE FUNZIA TUTTO OK*/
+
+.democonsole {
+    display: none;
+}
+
+
+/*PER PAGINA VIDEOCALL*/
+
+#usernameInput {
+    width: 100%;
+}
+
+#videocallButton {
+    padding-left: 15px;
 }

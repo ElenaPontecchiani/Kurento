@@ -234,7 +234,7 @@ nav #stdbar li {
 
 .page-content {
     width: calc(90% - 17rem);
-    margin-left: 15rem;
+    margin-left: 10rem;
     transition: all 0.4s;
     padding: 0em 6em;
     /*mette contenuto registrazione un po' più centrato*/
@@ -287,4 +287,22 @@ nav #stdbar li {
 
 #indexButton {
     margin: 0em;
+}
+
+
+/*PER NASCONDERE DEMO CONSOLE, DA METTERE SOLO QUANDO VOGLIO VEDERE SE FUNZIA TUTTO OK*/
+
+.democonsole {
+    display: none;
+}
+
+
+/*PER PAGINA VIDEOCALL*/
+
+#usernameInput {
+    width: 100%;
+}
+
+#videocallButton {
+    padding-left: 15px;
 }

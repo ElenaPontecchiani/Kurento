@@ -20,7 +20,7 @@ function setRegisterState(nextState) {
             break;
         case REGISTERING:
             disableButton('#register');
-            /*disableButton('#call');*/
+            disableButton('#call');
             enableButton('#skills_button', 'skills()');
             break;
         case REGISTERED:
@@ -109,9 +109,9 @@ function enableButton(id, functionName) {
 window.onload = function() {
     console = new Console();
     setRegisterState(NOT_REGISTERED);
-  /*  var drag = new Draggabilly(document.getElementById('videoSmall'));
+    var drag = new Draggabilly(document.getElementById('videoSmall'));
     videoInput = document.getElementById('videoInput');
-    videoOutput = document.getElementById('videoOutput');*/
+    videoOutput = document.getElementById('videoOutput');
     document.getElementById('name').focus();
 }
 
@@ -127,14 +127,12 @@ ws.onmessage = function(message) {
         case 'registerResponse':
             registerResponse(parsedMessage);
             break;
-            
+        case 'callResponse':
+            callResponse(parsedMessage);
+            break;
         case 'incomingCall':
             incomingCall(parsedMessage);
             break;
-       /* case 'callResponse':
-            callResponse(parsedMessage);
-            break;
-        
         case 'startCommunication':
             startCommunication(parsedMessage);
             break;
@@ -153,7 +151,7 @@ ws.onmessage = function(message) {
                 if (error)
                     return console.error('Error adding candidate: ' + error);
             });
-            break;*/
+            break;
         default:
             console.error('Unrecognized message', parsedMessage);
     }
@@ -163,7 +161,7 @@ function registerResponse(message) {
     if (message.response == 'accepted') {
         setRegisterState(REGISTERED);
         document.getElementById('skills').focus();
-        
+        console.log(window.location);
     } else {
         setRegisterState(NOT_REGISTERED);
         var errorMessage = message.response ? message.response :
@@ -216,7 +214,7 @@ function playResponse(message) {
 }
 
 function incomingCall(message) {
-    //QUI DEVO REINDIRIZZARE ALLA PAGINA videocall.html
+    // If bussy just reject without disturbing user
     if (callState != NO_CALL && callState != POST_CALL) {
         var response = {
             id: 'incomingCallResponse',
@@ -419,3 +417,78 @@ $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
     event.preventDefault();
     $(this).ekkoLightbox();
 });
+
+
+function registerPage() { //funzione che fa display solo della parte di registrazione
+    var intro = document.getElementById("intro");
+    var register = document.getElementById("registerForm");
+    var video = document.getElementById("videocall");
+    var file = document.getElementById("file");
+    var chat = document.getElementById("low_container");
+    intro.style.display = "none";
+    register.style.display = "block";
+    video.style.display = "none";
+    file.style.display = "none";
+    chat.style.display = "none";
+
+
+
+
+
+
+
+}
+
+
+function callPage() { //funzione che fa display solo della parte di call
+    var intro = document.getElementById("intro");
+    var register = document.getElementById("registerForm");
+    var video = document.getElementById("videocall");
+    var file = document.getElementById("file");
+    var chat = document.getElementById("low_container");
+    intro.style.display = "none";
+    register.style.display = "none";
+    video.style.display = "block";
+    file.style.display = "none";
+    chat.style.display = "none";
+}
+
+
+function filePage() { //funzione che fa display solo della parte di file sharing
+    var intro = document.getElementById("intro");
+    var register = document.getElementById("registerForm");
+    var video = document.getElementById("videocall");
+    var file = document.getElementById("file");
+    var chat = document.getElementById("low_container");
+    intro.style.display = "none";
+    register.style.display = "none";
+    video.style.display = "none";
+    file.style.display = "block";
+    chat.style.display = "none";
+}
+
+function chatPage() { //funzione che fa display solo della parte di chat
+    var intro = document.getElementById("intro");
+    var register = document.getElementById("registerForm");
+    var video = document.getElementById("videocall");
+    var file = document.getElementById("file");
+    var chat = document.getElementById("low_container");
+    intro.style.display = "none";
+    register.style.display = "none";
+    video.style.display = "none";
+    file.style.display = "none";
+    chat.style.display = "block";
+}
+
+function helpPage() { //funzione che fa display solo della parte di registrazione
+    var intro = document.getElementById("intro");
+    var register = document.getElementById("registerForm");
+    var video = document.getElementById("videocall");
+    var file = document.getElementById("file");
+    var chat = document.getElementById("low_container");
+    intro.style.display = "block";
+    register.style.display = "none";
+    video.style.display = "none";
+    file.style.display = "none";
+    chat.style.display = "none";
+}

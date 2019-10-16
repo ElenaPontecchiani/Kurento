@@ -24,8 +24,9 @@
     <script src="webjars/demo-console/index.js"></script>
 
     <script src="js/lib/kurento-utils.js"></script>
+    <script src="js/lib/adapter.js"></script>
     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
-    <script src="././js/all.js"></script>
+    <script src="././js/videocall&register.js"></script>
 
     <title>Demo2</title>
 </head>
@@ -117,14 +118,14 @@
             </div>
 
             <div class="superRow">
-                <label class="control-label" for="name">Competenze personali</label>
+                <label class="control-label" for="name">Di cosa hai bisogno?</label>
                 <div class="row">
                     <div class="col-md-5">
                         <select id="skills" name="name" class="form-control">
                             <option value="" disabled selected>Scegli l'opzione</option>
-                            <option value="1">Macchine edili</option>
-                            <option value="2">Macchine agricole</option>
-                            <option value="3">Macchinari industriali</option>
+                            <option value="1">Istruzioni di utilizzo</option>
+                            <option value="2">Istruzioni di correzione</option>
+                            <option value="3">Istruzioni di manutenzione</option>
                         </select>
                     </div>
                     <div class="col-md-7 text-right">
@@ -137,16 +138,19 @@
         </div>
 
         <!--VIDEOCALL-->
+
         <div class="row">
             <div id="videocall">
                 <div class="col-md-5">
-                    <h4>Fornisci assistenza</h4>
-                    <br /> <br /> <label class="control-label" for="peer">Username destinatario</label>
+                    <h4>Richiedi assistenza</h4>
+                    <label class="control-label" for="peer">Username destinatario</label>
+
                     <div class="row">
-                        <div class="col-md-5">
+                        <div id="usernameInput" class="col-md-5">
                             <input id="peer" name="peer" class="form-control" type="text" onkeydown="if (event.keyCode == 13) call();">
                         </div>
-                        <div class="col-md-7 text-right">
+                        <br/> <br/>
+                        <div id="videocallButton">
                             <a id="call" href="#" class="btn btn-success">
                                 <span class="glyphicon glyphicon-play"></span> Chiama</a>
                             <a id="terminate" href="#" class="btn btn-danger">
@@ -154,12 +158,12 @@
                             <a id="play" href="#" class="btn btn-warning">
                                 <span class="glyphicon glyphicon-play-circle"></span>Replay</a>
                         </div>
+                        <br/>
                     </div>
-                    <br /> <label class="control-label" for="console">Console</label><br>
-                    <br>
 
                 </div>
-                <div class="col-md-7">
+
+                <div id="video" class="col-md-7">
                     <div id="videoBig">
                         <video id="videoOutput" autoplay width="640px" height="448px" poster="./img/webrtc.png"></video>
                     </div>

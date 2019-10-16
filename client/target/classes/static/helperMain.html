@@ -24,8 +24,9 @@
     <script src="webjars/demo-console/index.js"></script>
 
     <script src="js/lib/kurento-utils.js"></script>
+    <script src="js/lib/adapter.js"></script>
     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
-    <script src="././js/all.js"></script>
+    <script src="././js/videocall&register.js"></script>
 
     <title>Demo2</title>
 </head>
@@ -140,7 +141,7 @@
             <div id="videocall">
                 <div class="col-md-5">
                     <h4>Fornisci assistenza</h4>
-                    <br /> <br /> <label class="control-label" for="peer">Username destinatario</label>
+                    <label class="control-label" for="peer">Username destinatario</label>
                     <div class="row">
                         <div class="col-md-5">
                             <input id="peer" name="peer" class="form-control" type="text" onkeydown="if (event.keyCode == 13) call();">
@@ -154,8 +155,7 @@
                                 <span class="glyphicon glyphicon-play-circle"></span>Replay</a>
                         </div>
                     </div>
-                    <br /> <label class="control-label" for="console">Console</label><br>
-                    <br>
+
 
                 </div>
                 <div class="col-md-7">

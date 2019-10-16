@@ -1,4 +1,3 @@
-
 package org.kurento.tutorial.one2onecalladv;
 
 import java.text.SimpleDateFormat;
