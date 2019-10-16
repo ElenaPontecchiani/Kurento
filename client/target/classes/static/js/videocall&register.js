@@ -110,6 +110,7 @@ window.onload = function() {
     console = new Console();
     setRegisterState(NOT_REGISTERED);
     var drag = new Draggabilly(document.getElementById('videoSmall'));
+    var drag1 = new Draggabilly(document.getElementById('content1'));
     videoInput = document.getElementById('videoInput');
     videoOutput = document.getElementById('videoOutput');
     document.getElementById('name').focus();
@@ -424,19 +425,12 @@ function registerPage() { //funzione che fa display solo della parte di registra
     var register = document.getElementById("registerForm");
     var video = document.getElementById("videocall");
     var file = document.getElementById("file");
-    var chat = document.getElementById("low_container");
+    var chat = document.getElementById("content1");
     intro.style.display = "none";
     register.style.display = "block";
     video.style.display = "none";
     file.style.display = "none";
     chat.style.display = "none";
-
-
-
-
-
-
-
 }
 
 
@@ -445,7 +439,7 @@ function callPage() { //funzione che fa display solo della parte di call
     var register = document.getElementById("registerForm");
     var video = document.getElementById("videocall");
     var file = document.getElementById("file");
-    var chat = document.getElementById("low_container");
+    var chat = document.getElementById("content1");
     intro.style.display = "none";
     register.style.display = "none";
     video.style.display = "block";
@@ -459,7 +453,7 @@ function filePage() { //funzione che fa display solo della parte di file sharing
     var register = document.getElementById("registerForm");
     var video = document.getElementById("videocall");
     var file = document.getElementById("file");
-    var chat = document.getElementById("low_container");
+    var chat = document.getElementById("content1");
     intro.style.display = "none";
     register.style.display = "none";
     video.style.display = "none";
@@ -472,7 +466,7 @@ function chatPage() { //funzione che fa display solo della parte di chat
     var register = document.getElementById("registerForm");
     var video = document.getElementById("videocall");
     var file = document.getElementById("file");
-    var chat = document.getElementById("low_container");
+    var chat = document.getElementById("content1");
     intro.style.display = "none";
     register.style.display = "none";
     video.style.display = "none";
@@ -485,7 +479,7 @@ function helpPage() { //funzione che fa display solo della parte di registrazion
     var register = document.getElementById("registerForm");
     var video = document.getElementById("videocall");
     var file = document.getElementById("file");
-    var chat = document.getElementById("low_container");
+    var chat = document.getElementById("content1");
     intro.style.display = "block";
     register.style.display = "none";
     video.style.display = "none";

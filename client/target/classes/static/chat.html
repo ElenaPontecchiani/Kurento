@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<!--PAGINA INTERNA PRINCIPALE-->
 <html>
 
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="pragma" content="no-cache">
@@ -13,22 +13,19 @@
     <link rel="stylesheet" href="webjars/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="webjars/ekko-lightbox/dist/ekko-lightbox.min.css">
     <link rel="stylesheet" href="webjars/demo-console/index.css">
-    <link rel="stylesheet" href="././css/kurento.css">
-
+    <link rel="stylesheet" type="text/css" href="css/kurento.css">
 
     <script src="webjars/jquery/dist/jquery.min.js"></script>
     <script src="webjars/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.scaledrone.com/scaledrone.min.js"></script>
     <script src="webjars/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
     <script src="webjars/draggabilly/draggabilly.pkgd.min.js"></script>
     <script src="/webjars/webrtc-adapter/release/adapter.js"></script>
     <script src="webjars/demo-console/index.js"></script>
-
     <script src="js/lib/kurento-utils.js"></script>
     <script src="js/lib/adapter.js"></script>
     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
     <script src="././js/videocall&register.js"></script>
-
-    <title>Demo2</title>
 </head>
 
 <body>
@@ -39,7 +36,6 @@
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
                     <a class="navbar-brand" href="./">Richiedi assitenza remota</a>
                 </div>
-
             </div>
         </div>
     </header>
@@ -79,10 +75,13 @@
 
     </div>
 
-    <!-- End vertical navbar -->
-    <!--CONTIENE LA PAGINA CON TUTTE LE INFORMAZIONI-->
+
+
+
     <div class="page-content p-5" id="content">
 
+        <!-- End vertical navbar -->
+        <!--FINO A QUI TUTTO OK-->
         <!--INTRO-->
         <div id="intro">
             <h4>Ciao, ti trovi nella sezione introduttiva</h4>
@@ -107,11 +106,11 @@
                 <label class="control-label" for="name">Username personale</label>
                 <div class="row">
                     <div class="col-md-5">
-                        <input id="name" name="name" class="form-control" type="text" onkeydown="if (event.keyCode == 13) register();" />
+                        <input id="name" name="name" class="form-control" onkeydown="if (event.keyCode == 13) register();" />
                     </div>
                     <div class="col-md-7 text-right">
                         <a id="register" href="#" class="btn btn-primary"><span
-                                    class="glyphicon glyphicon-plus"></span> Registrati</a>
+                                        class="glyphicon glyphicon-plus"></span> Registrati</a>
                     </div>
                 </div>
             </div>
@@ -120,19 +119,21 @@
                 <div class="row">
                     <div class="col-md-5">
                         <select id="skills" name="name" class="form-control">
-                            <option value="" disabled selected>Scegli l'opzione</option>
-                            <option value="1">Istruzioni di utilizzo</option>
-                            <option value="2">Istruzioni di correzione</option>
-                            <option value="3">Istruzioni di manutenzione</option>
-                        </select>
+                                <option value="" disabled selected>Scegli l'opzione</option>
+                                <option value="1">Istruzioni di utilizzo</option>
+                                <option value="2">Istruzioni di correzione</option>
+                                <option value="3">Istruzioni di manutenzione</option>
+                            </select>
                     </div>
                     <div class="col-md-7 text-right">
                         <a id="skills_button" href="#" class="btn btn-primary"><span
-                                class="glyphicon glyphicon-plus"></span> Aggiungi </a>
+                                    class="glyphicon glyphicon-plus"></span> Aggiungi </a>
                     </div>
                 </div>
             </div>
         </div>
+
+
 
         <!--VIDEOCALL-->
 
@@ -141,10 +142,9 @@
                 <div class="col-md-5">
                     <h4>Richiedi assistenza</h4>
                     <label class="control-label" for="peer">Username destinatario</label>
-
                     <div class="row">
                         <div id="usernameInput" class="col-md-5">
-                            <input id="peer" name="peer" class="form-control" type="text" onkeydown="if (event.keyCode == 13) call();">
+                            <input id="peer" name="peer" class="form-control" onkeydown="if (event.keyCode == 13) call();">
                         </div>
                         <br/> <br/>
                         <div id="videocallButton">
@@ -157,9 +157,7 @@
                         </div>
                         <br/>
                     </div>
-
                 </div>
-
                 <div id="video" class="col-md-7">
                     <div id="videoBig">
                         <video id="videoOutput" autoplay width="640px" height="448px" poster="./img/webrtc.png"></video>
@@ -170,77 +168,33 @@
                 </div>
             </div>
 
-            <!--FILE SHARING-->
-            <div id="file">
-                <div id="infoFile" class="col-md-5">
-                    <div id="intestazioneFile">
-                        <h4>Condividi file</h4>
-                        <p>Condividi con l'interlocutore i tuoi file. E' supportato qualsiasi tipo di file</p>
-                    </div>
-                    <div>
-                        <form id="fileInfo">
-                            <label class="custom-file-upload btn btn-primary" href="#">
-                                    <input type="file" id="fileInput" name="files"  />
-                                    <span class="glyphicon glyphicon-plus"></span>
-                                    Sfoglia..
-                                </label>
-                        </form>
-                        <button disabled id="sendFile" href="#" class="btn btn-success"><span
-                        class="glyphicon glyphicon-play"></span> Invia</button>
-                        <button disabled id="abortButton" href="#" class="btn btn-danger"><span
-                        class="glyphicon glyphicon-stop"></span> Sospendi</button>
-                    </div>
-                </div>
 
-                <div id="progress" class="col-md-7">
-                    <div id="contenitoreProgress">
-                        <div class="progress">
-                            <p class="label2">Send progress: </p>
-                            <progress id="sendProgress" max="0" value="0"></progress>
-                        </div>
-                        <div class="progress">
-                            <p class="label2">Receive progress: </p>
-                            <progress id="receiveProgress" max="0" value="0"></progress>
-                        </div>
-                    </div>
-                    <a id="download"></a>
-                    <span id="status"></span>
+
+
+
+
+
+            <!--CHAT-->
+            <div id="content1">
+                <div class="messages">
+
+
                 </div>
+                <form class="footer" onsubmit="return false;">
+                    <input type="text" placeholder="Your message..">
+                    <button type="submit">Send</button>
+                </form>
             </div>
+
+            <template data-template="message">
+        <div class="message">
+        <div class="message__name"></div>
+        <div class="message__bubble"></div>
         </div>
+        </template>
 
-
-        <!--CHAT-->
-        <div id="low_container">
-            <h4>Invia e ricevi messaggi</h4>
-            <p>Manda messaggi real time al tuo interlocutore</p>
-            <div id="buttons">
-                <button id="startButton" class="btn btn-primary"><span
-                        class="glyphicon glyphicon-plus"></span>Inizia la chat</button>
-                <button id="sendButton" class="btn btn-success" disabled><span class="glyphicon glyphicon-play"></span>Invia</button>
-                <button id="closeButton" class="btn btn-danger" disabled><span class="glyphicon glyphicon-stop"></span>Chiudi la chat</button>
-            </div>
-            <div id="sendReceive">
-                <div id="send">
-                    <p>Messaggi inviati:</p>
-                    <textarea id="dataChannelSend" disabled placeholder="Premi inizia la chat per inivare messaggi"></textarea>
-                </div>
-                <div id="receive">
-                    <p>Messaggi ricevuti:</p>
-                    <textarea id="dataChannelReceive" disabled></textarea>
-                </div>
-            </div>
+            <script src="script.js"></script>
         </div>
-
-
-    </div>
-    <!--chiude container della pagina-->
-
-    <!--chiude container generale-->
-    <!--SCRIPT CHE DEVONO ESSERE TENUTI QUI-->
-    <script src="js/file_sharing.js"></script>
-    <script src="js/chat.js" async></script>
-    <script src="js/lib/ga.js"></script>
 
 </body>
 
