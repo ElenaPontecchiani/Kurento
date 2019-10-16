@@ -16,12 +16,14 @@ function setRegisterState(nextState) {
         case NOT_REGISTERED:
             enableButton('#register', 'register()');
             disableButton('#skills_button');
+            disableButton('#textSubmit');
             setCallState(DISABLED);
             break;
         case REGISTERING:
             disableButton('#register');
             disableButton('#call');
             enableButton('#skills_button', 'skills()');
+            enableButton('#textSubmit');
             break;
         case REGISTERED:
             disableButton('#register');

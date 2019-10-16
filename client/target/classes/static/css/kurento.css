@@ -320,7 +320,6 @@ nav #stdbar li {
     max-width: 400px;
     display: flex;
     flex-direction: column;
-    position: fixed;
     left: 0;
     bottom: -17px;
     position: relative;
