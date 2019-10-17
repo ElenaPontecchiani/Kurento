@@ -1,16 +1,3 @@
-const possibleEmojis = [
-    '🐀', '🐁', '🐭', '🐹', '🐂', '🐃', '🐄', '🐮', '🐅', '🐆', '🐯', '🐇', '🐐', '🐑', '🐏', '🐴',
-    '🐎', '🐱', '🐈', '🐰', '🐓', '🐔', '🐤', '🐣', '🐥', '🐦', '🐧', '🐘', '🐩', '🐕', '🐷', '🐖',
-    '🐗', '🐫', '🐪', '🐶', '🐺', '🐻', '🐨', '🐼', '🐵', '🙈', '🙉', '🙊', '🐒', '🐉', '🐲', '🐊',
-    '🐍', '🐢', '🐸', '🐋', '🐳', '🐬', '🐙', '🐟', '🐠', '🐡', '🐚', '🐌', '🐛', '🐜', '🐝', '🐞',
-];
-
-function randomEmoji() {
-    var randomIndex = Math.floor(Math.random() * possibleEmojis.length);
-    return possibleEmojis[randomIndex];
-}
-
-const emoji = randomEmoji();
 const name = document.getElementById('name');
 
 // Generate random chat hash if needed
@@ -143,7 +130,7 @@ function setupDataChannel() {
 function checkDataChannelState() {
     console.log('WebRTC channel state is:', dataChannel.readyState);
     if (dataChannel.readyState === 'open') {
-        insertMessageToDOM({ content: 'WebRTC data channel is now open' });
+        insertMessageToDOM({ content: 'Puoi iniziare a messaggiare!' });
     }
 }
 
@@ -176,9 +163,9 @@ form.addEventListener('submit', () => {
     input.value = '';
 
     const data = {
-        //name,
+
         content: value,
-        //emoji,
+
     };
 
     dataChannel.send(JSON.stringify(data));
@@ -186,4 +173,4 @@ form.addEventListener('submit', () => {
     insertMessageToDOM(data, true);
 });
 
-insertMessageToDOM({ content: 'Chat URL is ' + location.href });
+insertMessageToDOM({ content: 'Registrati per iniziare a chattare!' });

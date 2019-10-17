@@ -130,7 +130,7 @@ function setupDataChannel() {
 function checkDataChannelState() {
     console.log('WebRTC channel state is:', dataChannel.readyState);
     if (dataChannel.readyState === 'open') {
-        insertMessageToDOM({ content: 'WebRTC data channel is now open' });
+        insertMessageToDOM({ content: 'Puoi iniziare a messaggiare!' });
     }
 }
 
@@ -173,4 +173,4 @@ form.addEventListener('submit', () => {
     insertMessageToDOM(data, true);
 });
 
-insertMessageToDOM({ content: 'Chat URL is ' + location.href });
+insertMessageToDOM({ content: 'Registrati per iniziare a chattare!' });
