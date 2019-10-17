@@ -432,7 +432,7 @@ function registerPage() { //funzione che fa display solo della parte di registra
     register.style.display = "block";
     video.style.display = "none";
     file.style.display = "none";
-    chat.style.display = "none";
+    //chat.style.display = "none";
 }
 
 
@@ -446,7 +446,7 @@ function callPage() { //funzione che fa display solo della parte di call
     register.style.display = "none";
     video.style.display = "block";
     file.style.display = "none";
-    chat.style.display = "none";
+    //chat.style.display = "none";
 }
 
 
@@ -460,7 +460,7 @@ function filePage() { //funzione che fa display solo della parte di file sharing
     register.style.display = "none";
     video.style.display = "none";
     file.style.display = "block";
-    chat.style.display = "none";
+    //chat.style.display = "none";
 }
 
 function chatPage() { //funzione che fa display solo della parte di chat
@@ -486,5 +486,5 @@ function helpPage() { //funzione che fa display solo della parte di registrazion
     register.style.display = "none";
     video.style.display = "none";
     file.style.display = "none";
-    chat.style.display = "none";
+    //chat.style.display = "none";
 }

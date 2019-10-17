@@ -156,7 +156,7 @@ function insertMessageToDOM(options, isFromMe) {
     messagesEl.scrollTop = messagesEl.scrollHeight - messagesEl.clientHeight;
 }
 
-const form = document.querySelector('form');
+const form = document.querySelector('.footer');
 form.addEventListener('submit', () => {
     const input = document.querySelector('input[type="text"]');
     const value = input.value;
