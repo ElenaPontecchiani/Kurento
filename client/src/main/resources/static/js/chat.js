@@ -1,6 +1,7 @@
 //CODICE JS PER LA CHAT
 //Viene utilizzato un server Scaledrone per il processo di signaling, mentre per il resto non serve nessun intermediario
 // Genera hash per la chat casuale (codice dopo # nell'URL che identifica univocamente la room)
+
 if (!location.hash) {
     location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
 }
@@ -159,7 +160,6 @@ form.addEventListener('submit', () => {
     input.value = '';
 
     const data = {
-
         content: value,
 
     };
