@@ -1,16 +1,16 @@
-const name = document.getElementById('name');
-
-// Generate random chat hash if needed
+//CODICE JS PER LA CHAT
+//Viene utilizzato un server Scaledrone per il processo di signaling, mentre per il resto non serve nessun intermediario
+// Genera hash per la chat casuale (codice dopo # nell'URL che identifica univocamente la room)
 if (!location.hash) {
     location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
 }
 const chatHash = location.hash.substring(1);
 
-// TODO: Replace with your own channel ID
+//Utilizzo ScaleDrone
 const drone = new ScaleDrone('yiS12Ts5RdNhebyM');
-// Scaledrone room name needs to be prefixed with 'observable-'
+//Le room di Scaledrone necessitano del prefisso'observable-'
 const roomName = 'observable-' + chatHash;
-// Scaledrone room used for signaling
+//Room Scaledrone per il processo di scambio di segnali
 let room;
 
 const configuration = {
@@ -18,12 +18,13 @@ const configuration = {
         url: 'stun:stun.l.google.com:19302'
     }]
 };
-// RTCPeerConnection
+
+// RTCPeerConnection: identifica un peer della connessione, tengo ugugale anche per file sharing
 let pc;
-// RTCDataChannel
+// RTCDataChannel: identifica il canale attraverso il quale scambio dati etc
 let dataChannel;
 
-// Wait for Scaledrone signalling server to connect
+// Connessione al server Scaledrone per il processo di signaling
 drone.on('open', error => {
     if (error) {
         return console.error(error);
@@ -35,19 +36,18 @@ drone.on('open', error => {
         }
         console.log('Connected to signaling server');
     });
-    // We're connected to the room and received an array of 'members'
-    // connected to the room (including us). Signaling server is ready.
+    //Connesso alla stanza
     room.on('members', members => {
         if (members.length >= 3) {
             return alert('The room is full');
         }
-        // If we are the second user to connect to the room we will be creating the offer
+        //Se sono il secondo membro ad accedere alla stanza viene creatta l'offerta
         const isOfferer = members.length === 2;
         startWebRTC(isOfferer);
     });
 });
 
-// Send signaling data via Scaledrone
+//Invio dei segnali attraverso Scaledrone
 function sendSignalingMessage(message) {
     drone.publish({
         room: roomName,
@@ -59,8 +59,7 @@ function startWebRTC(isOfferer) {
     console.log('Starting WebRTC in as', isOfferer ? 'offerer' : 'waiter');
     pc = new RTCPeerConnection(configuration);
 
-    // 'onicecandidate' notifies us whenever an ICE agent needs to deliver a
-    // message to the other peer through the signaling server
+    // 'onicecandidate' notifica quando un ICE vuole inviare un messaggio a un altro peer
     pc.onicecandidate = event => {
         if (event.candidate) {
             sendSignalingMessage({ 'candidate': event.candidate });
@@ -69,14 +68,14 @@ function startWebRTC(isOfferer) {
 
 
     if (isOfferer) {
-        // If user is offerer let them create a negotiation offer and set up the data channel
+        //Se l'utente è l'offerente avvia la negoziazione e crea il datachannel
         pc.onnegotiationneeded = () => {
             pc.createOffer(localDescCreated, error => console.error(error));
         }
         dataChannel = pc.createDataChannel('chat');
         setupDataChannel();
     } else {
-        // If user is not the offerer let wait for a data channel
+        //Se l'utente non è l'offerente attende semplicemnete il datachannel
         pc.ondatachannel = event => {
             dataChannel = event.channel;
             setupDataChannel();
@@ -87,24 +86,23 @@ function startWebRTC(isOfferer) {
 }
 
 function startListentingToSignals() {
-    // Listen to signaling data from Scaledrone
+    // In ascolto dei segnali provenienti da Scaledrone
     room.on('data', (message, client) => {
-        // Message was sent by us
         if (client.id === drone.clientId) {
             return;
         }
         if (message.sdp) {
-            // This is called after receiving an offer or answer from another peer
+            // Chiamato quando ricevo domanda/risposta da un altro peer
             pc.setRemoteDescription(new RTCSessionDescription(message.sdp), () => {
                 console.log('pc.remoteDescription.type', pc.remoteDescription.type);
-                // When receiving an offer lets answer it
+                // Quando ricevo un offerta e le rispondo
                 if (pc.remoteDescription.type === 'offer') {
                     console.log('Answering offer');
                     pc.createAnswer(localDescCreated, error => console.error(error));
                 }
             }, error => console.error(error));
         } else if (message.candidate) {
-            // Add the new ICE candidate to our connections remote description
+            // Aggiungo un ICE alla descrizione di connessione remota
             pc.addIceCandidate(new RTCIceCandidate(message.candidate));
         }
     });
@@ -118,7 +116,7 @@ function localDescCreated(desc) {
     );
 }
 
-// Hook up data channel event handlers
+//Data channel event handlers
 function setupDataChannel() {
     checkDataChannelState();
     dataChannel.onopen = checkDataChannelState;
@@ -151,8 +149,6 @@ function insertMessageToDOM(options, isFromMe) {
 
     const messagesEl = document.querySelector('.messages');
     messagesEl.appendChild(clone);
-
-    // Scroll to bottom
     messagesEl.scrollTop = messagesEl.scrollHeight - messagesEl.clientHeight;
 }
 

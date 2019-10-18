@@ -3,17 +3,12 @@ package org.kurento.tutorial.one2onecalladv;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.kurento.client.FaceOverlayFilter;
 import org.kurento.client.KurentoClient;
 import org.kurento.client.MediaPipeline;
 import org.kurento.client.RecorderEndpoint;
 import org.kurento.client.WebRtcEndpoint;
 
-/**
- * Media Pipeline (connection of Media Elements) per la trasmisisone audio video della chiamata vera  e propria
- * 
-
- */
+/** Media Pipeline (connection of Media Elements) per la trasmisisone audio video della chiamata vera  e propria */
 public class CallMediaPipeline {
 
   private static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss-S");
@@ -42,7 +37,7 @@ public class CallMediaPipeline {
 
     // String appServerUrl = System.getProperty("app.server.url",
     //    One2OneCallAdvApp.DEFAULT_APP_SERVER_URL);
-    String appServerUrl = "http://files.openvidu.io";
+    /*String appServerUrl = "http://files.openvidu.io";
     FaceOverlayFilter faceOverlayFilterCaller = new FaceOverlayFilter.Builder(pipeline).build();
     faceOverlayFilterCaller.setOverlayedImage(appServerUrl + "/img/mario-wings.png", -0.35F, -1.2F,
         1.6F, 1.6F);
@@ -58,7 +53,13 @@ public class CallMediaPipeline {
 
     webRtcCallee.connect(faceOverlayFilterCallee);
     faceOverlayFilterCallee.connect(webRtcCaller);
-    faceOverlayFilterCallee.connect(recorderCallee);
+    faceOverlayFilterCallee.connect(recorderCallee);*/
+    // Connections
+    webRtcCaller.connect(webRtcCallee);
+    webRtcCaller.connect(recorderCaller);
+
+    webRtcCallee.connect(webRtcCaller);
+    webRtcCallee.connect(recorderCallee);
   }
 
   public void record() {

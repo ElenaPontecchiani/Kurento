@@ -29,6 +29,7 @@ let timestampStart;
 let statsInterval = null;
 let bitrateMax = 0;
 
+//SETTAGGIO EVENTI
 sendFileButton.addEventListener('click', () => createConnection());
 fileInput.addEventListener('change', handleFileInputChange, false);
 abortButton.addEventListener('click', () => {
