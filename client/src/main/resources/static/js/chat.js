@@ -1,7 +1,7 @@
 //CODICE JS PER LA CHAT
 //Viene utilizzato un server Scaledrone per il processo di signaling, mentre per il resto non serve nessun intermediario
-// Genera hash per la chat casuale (codice dopo # nell'URL che identifica univocamente la room)
 
+// Genera hash per la chat casuale (codice dopo # nell'URL che identifica univocamente la room)
 if (!location.hash) {
     location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
 }
@@ -11,9 +11,7 @@ const chatHash = location.hash.substring(1);
 const drone = new ScaleDrone('yiS12Ts5RdNhebyM');
 //Le room di Scaledrone necessitano del prefisso'observable-'
 const roomName = 'observable-' + chatHash;
-//Room Scaledrone per il processo di scambio di segnali
-let room;
-
+//Room Scaledrone
 const configuration = {
     iceServers: [{
         url: 'stun:stun.l.google.com:19302'
@@ -130,6 +128,7 @@ function checkDataChannelState() {
     console.log('WebRTC channel state is:', dataChannel.readyState);
     if (dataChannel.readyState === 'open') {
         insertMessageToDOM({ content: 'Puoi iniziare a messaggiare!' });
+
     }
 }
 
@@ -169,4 +168,4 @@ form.addEventListener('submit', () => {
     insertMessageToDOM(data, true);
 });
 
-insertMessageToDOM({ content: 'Registrati per iniziare a chattare!' });
+insertMessageToDOM({ content: 'Registrati e contatta un utente per iniziare a chattare!' });

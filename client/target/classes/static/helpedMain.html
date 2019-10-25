@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="webjars/ekko-lightbox/dist/ekko-lightbox.min.css">
     <link rel="stylesheet" href="webjars/demo-console/index.css">
     <link rel="stylesheet" type="text/css" href="css/kurento.css">
+    <link rel="stylesheet" href="css/widget.css">
 
     <script src="webjars/jquery/dist/jquery.min.js"></script>
     <script src="webjars/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -21,23 +22,44 @@
     <script src="webjars/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
     <script src="webjars/draggabilly/draggabilly.pkgd.min.js"></script>
     <script src="/webjars/webrtc-adapter/release/adapter.js"></script>
-    <script src="webjars/demo-console/index.js"></script>
+    <!--<script src="webjars/demo-console/index.js"></script>-->
+
     <script src="js/lib/kurento-utils.js"></script>
     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
     <script src="js/videocall&register.js"></script>
     <script src="js/main.js"></script>
 
+    <script src="js/canvas-designer-widget.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.489/build/pdf.min.js"></script>
     <title>Demo</title>
+
+
+    <script src="https://www.webrtc-experiment.com/common.js" async></script>
+    <script src="dev/webrtc-handler.js"></script>
+    <script src="https://rtcmulticonnection.herokuapp.com/dist/RTCMultiConnection.min.js"></script>
+    <script src="https://rtcmulticonnection.herokuapp.com/socket.io/socket.io.js"></script>
 </head>
 
 <body>
+
     <header>
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
-                <div class="navbar-header">
+                <div id="navbar_left" class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
                     <a class="navbar-brand" href="./">Richiedi assitenza remota</a>
                 </div>
+                <div id="superior_room">
+                    Numero di utenti connessi alla room: <b id="number-of-connected-users">0</b>
+
+                    <div id="hide-on-datachannel-opened">
+                        <p id="first">Apri una room:</p>
+
+                        <input type="text" id="room-id" placeholder="room-id">
+                        <button id="open-room">Open</button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </header>
@@ -57,11 +79,12 @@
                     <i class="fa fa-address-card mr-3 text-primary fa-fw"></i> Videochiamata
                 </a>
             </li>
-            <li class="nav-item">
+            <!--<li class="nav-item">
                 <a id="fileButton" href="#" class="nav-link text-dark font-italic" onclick="filePage()">
                     <i class="fa fa-cubes mr-3 text-primary fa-fw"></i> Condividi file
                 </a>
-            </li>
+            </li>-->
+
             <li class="nav-item">
                 <a id="helpButton" href="#" class="nav-link text-dark font-italic" onclick="helpPage()">
                     <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i> Help
@@ -80,6 +103,7 @@
         <!-- End vertical navbar -->
         <!--FINO A QUI TUTTO OK-->
         <!--INTRO-->
+
         <div id="intro">
             <h4>Ciao, ti trovi nella sezione introduttiva</h4>
             <p>Per richiedere il supporto di un tecnico attraverso l'applicazione, svolgi i seguenti passi:</p>
@@ -96,6 +120,8 @@
         </div>
 
         <!--REGISTRAZIONE-->
+        <!--
+
         <div id="registerForm" class="page-header">
             <h4>Registrazione</h4>
             <p>Compila il form per registrarti nel sistema. Gli altri utenti potranno contattarti attraverso l'username che inserirai.</p>
@@ -130,10 +156,10 @@
             </div>
         </div>
 
-
+        -->
 
         <!--VIDEOCALL-->
-
+        <!--
         <div class="row">
             <div id="videocall">
                 <div class="col-md-5">
@@ -164,10 +190,9 @@
                     </div>
                 </div>
             </div>
-
-
-
-            <!--FILE SHARING-->
+            -->
+        <!--FILE SHARING-->
+        <!--
             <div id="file">
                 <div id="infoFile" class="col-md-5">
                     <div id="intestazioneFile">
@@ -203,29 +228,279 @@
                     <a id="download"></a>
                     <span id="status"></span>
                 </div>
+            </div>-->
+
+        <!--CHAT-->
+        <!--<div id="content1">
+            <div class="messages">
+
+
             </div>
+            <form id="formChat" class="footer" onsubmit="return false;">
+                <input type="text" placeholder="Scrivi..">
+                <button id="textSubmit" class="btn btn-primary" type="submit">Invia</button>
+            </form>
+        </div>
 
-            <!--CHAT-->
-            <div id="content1">
-                <div class="messages">
-
-
-                </div>
-                <form id="formChat" class="footer" onsubmit="return false;">
-                    <input type="text" placeholder="Scrivi..">
-                    <button id="textSubmit" class="btn btn-primary" type="submit">Invia</button>
-                </form>
-            </div>
-
-            <template data-template="message">
+        <template data-template="message">
         <div class="message">
             <div class="message__bubble"></div>
         </div>
         </template>
 
-            <script src="js/chat.js"></script>
+        <script src="js/chat.js"></script>-->
+
+
+        <div id="canvas">
+            <div id="canvas_container">
+                <script src="js/canvas.js"></script>
+
+            </div>
+            <div id="fade" class="black_overlay">
+                <!--SERVE PER AVERE SCHERMO NERO QUANDO APPARE POP UP-->
+            </div>
+            <div id="command_bar">
+
+
+                <div id="extra-controls">
+                    <button id="export-as-image">Export as Image</button>
+                    <button id="btn-display-undo-popup">Undo</button>
+                </div>
+            </div>
+
+
+
+            <!--POP UP UNDO-->
+            <div id="light" class="white_content">
+                <!--PER SFONDO BIANCO POP UP-->
+                <button id="btn-close-undo-popup" style="float:right;">x</button>
+                <select id="undo-options" size="4">
+                            <option>Last Shape</option>
+                            <option>All Shapes</option>
+                            <option>Last Multiple</option>
+                            <option disabled>Specific Range</option>
+                        </select>
+
+                <div id="numberUndo">
+                    Digit/Number:<br>
+                    <input type="text" id="number-of-shapes-to-undo">
+                </div>
+
+                <button id="btn-undo" style="float:right;">Undo</button>
+            </div>
+
+            <!--POP UP EXPORT IMG-->
+            <div id="dataURL-popup" class="white_content">
+                <button id="btn-close-dataURL-popup" style="float:right;">x</button>
+                <select id="data-url-format" size="4">
+                            <option>image/png</option>
+                            <option>image/jpeg</option>
+                            <option>image/gif</option>
+                            <option>image/webp</option>
+                        </select>
+                <a id="link-to-image" target="_blank" download="image.png"></a>
+                <button id="btn-getDataURL" style="float:right;">Get DataURL</button>
+            </div>
+
+            <!--POP UP COMMENTI-->
+            <div id="comments-popup" class="white_content">
+                <button id="btn-close-comments-popup" style="float:right;">x</button>
+
+                <h2 id="h2-close-popup">Click right-side "x" button to close this popup.</h2>
+                <section class="experiment">
+                    <h2 class="header" id="feedback">Feedback</h2>
+                    <div>
+                        <textarea id="message" style="height: 8em; margin: .2em; width: 98%; border: 1px solid rgb(189, 189, 189); outline: none; resize: vertical;" placeholder="Have any message? Suggestions or something went wrong?"></textarea>
+                    </div>
+                    <button id="send-message" style="font-size: 1em;">Send Message</button><small style="margin-left:1em;">Enter your email too; if you want "direct" reply!</small>
+                </section>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!--SCRIPT VARI-->
+            <!--SCRIPT CHE SERVE PER LA CONNESSIONE ALLA ROOM-->
+            <script>
+                document.getElementById('room-id').onkeyup = document.getElementById('room-id').onblur = function() {
+                    localStorage.setItem('canvas-designer-roomid', this.value);
+                };
+
+                if (localStorage.getItem('canvas-designer-roomid')) {
+                    document.getElementById('room-id').value = localStorage.getItem('canvas-designer-roomid');
+                }
+
+                document.getElementById('open-room').onclick = function() {
+                    var roomid = document.getElementById('room-id').value;
+                    if (!roomid.length) return alert('Please enter roomid.');
+
+                    this.disabled = true;
+
+                    connection.open(roomid, onOpenRoom);
+                    //forse da cambiare questo, provare a inserire un p dove setto tx
+                    this.parentNode.innerHTML = '<a href="#' + roomid + '" target="_blank">Please share this link</a>';
+                };
+            </script>
+
+            <!--SCRIPT PER LA CONNESSIONE ALLA CAMERA2-->
+            <script>
+                var connection = new RTCMultiConnection();
+
+                connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
+                connection.socketMessageEvent = 'canvas-designer';
+
+                connection.enableFileSharing = false;
+                connection.session = {
+                    audio: true,
+                    video: true,
+                    data: true
+                };
+                connection.sdpConstraints.mandatory = {
+                    OfferToReceiveAudio: true,
+                    OfferToReceiveVideo: true
+                };
+                connection.dontCaptureUserMedia = true;
+                if (location.hash.replace('#', '').length) {
+                    var roomid = location.hash.replace('#', '');
+                    connection.join(roomid);
+                }
+
+                connection.onUserStatusChanged = function(event) {
+                    var infoBar = document.getElementById('hide-on-datachannel-opened');
+                    if (event.status == 'online') {
+                        infoBar.innerHTML = event.userid + ' is <b>online</b>.';
+                    }
+
+                    if (event.status == 'offline') {
+                        infoBar.innerHTML = event.userid + ' is <b>offline</b>.';
+                    }
+
+                    numberOfConnectedUsers.innerHTML = connection.getAllParticipants().length;
+                };
+
+                var numberOfConnectedUsers = document.getElementById('number-of-connected-users');
+                connection.onopen = function(event) {
+                    var infoBar = document.getElementById('hide-on-datachannel-opened');
+                    infoBar.innerHTML = '<b>' + event.userid + '</b> is ready to collaborate with you.';
+
+                    if (designer.pointsLength <= 0) {
+                        // make sure that remote user gets all drawings synced.
+                        setTimeout(function() {
+                            connection.send('plz-sync-points');
+                        }, 1000);
+                    }
+
+                    numberOfConnectedUsers.innerHTML = connection.getAllParticipants().length;
+
+                    if (connection.isInitiator) {
+                        setTimeout(function() {
+                            designer.renderStream();
+                        }, 1000);
+                    }
+                };
+
+                connection.onclose = connection.onerror = connection.onleave = function() {
+                    numberOfConnectedUsers.innerHTML = connection.getAllParticipants().length;
+                };
+
+                connection.onmessage = function(event) {
+                    if (event.data === 'plz-sync-points') {
+                        designer.sync();
+                        return;
+                    }
+
+                    designer.syncData(event.data);
+                };
+            </script>
+
+            <!--SCRIPT 3-->
+            <script>
+                function onOpenRoom() {
+                    // capture canvas-2d stream
+                    // and share in realtime using RTCPeerConnection.addStream
+                    // requires: dev/webrtc-handler.js
+                    designer.captureStream(function(stream) {
+                        connection.attachStreams = [stream];
+                        connection.onstream({
+                            stream: stream
+                        });
+                    });
+                }
+
+                var video = document.querySelector('video');
+
+                connection.onstream = function(event) {
+                    if (connection.isInitiator && event.mediaElement) return;
+
+                    video.style.display = '';
+                    video.srcObject = event.stream;
+
+
+                };
+
+                connection.onstreamended = function() {
+                    video.src = null;
+                    video.style.display = 'none';
+                };
+            </script>
         </div>
-        <script src="js/file_sharing.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
 
 </body>
 

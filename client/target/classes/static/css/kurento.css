@@ -364,3 +364,9 @@ button {
     margin-right: 0.5em;
     margin-top: 0.5em;
 }
+
+#command_bar {
+    width: 20%;
+    float: left;
+    margin: 0.3em;
+}

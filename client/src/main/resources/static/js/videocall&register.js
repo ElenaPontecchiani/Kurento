@@ -11,6 +11,7 @@ const NOT_REGISTERED = 0;
 const REGISTERING = 1;
 const REGISTERED = 2;
 
+//SETTER STATO DELA REGISTRAZIONE
 function setRegisterState(nextState) {
     switch (nextState) {
         case NOT_REGISTERED:
@@ -43,6 +44,7 @@ const POST_CALL = 2;
 const DISABLED = 3;
 const IN_PLAY = 4;
 
+//SETTER STATO DELLA CHIAMATA
 function setCallState(nextState) {
     switch (nextState) {
         case NO_CALL:
@@ -77,6 +79,7 @@ var skillsState = null;
 const NO_SKILLS = 0;
 const YES_SKILLS = 1;
 
+//SETTER STATO INSERIMENTO SKILLS
 function setSkillsState(nextState) {
     switch (nextState) {
         case NO_SKILLS:
@@ -97,7 +100,7 @@ function setSkillsState(nextState) {
 }
 
 
-
+//UTILITY GENERALI PER BOTTONI
 function disableButton(id) {
     $(id).attr('disabled', true);
     $(id).removeAttr('onclick');
@@ -108,6 +111,7 @@ function enableButton(id, functionName) {
     $(id).attr('onclick', functionName);
 }
 
+//CARICAMENTO FINESTRA
 window.onload = function() {
     console = new Console();
     setRegisterState(NOT_REGISTERED);
@@ -270,6 +274,7 @@ function onOfferIncomingCall(error, offerSdp) {
     sendMessage(response);
 }
 
+//REGISTRAZIONE DELL'UTENTE AL SISTEMA
 function register() {
     var name = document.getElementById('name').value;
     if (name == '') {
@@ -286,6 +291,7 @@ function register() {
     sendMessage(message);
 }
 
+//INIZIALIZZAZIONE E INOLTRO DELLA CHIAMATA
 function call() {
     if (document.getElementById('peer').value == '') {
         document.getElementById('peer').focus();
@@ -309,6 +315,7 @@ function call() {
         });
 }
 
+//OFFERTA DELLA CHIAMATA
 function onOfferCall(error, offerSdp) {
     if (error)
         return console.error('Error generating the offer ' + error);
@@ -322,6 +329,7 @@ function onOfferCall(error, offerSdp) {
     sendMessage(message);
 }
 
+//FUNZIONE DI RIPRODUZIONE DELLA CHIAMATA EFFETTUATA
 function play() {
     var peer = document.getElementById('peer').value;
     if (peer == '') {
@@ -348,6 +356,7 @@ function play() {
         });
 }
 
+//OFFERTA PER LA RIPRODUZIONE
 function onOfferPlay(error, offerSdp) {
     console.log('Invoking SDP offer callback function');
     var message = {
@@ -358,12 +367,14 @@ function onOfferPlay(error, offerSdp) {
     sendMessage(message);
 }
 
+//ABORT DELLA RIPRODUZIONE
 function playEnd() {
     setCallState(POST_CALL);
     hideSpinner(videoInput, videoOutput);
     document.getElementById('videoSmall').style.display = 'block';
 }
 
+//STOP DELLA CHIAMATA, CHIUDE LA CONNESSIONE PER LA CHIAMATA
 function stop(message) {
     var stopMessageId = (callState == IN_CALL) ? 'stop' : 'stopPlay';
     setCallState(POST_CALL);
@@ -388,6 +399,7 @@ function sendMessage(message) {
     ws.send(jsonMessage);
 }
 
+//IMPLEMENTAZIONE DEL PROTOCOLLO ICE
 function onIceCandidate(candidate) {
     console.log('Local candidate ' + JSON.stringify(candidate));
 
@@ -398,6 +410,7 @@ function onIceCandidate(candidate) {
     sendMessage(message);
 }
 
+//UTILITY GENERALI PER LAYOUT: SPINNER PER L'ATTESA
 function showSpinner() {
     for (var i = 0; i < arguments.length; i++) {
         arguments[i].poster = './img/transparent-1px.png';
@@ -413,9 +426,7 @@ function hideSpinner() {
     }
 }
 
-/**
- * Lightbox utility (to display media pipeline image in a modal dialog)
- */
+//DEVE STARE QUI, ROBA PER IL SETTING DEL KMS
 $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
     event.preventDefault();
     $(this).ekkoLightbox();

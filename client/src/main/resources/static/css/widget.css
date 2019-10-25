@@ -1,0 +1,463 @@
+/*PARTE INDEX*/
+
+
+/* popup box */
+
+.black_overlay {
+    /*SERVE PER SCHERMO NERO IN BACKGROUND QUANDO APPARE POPUP*/
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: .80;
+}
+
+.white_content {
+    /*PER SFONDO BIANCO IN POP UP*/
+    display: none;
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    width: 16%;
+    height: 15%;
+    padding: 16px;
+    border: 10px solid rgb(9, 159, 243);
+    background-color: rgba(255, 255, 255, 0.94);
+    z-index: 1002;
+    overflow: hidden;
+    border-radius: 5px;
+    min-width: 300px;
+    min-height: 120px;
+}
+
+.white_content hr {
+    border-top: 4px solid rgb(9, 159, 243);
+    margin: 9px -20px;
+}
+
+#btn-undo,
+#btn-close-undo-popup,
+#btn-close-dataURL-popup,
+#btn-close-comments-popup,
+#btn-getDataURL {
+    font-size: 1.2em;
+    padding: 2px 9px;
+}
+
+#btn-close-undo-popup,
+#btn-close-dataURL-popup,
+#btn-close-comments-popup {
+    padding: 0 6px;
+    border-radius: 50%;
+    padding-bottom: 1px;
+    color: red;
+}
+
+.white_content select {
+    font-size: 1.2em;
+    border: 1px solid;
+    padding: 0;
+    outline: none!important;
+    border: 1px solid black !important;
+    float: left;
+}
+
+.white_content select option {
+    padding: 2px 5px;
+    border-bottom: 1px solid black;
+}
+
+.white_content select option:last-child {
+    border-bottom: 0;
+}
+
+.white_content option:checked,
+.white_content option[selected] {
+    background-color: #06CDFF!important;
+    background: linear-gradient(#06CDFF, #06CDFF)!important;
+    color: white!important;
+}
+
+.white_content select[disabled] {
+    background-color: rgba(232, 229, 229, 0.17);
+    color: rgb(84, 82, 82);
+}
+
+div#comments-popup {
+    width: 100%;
+    left: 0;
+    top: 0;
+    height: 100%;
+    border: 0;
+    padding: 0;
+    border-radius: 0;
+    overflow: auto;
+}
+
+#btn-comments {
+    color: red;
+    margin-top: 5px;
+    font-size: 24px;
+    text-shadow: 1px 1px white;
+}
+
+#h2-close-popup {
+    background: yellow;
+    padding: 5px 10px;
+    border-bottom: 1px solid red;
+    margin: 0;
+    color: red;
+}
+
+
+/* header */
+
+
+/* design-surface */
+
+.design-surface {
+    background-color: transparent;
+}
+
+.design-surface canvas {
+    position: absolute;
+}
+
+.design-surface canvas:last-child {
+    position: static;
+}
+
+
+/* toolbox */
+
+.tool-box {
+    border-right: 1px solid #E5E5E5;
+    position: absolute;
+    top: 0;
+    width: 4em;
+    height: 6em;
+    background-color: #FBFBFB;
+    overflow: hidden;
+    height: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.tool-box canvas:hover {
+    box-shadow: none;
+    background: #eeeeee;
+}
+
+.selected-shape {
+    background: #eeeeee!important;
+}
+
+
+/* select */
+
+.allow-select {
+    -webkit-user-select: initial;
+    -moz-user-select: initial;
+    user-select: initial
+}
+
+
+/* arc */
+
+.arc-range-container,
+#pdf-page-container {
+    position: absolute;
+    z-index: 1000;
+    display: none;
+}
+
+.arc-range {
+    font-size: 18px;
+    padding: 2px 16px;
+    text-align: center;
+    width: 40px;
+}
+
+.arc-range-container-guide {
+    margin-top: 10px;
+    color: #C5C5C5;
+}
+
+
+/* context menu */
+
+.context-popup {
+    position: absolute;
+    display: none;
+    padding: 5px;
+    border: 1px solid #E5E5E5;
+    border-left: 0;
+    background-color: #FBFBFB;
+    box-shadow: inset 0 0 14px rgb(229, 229, 229);
+}
+
+.line-width-text,
+.colors-container input {
+    width: 25px;
+    padding: 2px 5px;
+    text-align: center;
+}
+
+
+/* colors */
+
+.colors-container label {
+    width: 100px;
+    display: inline-block;
+}
+
+.colors-container input {
+    width: 100px;
+    text-align: left;
+}
+
+.colors-container .input-div {
+    margin-bottom: 5px;
+}
+
+
+/* additional controls */
+
+.additional-container label,
+.additional-container select {
+    width: 200px;
+    display: inline-block;
+}
+
+.additional-container select {
+    width: 120px;
+}
+
+.btn-007 {
+    font-family: Verdana, arial, helvetica, sans-serif;
+    font-weight: normal;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    padding: 2px 3px;
+    text-decoration: none;
+    color: rgb(27, 26, 26);
+    display: inline-block;
+    box-shadow: rgb(255, 255, 255) 1px 1px 0px 0px inset;
+    text-shadow: none;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0.05, rgb(241, 241, 241)), to(rgb(230, 230, 230)));
+    font-size: 13px;
+    border: 1px solid red;
+    outline: none;
+}
+
+.btn-007:hover,
+.btn-007:focus {
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(5%, rgb(221, 221, 221)), to(rgb(250, 250, 250)));
+    border: 1px solid rgb(142, 142, 142);
+}
+
+.btn-007[disabled] {
+    background: rgb(249, 249, 249);
+    border: 1px solid rgb(218, 207, 207);
+    color: rgb(197, 189, 189);
+}
+
+.fontSelect {
+    position: relative;
+    padding: 3px;
+    height: 28px;
+    line-height: 28px;
+    cursor: pointer;
+    margin: 3px;
+    width: 200px;
+    background-image: -webkit-linear-gradient(top, #f9f9f9, #f0f0f0);
+    background-image: -moz-linear-gradient(top, #f9f9f9, #f0f0f0);
+    background-image: -o-linear-gradient(top, #f9f9f9, #f0f0f0);
+    background-image: -ms-linear-gradient(top, #f9f9f9, #f0f0f0);
+    background-image: linear-gradient(top, #f9f9f9, #f0f0f0);
+    filter: progid: DXImageTransform.Microsoft.gradient(GradientType=0, StartColorStr='$from', EndColorStr='$to');
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #cecece;
+}
+
+.fontSelect span {
+    overflow: hidden;
+    margin-left: 5px;
+}
+
+.fontSelect .arrow-down {
+    position: absolute;
+    right: 10px;
+    top: 14px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #AAA;
+}
+
+.fontSelectUl,
+.fontSizeUl {
+    list-style: none;
+    width: 200px;
+    background: #f9f9f9;
+    position: absolute;
+    left: 0;
+    top: 35px;
+    padding: 0;
+}
+
+.fontSelectUl {
+    padding-left: 5px;
+}
+
+.fontSelectUl li,
+.fontSizeUl li {
+    height: 24px;
+    line-height: 24px;
+    overflow: hidden;
+    cursor: pointer;
+    padding: 0 10px;
+    font-size: 14px;
+    border-left: 1px solid #f0f0f0;
+    border-right: 1px solid #f0f0f0;
+}
+
+.fontSelectUl li:last-child,
+.fontSizeUl li:last-child {
+    -webkit-border-radius: 0 0 4px 4px;
+    -moz-border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
+    border-bottom: 1px solid #EEEEEE;
+}
+
+.fontSelectUl li:hover,
+.fontSizeUl li:hover {
+    background: #DDD;
+}
+
+.fontSelectUl li.font-family-selected,
+.fontSizeUl li.font-size-selected {
+    background: rgb(6, 205, 255)!important;
+    color: white!important;
+}
+
+#marker-selected-color,
+#marker-selected-color-2,
+#pencil-selected-color,
+#pencil-selected-color-2 {
+    display: inline-block;
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+}
+
+#marker-fill-colors,
+#pencil-fill-colors {
+    display: none;
+}
+
+#marker-color-container,
+#pencil-color-container {
+    position: relative;
+}
+
+#marker-fill-colors,
+#pencil-fill-colors {
+    left: 100%;
+    top: 0;
+    width: 100px;
+    padding: 10px;
+}
+
+#marker-fill-style,
+#pencil-fill-style {
+    width: 50px;
+    display: inline-block;
+}
+
+#marker-colors-list,
+#pencil-colors-list {
+    margin: 10px auto;
+    border-collapse: collapse;
+}
+
+#marker-colors-list td,
+#pencil-colors-list td {
+    width: 15px;
+    height: 15px;
+    border: 1px solid black;
+    padding: 0;
+}
+
+#marker-colors-list td:hover,
+#pencil-colors-list td:hover {
+    border: 1px solid white;
+}
+
+#pdf-next,
+#pdf-prev,
+#pdf-close {
+    width: 22px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+
+/*ACTION BAR A SINISTRA*/
+
+#command_bar {
+    width: 20%;
+    float: left;
+    margin: 0.3em;
+}
+
+
+/*POP UP PER UNDO*/
+
+#numberUndo {
+    display: none;
+    margin: 1.5em;
+    float: right;
+    width: 40%;
+}
+
+#btn-getDataURL {
+    bottom: 0;
+    margin-top: 3em;
+}
+
+
+/*resize canvas*/
+
+#canvas_container {
+    float: right;
+    width: 70%;
+    margin-top: 13em;
+}
+
+#superior_room {
+    color: #ffff;
+    width: 20%;
+    float: right;
+}
+
+#navbar_left {
+    width: 80%;
+    float: left;
+}
+
+#first {
+    width: 40%;
+}
+
+#room-id {
+    width: 35%;
+}
+
+#open-room {
+    width: 50%;
+    background: #AAA;
+}
