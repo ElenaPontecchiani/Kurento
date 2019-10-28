@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--DEMO7-->
 <!--PAGINA INTERNA PRINCIPALE PER CHI VIENE AIUTATO-->
 <html>
 
@@ -12,9 +13,9 @@
 
     <link rel="stylesheet" href="webjars/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="webjars/ekko-lightbox/dist/ekko-lightbox.min.css">
-    <link rel="stylesheet" href="webjars/demo-console/index.css">
+    <!--<link rel="stylesheet" href="webjars/demo-console/index.css">-->
     <link rel="stylesheet" type="text/css" href="css/kurento.css">
-    <link rel="stylesheet" href="css/widget.css">
+    <link rel="stylesheet" type="text/css" href="css/widget.css">
 
     <script src="webjars/jquery/dist/jquery.min.js"></script>
     <script src="webjars/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -23,32 +24,35 @@
     <script src="webjars/draggabilly/draggabilly.pkgd.min.js"></script>
     <script src="/webjars/webrtc-adapter/release/adapter.js"></script>
     <!--<script src="webjars/demo-console/index.js"></script>-->
-
+    <!--<script src="js/console.js"></script>-->
     <script src="js/lib/kurento-utils.js"></script>
     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
     <script src="js/videocall&register.js"></script>
     <script src="js/main.js"></script>
 
+    <!--SCRIPT CANVAS-->
     <script src="js/canvas-designer-widget.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.489/build/pdf.min.js"></script>
-    <title>Demo</title>
+
 
 
     <script src="https://www.webrtc-experiment.com/common.js" async></script>
     <script src="dev/webrtc-handler.js"></script>
     <script src="https://rtcmulticonnection.herokuapp.com/dist/RTCMultiConnection.min.js"></script>
     <script src="https://rtcmulticonnection.herokuapp.com/socket.io/socket.io.js"></script>
+
+    <title>Demo</title>
 </head>
 
 <body>
-
     <header>
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
-                <div id="navbar_left" class="navbar-header">
+                <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
                     <a class="navbar-brand" href="./">Richiedi assitenza remota</a>
                 </div>
+
                 <div id="superior_room">
                     Numero di utenti connessi alla room: <b id="number-of-connected-users">0</b>
 
@@ -59,7 +63,6 @@
                         <button id="open-room">Open</button>
                     </div>
                 </div>
-
             </div>
         </div>
     </header>
@@ -84,7 +87,6 @@
                     <i class="fa fa-cubes mr-3 text-primary fa-fw"></i> Condividi file
                 </a>
             </li>-->
-
             <li class="nav-item">
                 <a id="helpButton" href="#" class="nav-link text-dark font-italic" onclick="helpPage()">
                     <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i> Help
@@ -103,7 +105,6 @@
         <!-- End vertical navbar -->
         <!--FINO A QUI TUTTO OK-->
         <!--INTRO-->
-
         <div id="intro">
             <h4>Ciao, ti trovi nella sezione introduttiva</h4>
             <p>Per richiedere il supporto di un tecnico attraverso l'applicazione, svolgi i seguenti passi:</p>
@@ -120,8 +121,6 @@
         </div>
 
         <!--REGISTRAZIONE-->
-        <!--
-
         <div id="registerForm" class="page-header">
             <h4>Registrazione</h4>
             <p>Compila il form per registrarti nel sistema. Gli altri utenti potranno contattarti attraverso l'username che inserirai.</p>
@@ -156,10 +155,10 @@
             </div>
         </div>
 
-        -->
+
 
         <!--VIDEOCALL-->
-        <!--
+
         <div class="row">
             <div id="videocall">
                 <div class="col-md-5">
@@ -190,170 +189,40 @@
                     </div>
                 </div>
             </div>
-            -->
-        <!--FILE SHARING-->
-        <!--
-            <div id="file">
-                <div id="infoFile" class="col-md-5">
-                    <div id="intestazioneFile">
-                        <h4>Condividi file</h4>
-                        <p>Condividi con l'interlocutore i tuoi file. E' supportato qualsiasi tipo di file</p>
-                    </div>
-                    <div>
-                        <form id="fileInfo">
-                            <label class="custom-file-upload btn btn-primary" href="#">
-                                <input type="file" id="fileInput" name="files"  />
-                                <span class="glyphicon glyphicon-plus"></span>
-                                Sfoglia..
-                            </label>
-                        </form>
-                        <button disabled id="sendFile" href="#" class="btn btn-success"><span
-                        class="glyphicon glyphicon-play"></span> Invia</button>
-                        <button disabled id="abortButton" href="#" class="btn btn-danger"><span
-                        class="glyphicon glyphicon-stop"></span> Sospendi</button>
-                    </div>
+
+            <div id="canvas">
+                <div id="canvas_container">
+                    <script src="js/canvas.js"></script>
+
                 </div>
-
-                <div id="progress" class="col-md-7">
-                    <div id="contenitoreProgress">
-                        <div class="progress">
-                            <p class="label2">Send progress: </p>
-                            <progress id="sendProgress" max="0" value="0"></progress>
-                        </div>
-                        <div class="progress">
-                            <p class="label2">Receive progress: </p>
-                            <progress id="receiveProgress" max="0" value="0"></progress>
-                        </div>
-                    </div>
-                    <a id="download"></a>
-                    <span id="status"></span>
-                </div>
-            </div>-->
-
-        <!--CHAT-->
-        <!--<div id="content1">
-            <div class="messages">
-
 
             </div>
-            <form id="formChat" class="footer" onsubmit="return false;">
-                <input type="text" placeholder="Scrivi..">
-                <button id="textSubmit" class="btn btn-primary" type="submit">Invia</button>
-            </form>
-        </div>
 
-        <template data-template="message">
+
+            <!--CHAT-->
+            <div id="content1">
+                <div class="messages">
+
+
+                </div>
+                <form id="formChat" class="footer" onsubmit="return false;">
+                    <input type="text" placeholder="Scrivi..">
+                    <button id="textSubmit" class="btn btn-primary" type="submit">Invia</button>
+                </form>
+            </div>
+
+            <template data-template="message">
         <div class="message">
             <div class="message__bubble"></div>
         </div>
         </template>
 
-        <script src="js/chat.js"></script>-->
+            <!--<script src="js/chat.js"></script>-->
+            <!--metto canvas dentro row-->
+            <!--CANVAS-->
 
-
-        <div id="canvas">
-            <div id="canvas_container">
-                <script src="js/canvas.js"></script>
-
-            </div>
-            <div id="fade" class="black_overlay">
-                <!--SERVE PER AVERE SCHERMO NERO QUANDO APPARE POP UP-->
-            </div>
-            <div id="command_bar">
-
-
-                <div id="extra-controls">
-                    <button id="export-as-image">Export as Image</button>
-                    <button id="btn-display-undo-popup">Undo</button>
-                </div>
-            </div>
-
-
-
-            <!--POP UP UNDO-->
-            <div id="light" class="white_content">
-                <!--PER SFONDO BIANCO POP UP-->
-                <button id="btn-close-undo-popup" style="float:right;">x</button>
-                <select id="undo-options" size="4">
-                            <option>Last Shape</option>
-                            <option>All Shapes</option>
-                            <option>Last Multiple</option>
-                            <option disabled>Specific Range</option>
-                        </select>
-
-                <div id="numberUndo">
-                    Digit/Number:<br>
-                    <input type="text" id="number-of-shapes-to-undo">
-                </div>
-
-                <button id="btn-undo" style="float:right;">Undo</button>
-            </div>
-
-            <!--POP UP EXPORT IMG-->
-            <div id="dataURL-popup" class="white_content">
-                <button id="btn-close-dataURL-popup" style="float:right;">x</button>
-                <select id="data-url-format" size="4">
-                            <option>image/png</option>
-                            <option>image/jpeg</option>
-                            <option>image/gif</option>
-                            <option>image/webp</option>
-                        </select>
-                <a id="link-to-image" target="_blank" download="image.png"></a>
-                <button id="btn-getDataURL" style="float:right;">Get DataURL</button>
-            </div>
-
-            <!--POP UP COMMENTI-->
-            <div id="comments-popup" class="white_content">
-                <button id="btn-close-comments-popup" style="float:right;">x</button>
-
-                <h2 id="h2-close-popup">Click right-side "x" button to close this popup.</h2>
-                <section class="experiment">
-                    <h2 class="header" id="feedback">Feedback</h2>
-                    <div>
-                        <textarea id="message" style="height: 8em; margin: .2em; width: 98%; border: 1px solid rgb(189, 189, 189); outline: none; resize: vertical;" placeholder="Have any message? Suggestions or something went wrong?"></textarea>
-                    </div>
-                    <button id="send-message" style="font-size: 1em;">Send Message</button><small style="margin-left:1em;">Enter your email too; if you want "direct" reply!</small>
-                </section>
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <!--SCRIPT VARI-->
             <!--SCRIPT CHE SERVE PER LA CONNESSIONE ALLA ROOM-->
+
             <script>
                 document.getElementById('room-id').onkeyup = document.getElementById('room-id').onblur = function() {
                     localStorage.setItem('canvas-designer-roomid', this.value);
@@ -447,6 +316,7 @@
             </script>
 
             <!--SCRIPT 3-->
+
             <script>
                 function onOpenRoom() {
                     // capture canvas-2d stream
@@ -476,32 +346,37 @@
                     video.style.display = 'none';
                 };
             </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </div>
-
-
+    <!--FINE PAGE CONTENT-->
 
 
 </body>
 
-</html>
+</html>s

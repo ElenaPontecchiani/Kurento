@@ -116,7 +116,8 @@ div#comments-popup {
 /* design-surface */
 
 .design-surface {
-    background-color: transparent;
+    background-color: rgba(60, 142, 215, 0.001) !important;
+    z-index: 100 !important;
 }
 
 .design-surface canvas {

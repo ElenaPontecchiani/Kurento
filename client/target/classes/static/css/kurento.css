@@ -240,7 +240,9 @@ nav #stdbar li {
 
 /*ROBA PER FARE PAGINA MAIN INIZIALE**/
 
-#videocall,
+
+/*#videocall,*/
+
 #file,
 #content1,
 #intro {
@@ -369,4 +371,38 @@ button {
     width: 20%;
     float: left;
     margin: 0.3em;
+}
+
+
+/*PROVA PER DISPLAYARE AR IN VIDEO*/
+
+#video {
+    top: 13em;
+}
+
+#wrapper {
+    position: relative;
+    width: 600px;
+    height: 600px;
+}
+
+.contentCanvas {
+    position: relative;
+    z-index: 100;
+}
+
+.backgroundCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -100;
+}
+
+
+/*PROVE PER DISPLAYARE CANVAS SOPRA VIDEO*/
+
+#video {
+    top: 22em;
+    left: 9em;
+    z-index: -100;
 }

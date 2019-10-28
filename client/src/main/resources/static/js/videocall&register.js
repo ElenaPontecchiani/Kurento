@@ -113,7 +113,7 @@ function enableButton(id, functionName) {
 
 //CARICAMENTO FINESTRA
 window.onload = function() {
-    console = new Console();
+    //console = new Console();
     setRegisterState(NOT_REGISTERED);
     var drag = new Draggabilly(document.getElementById('videoSmall'));
     var drag1 = new Draggabilly(document.getElementById('content1'));
