@@ -13,7 +13,6 @@
 
     <link rel="stylesheet" href="webjars/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="webjars/ekko-lightbox/dist/ekko-lightbox.min.css">
-    <!--<link rel="stylesheet" href="webjars/demo-console/index.css">-->
     <link rel="stylesheet" type="text/css" href="css/kurento.css">
     <link rel="stylesheet" type="text/css" href="css/widget.css">
 
@@ -23,23 +22,19 @@
     <script src="webjars/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
     <script src="webjars/draggabilly/draggabilly.pkgd.min.js"></script>
     <script src="/webjars/webrtc-adapter/release/adapter.js"></script>
-    <!--<script src="webjars/demo-console/index.js"></script>-->
-    <!--<script src="js/console.js"></script>-->
     <script src="js/lib/kurento-utils.js"></script>
     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
     <script src="js/videocall&register.js"></script>
     <script src="js/main.js"></script>
 
     <!--SCRIPT CANVAS-->
-    <script src="js/canvas-designer-widget.js"></script>
+    <script src="js/canvas/canvas-designer-widget.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.489/build/pdf.min.js"></script>
-
-
-
     <script src="https://www.webrtc-experiment.com/common.js" async></script>
     <script src="dev/webrtc-handler.js"></script>
     <script src="https://rtcmulticonnection.herokuapp.com/dist/RTCMultiConnection.min.js"></script>
     <script src="https://rtcmulticonnection.herokuapp.com/socket.io/socket.io.js"></script>
+
 
     <title>Demo</title>
 </head>
@@ -192,7 +187,7 @@
 
             <div id="canvas">
                 <div id="canvas_container">
-                    <script src="js/canvas.js"></script>
+                    <script src="js/canvas/canvas_designer.js"></script>
 
                 </div>
 
@@ -218,134 +213,19 @@
         </template>
 
             <!--<script src="js/chat.js"></script>-->
-            <!--metto canvas dentro row-->
+
             <!--CANVAS-->
 
             <!--SCRIPT CHE SERVE PER LA CONNESSIONE ALLA ROOM-->
 
-            <script>
-                document.getElementById('room-id').onkeyup = document.getElementById('room-id').onblur = function() {
-                    localStorage.setItem('canvas-designer-roomid', this.value);
-                };
 
-                if (localStorage.getItem('canvas-designer-roomid')) {
-                    document.getElementById('room-id').value = localStorage.getItem('canvas-designer-roomid');
-                }
+            <script src="js/room_connection/room_manager.js"></script>
 
-                document.getElementById('open-room').onclick = function() {
-                    var roomid = document.getElementById('room-id').value;
-                    if (!roomid.length) return alert('Please enter roomid.');
-
-                    this.disabled = true;
-
-                    connection.open(roomid, onOpenRoom);
-                    //forse da cambiare questo, provare a inserire un p dove setto tx
-                    this.parentNode.innerHTML = '<a href="#' + roomid + '" target="_blank">Please share this link</a>';
-                };
-            </script>
-
-            <!--SCRIPT PER LA CONNESSIONE ALLA CAMERA2-->
-            <script>
-                var connection = new RTCMultiConnection();
-
-                connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
-                connection.socketMessageEvent = 'canvas-designer';
-
-                connection.enableFileSharing = false;
-                connection.session = {
-                    audio: true,
-                    video: true,
-                    data: true
-                };
-                connection.sdpConstraints.mandatory = {
-                    OfferToReceiveAudio: true,
-                    OfferToReceiveVideo: true
-                };
-                connection.dontCaptureUserMedia = true;
-                if (location.hash.replace('#', '').length) {
-                    var roomid = location.hash.replace('#', '');
-                    connection.join(roomid);
-                }
-
-                connection.onUserStatusChanged = function(event) {
-                    var infoBar = document.getElementById('hide-on-datachannel-opened');
-                    if (event.status == 'online') {
-                        infoBar.innerHTML = event.userid + ' is <b>online</b>.';
-                    }
-
-                    if (event.status == 'offline') {
-                        infoBar.innerHTML = event.userid + ' is <b>offline</b>.';
-                    }
-
-                    numberOfConnectedUsers.innerHTML = connection.getAllParticipants().length;
-                };
-
-                var numberOfConnectedUsers = document.getElementById('number-of-connected-users');
-                connection.onopen = function(event) {
-                    var infoBar = document.getElementById('hide-on-datachannel-opened');
-                    infoBar.innerHTML = '<b>' + event.userid + '</b> is ready to collaborate with you.';
-
-                    if (designer.pointsLength <= 0) {
-                        // make sure that remote user gets all drawings synced.
-                        setTimeout(function() {
-                            connection.send('plz-sync-points');
-                        }, 1000);
-                    }
-
-                    numberOfConnectedUsers.innerHTML = connection.getAllParticipants().length;
-
-                    if (connection.isInitiator) {
-                        setTimeout(function() {
-                            designer.renderStream();
-                        }, 1000);
-                    }
-                };
-
-                connection.onclose = connection.onerror = connection.onleave = function() {
-                    numberOfConnectedUsers.innerHTML = connection.getAllParticipants().length;
-                };
-
-                connection.onmessage = function(event) {
-                    if (event.data === 'plz-sync-points') {
-                        designer.sync();
-                        return;
-                    }
-
-                    designer.syncData(event.data);
-                };
-            </script>
-
-            <!--SCRIPT 3-->
-
-            <script>
-                function onOpenRoom() {
-                    // capture canvas-2d stream
-                    // and share in realtime using RTCPeerConnection.addStream
-                    // requires: dev/webrtc-handler.js
-                    designer.captureStream(function(stream) {
-                        connection.attachStreams = [stream];
-                        connection.onstream({
-                            stream: stream
-                        });
-                    });
-                }
-
-                var video = document.querySelector('video');
-
-                connection.onstream = function(event) {
-                    if (connection.isInitiator && event.mediaElement) return;
-
-                    video.style.display = '';
-                    video.srcObject = event.stream;
+            <script src="js/room_connection/connection_manager.js"></script>
 
 
-                };
+            <script src="js/canvas/canvas_stream_manager.js"></script>
 
-                connection.onstreamended = function() {
-                    video.src = null;
-                    video.style.display = 'none';
-                };
-            </script>
 
 
 
