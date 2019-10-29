@@ -30,7 +30,8 @@ video,
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 
-#videoOutput {
+#videoOutput,
+#videoInput {
     display: block !important;
 }
 
@@ -256,7 +257,8 @@ nav #stdbar li {
 */
 
 #name,
-#skills {
+#skills,
+#peer {
     width: 35em;
 }
 
@@ -283,11 +285,7 @@ nav #stdbar li {
 
 /*PER PAGINA VIDEOCALL*/
 
-#usernameInput {
-    width: 100%;
-}
-
-#videocallButton {
+.videocallButton {
     padding-left: 15px;
 }
 
@@ -414,4 +412,25 @@ button {
 
 #page {
     margin-top: 2em;
+}
+
+
+/*MENU IN BASSO*/
+
+.card {
+    margin: 2em;
+    border: 1px solid #ccc;
+    background-color: rgba(143, 148, 153, 0.137);
+}
+
+.card h2 {
+    text-align: center;
+}
+
+.vertical-menu {
+    font-size: 18px;
+}
+
+.collapse.in {
+    margin: 1em 15em 1em 15em;
 }

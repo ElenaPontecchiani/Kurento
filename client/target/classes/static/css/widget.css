@@ -461,6 +461,13 @@ div#comments-popup {
 }
 
 #open-room {
-    width: 50%;
+    width: 30%;
     background: #AAA;
+    font-size: 14px;
+    margin: 0em 0em 0em 0.5em;
+}
+
+#share_room {
+    color: rgba(124, 181, 231, 0.849);
+    ;
 }

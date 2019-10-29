@@ -54,7 +54,7 @@
                     <div id="hide-on-datachannel-opened">
                         Apri la tua room: <b id="room-id"> </b>
 
-                        <button id="open-room">Apri room</button>
+                        <button id="open-room">Apri</button>
                     </div>
                 </div>
             </div>
@@ -166,7 +166,7 @@
             <div class="card">
                 <div class="card-header" id="headingTwo">
                     <h2 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <button class="btn btn-link collapsed vertical-menu" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                         + Registrati
                       </button>
                     </h2>
@@ -175,7 +175,7 @@
                     <div class="card-body">
                         <!--REGISTRAZIONE-->
                         <div id="registerForm" class="page-header">
-                            <h4>Registrazione</h4>
+
                             <p>Compila il form per registrarti nel sistema. Gli altri utenti potranno contattarti attraverso l'username che inserirai.</p>
                             <div class="superRow">
                                 <label class="control-label" for="name">Username personale</label>
@@ -213,31 +213,40 @@
             <div class="card">
                 <div class="card-header" id="headingThree">
                     <h2 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <button class="btn btn-link collapsed vertical-menu" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                         + Chiama
                       </button>
                     </h2>
                 </div>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                     <!--VIDEOCALL-->
-                    <div class="col-md-5">
-                        <h4>Richiedi assistenza</h4>
+                    <div class="superRow">
+
                         <label class="control-label" for="peer">Username destinatario</label>
                         <div class="row">
                             <div id="usernameInput" class="col-md-5">
                                 <input id="peer" name="peer" class="form-control" onkeydown="if (event.keyCode == 13) call();">
                             </div>
-                            <br/> <br/>
-                            <div id="videocallButton">
+
+                            <div class=" col-md-7 text-right">
                                 <a id="call" href="#" class="btn btn-success">
                                     <span class="glyphicon glyphicon-play"></span> Chiama</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="videocallButton">
+                                <br/>
+                                <label class="control-label">Opzioni chiamata</label>
+                                <br> <br/>
                                 <a id="terminate" href="#" class="btn btn-danger">
                                     <span class="glyphicon glyphicon-stop"></span> Stop</a>
                                 <a id="play" href="#" class="btn btn-warning">
                                     <span class="glyphicon glyphicon-play-circle"></span>Replay</a>
                             </div>
-
                         </div>
+
+
+
                     </div>
                 </div>
             </div>

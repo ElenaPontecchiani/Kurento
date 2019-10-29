@@ -185,7 +185,7 @@ document.getElementById('open-room').onclick = function() { //quando premo botto
 
     connection.open(roomid, onOpenRoom);
     //forse da cambiare questo, provare a inserire un p dove setto tx
-    this.parentNode.innerHTML = '<a href="#' + roomid + '" target="_blank">Condividi il link con i tuoi interlocutori!</a>';
+    this.parentNode.innerHTML = '<a id="share_room" href="#' + roomid + '" target="_blank">Condividi il link con i tuoi interlocutori!</a>';
 };
 
 
@@ -232,22 +232,13 @@ if (location.hash.replace('#', '').length) {
 }
 
 connection.onUserStatusChanged = function(event) {
-    var infoBar = document.getElementById('hide-on-datachannel-opened');
-    if (event.status == 'online') {
-        infoBar.innerHTML = event.userid + ' is <b>online</b>.';
-    }
-
-    if (event.status == 'offline') {
-        infoBar.innerHTML = event.userid + ' is <b>offline</b>.';
-    }
 
     numberOfConnectedUsers.innerHTML = connection.getAllParticipants().length;
 };
 
 var numberOfConnectedUsers = document.getElementById('number-of-connected-users');
 connection.onopen = function(event) {
-    var infoBar = document.getElementById('hide-on-datachannel-opened');
-    infoBar.innerHTML = '<b>' + event.userid + '</b> is ready to collaborate with you.';
+
 
     if (designer.pointsLength <= 0) {
         // make sure that remote user gets all drawings synced.
