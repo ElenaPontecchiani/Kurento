@@ -433,11 +433,13 @@ div#comments-popup {
 
 /*resize canvas*/
 
+
+/*
 #canvas_container {
     float: right;
     width: 70%;
     margin-top: 13em;
-}
+}*/
 
 #superior_room {
     color: #ffff;
@@ -451,11 +453,11 @@ div#comments-popup {
 }
 
 #first {
-    width: 40%;
+    width: 60%;
 }
 
 #room-id {
-    width: 35%;
+    width: 40%;
 }
 
 #open-room {

@@ -1,90 +1,35 @@
-var connection = new RTCMultiConnection();
+//METTO ANCHE ROBA CHAT
+//CODICE JS PER LA CHAT
+//Viene utilizzato un server Scaledrone per il processo di signaling, mentre per il resto non serve nessun intermediario
 
-connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
-connection.socketMessageEvent = 'canvas-designer';
-
-connection.enableFileSharing = false;
-connection.session = {
-    audio: true,
-    video: true,
-    data: true
-};
-connection.sdpConstraints.mandatory = {
-    OfferToReceiveAudio: true,
-    OfferToReceiveVideo: true
-};
-connection.dontCaptureUserMedia = true;
-if (location.hash.replace('#', '').length) {
-    var roomid = location.hash.replace('#', '');
-    connection.join(roomid);
+// Genera hash per la chat casuale (codice dopo # nell'URL che identifica univocamente la room)
+if (!location.hash) {
+    location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
 }
-
-connection.onUserStatusChanged = function(event) {
-    var infoBar = document.getElementById('hide-on-datachannel-opened');
-    if (event.status == 'online') {
-        infoBar.innerHTML = event.userid + ' is <b>online</b>.';
-    }
-
-    if (event.status == 'offline') {
-        infoBar.innerHTML = event.userid + ' is <b>offline</b>.';
-    }
-
-    numberOfConnectedUsers.innerHTML = connection.getAllParticipants().length;
-};
-
-var numberOfConnectedUsers = document.getElementById('number-of-connected-users');
-connection.onopen = function(event) {
-    var infoBar = document.getElementById('hide-on-datachannel-opened');
-    infoBar.innerHTML = '<b>' + event.userid + '</b> is ready to collaborate with you.';
-
-    if (designer.pointsLength <= 0) {
-        // make sure that remote user gets all drawings synced.
-        setTimeout(function() {
-            connection.send('plz-sync-points');
-        }, 1000);
-    }
-
-    numberOfConnectedUsers.innerHTML = connection.getAllParticipants().length;
-
-    if (connection.isInitiator) {
-        setTimeout(function() {
-            designer.renderStream();
-        }, 1000);
-    }
-};
-
-connection.onclose = connection.onerror = connection.onleave = function() {
-    numberOfConnectedUsers.innerHTML = connection.getAllParticipants().length;
-};
-
-connection.onmessage = function(event) {
-    if (event.data === 'plz-sync-points') {
-        designer.sync();
-        return;
-    }
-
-    designer.syncData(event.data);
-};
-
-/*ATTACCO ROBA CHAT*/
-
 const chatHash = location.hash.substring(1);
+
+//Utilizzo ScaleDrone
 const drone = new ScaleDrone('yiS12Ts5RdNhebyM');
+//Le room di Scaledrone necessitano del prefisso'observable-'
+const roomName = 'observable-' + chatHash;
+//Room Scaledrone
 const configuration = {
     iceServers: [{
         url: 'stun:stun.l.google.com:19302'
     }]
 };
 
+// RTCPeerConnection: identifica un peer della connessione, tengo ugugale anche per file sharing
 let pc;
 // RTCDataChannel: identifica il canale attraverso il quale scambio dati etc
 let dataChannel;
 
+// Connessione al server Scaledrone per il processo di signaling
 drone.on('open', error => {
     if (error) {
         return console.error(error);
     }
-    room = drone.subscribe(roomid);
+    room = drone.subscribe(roomName);
     room.on('open', error => {
         if (error) {
             return console.error(error);
@@ -105,7 +50,7 @@ drone.on('open', error => {
 //Invio dei segnali attraverso Scaledrone
 function sendSignalingMessage(message) {
     drone.publish({
-        room: roomId,
+        room: roomName,
         message
     });
 }
@@ -225,3 +170,110 @@ form.addEventListener('submit', () => {
 });
 
 insertMessageToDOM({ content: 'Registrati e contatta un utente per iniziare a chattare!' });
+
+
+document.getElementById("room-id").innerHTML = chatHash;
+
+
+
+//ROOM MANAGER
+document.getElementById('open-room').onclick = function() { //quando premo bottone
+    var roomid = chatHash;
+    //if (!roomid.length) return alert('Please enter roomid.');
+
+    this.disabled = true;
+
+    connection.open(roomid, onOpenRoom);
+    //forse da cambiare questo, provare a inserire un p dove setto tx
+    this.parentNode.innerHTML = '<a href="#' + roomid + '" target="_blank">Condividi il link con i tuoi interlocutori!</a>';
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var connection = new RTCMultiConnection();
+
+connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
+connection.socketMessageEvent = 'canvas-designer';
+
+connection.enableFileSharing = false;
+connection.session = {
+    audio: true,
+    video: true,
+    data: true
+};
+connection.sdpConstraints.mandatory = {
+    OfferToReceiveAudio: true,
+    OfferToReceiveVideo: true
+};
+connection.dontCaptureUserMedia = true;
+if (location.hash.replace('#', '').length) {
+    var roomid = location.hash.replace('#', '');
+    connection.join(roomid);
+}
+
+connection.onUserStatusChanged = function(event) {
+    var infoBar = document.getElementById('hide-on-datachannel-opened');
+    if (event.status == 'online') {
+        infoBar.innerHTML = event.userid + ' is <b>online</b>.';
+    }
+
+    if (event.status == 'offline') {
+        infoBar.innerHTML = event.userid + ' is <b>offline</b>.';
+    }
+
+    numberOfConnectedUsers.innerHTML = connection.getAllParticipants().length;
+};
+
+var numberOfConnectedUsers = document.getElementById('number-of-connected-users');
+connection.onopen = function(event) {
+    var infoBar = document.getElementById('hide-on-datachannel-opened');
+    infoBar.innerHTML = '<b>' + event.userid + '</b> is ready to collaborate with you.';
+
+    if (designer.pointsLength <= 0) {
+        // make sure that remote user gets all drawings synced.
+        setTimeout(function() {
+            connection.send('plz-sync-points');
+        }, 1000);
+    }
+
+    numberOfConnectedUsers.innerHTML = connection.getAllParticipants().length;
+
+    if (connection.isInitiator) {
+        setTimeout(function() {
+            designer.renderStream();
+        }, 1000);
+    }
+};
+
+connection.onclose = connection.onerror = connection.onleave = function() {
+    numberOfConnectedUsers.innerHTML = connection.getAllParticipants().length;
+};
+
+connection.onmessage = function(event) {
+    if (event.data === 'plz-sync-points') {
+        designer.sync();
+        return;
+    }
+
+    designer.syncData(event.data);
+};

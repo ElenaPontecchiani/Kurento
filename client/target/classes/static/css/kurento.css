@@ -16,7 +16,7 @@ body {
 video,
 #console,
 .democonsole {
-    display: block;
+    display: none;
     font-size: 14px;
     line-height: 1.42857143;
     color: #555;
@@ -28,6 +28,10 @@ video,
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
     -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+#videoOutput {
+    display: block !important;
 }
 
 #console,
@@ -219,7 +223,7 @@ nav #stdbar li {
 
 .page-content {
     width: calc(90% - 17rem);
-    margin-left: 10rem;
+    margin: auto;
     transition: all 0.4s;
     padding: 0em 6em;
     /*mette contenuto registrazione un po' più centrato*/
@@ -241,14 +245,15 @@ nav #stdbar li {
 /*ROBA PER FARE PAGINA MAIN INIZIALE**/
 
 
-/*#videocall,*/
-
+/*
+#videocall,
 #file,
 #content1,
 #intro {
     display: none;
     margin: 3em 0 0 0;
 }
+*/
 
 #name,
 #skills {
@@ -290,17 +295,17 @@ nav #stdbar li {
 /*ROBA PER CHAT*/
 
 #content1 {
-    box-shadow: rgba(156, 172, 172, 0.2) 0px 2px 2px, rgba(156, 172, 172, 0.2) 0px 4px 4px, rgba(156, 172, 172, 0.2) 0px 8px 8px, rgba(156, 172, 172, 0.2) 0px 16px 16px, rgba(156, 172, 172, 0.2) 0px 32px 32px, rgba(156, 172, 172, 0.2) 0px 64px 64px;
-    background-color: rgba(60, 142, 215, 0.41);
+    /*box-shadow: rgba(156, 172, 172, 0.2) 0px 2px 2px, rgba(156, 172, 172, 0.2) 0px 4px 4px, rgba(156, 172, 172, 0.2) 0px 8px 8px, rgba(156, 172, 172, 0.2) 0px 16px 16px, rgba(156, 172, 172, 0.2) 0px 32px 32px, rgba(156, 172, 172, 0.2) 0px 64px 64px;*/
+    /*background-color: rgba(60, 142, 215, 0.41);*/
+    background-color: transparent;
     border-radius: 3px;
-    height: 48vh;
-    max-height: 22em;
-    width: 100vw;
+    border: 1px solid #ccc;
+    height: 370px;
+    width: 23vw;
     max-width: 22em;
     display: flex;
     flex-direction: column;
     left: 0;
-    bottom: -17px;
     position: relative;
 }
 
@@ -376,10 +381,6 @@ button {
 
 /*PROVA PER DISPLAYARE AR IN VIDEO*/
 
-#video {
-    top: 13em;
-}
-
 #wrapper {
     position: relative;
     width: 600px;
@@ -402,7 +403,15 @@ button {
 /*PROVE PER DISPLAYARE CANVAS SOPRA VIDEO*/
 
 #video {
-    top: 22em;
-    left: 9em;
-    z-index: -100;
+    z-index: 100;
+    width: 45%;
+}
+
+#canvas {
+    width: 30%;
+    float: left;
+}
+
+#page {
+    margin-top: 2em;
 }

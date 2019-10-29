@@ -52,10 +52,9 @@
                     Numero di utenti connessi alla room: <b id="number-of-connected-users">0</b>
 
                     <div id="hide-on-datachannel-opened">
-                        <p id="first">Apri una room:</p>
+                        Apri la tua room: <b id="room-id"> </b>
 
-                        <input type="text" id="room-id" placeholder="room-id">
-                        <button id="open-room">Open</button>
+                        <button id="open-room">Apri room</button>
                     </div>
                 </div>
             </div>
@@ -63,128 +62,15 @@
     </header>
 
 
-    <!-- Vertical navbar -->
-
-    <div class="vertical-nav bg-white" id="sidebar">
-        <ul class="nav flex-column bg-white mb-0">
-            <li class="nav-item">
-                <a id="registerButton" href="#" class="nav-link text-dark font-italic bg-light" onclick="registerPage()">
-                    <i class="fa fa-th-large mr-3 text-primary fa-fw"></i> Registrazione
-                </a>
-            </li>
-            <li class="nav-item">
-                <a id="callButton" href="#" class="nav-link text-dark font-italic bg-light" onclick="callPage()">
-                    <i class="fa fa-address-card mr-3 text-primary fa-fw"></i> Videochiamata
-                </a>
-            </li>
-            <!--<li class="nav-item">
-                <a id="fileButton" href="#" class="nav-link text-dark font-italic" onclick="filePage()">
-                    <i class="fa fa-cubes mr-3 text-primary fa-fw"></i> Condividi file
-                </a>
-            </li>-->
-            <li class="nav-item">
-                <a id="helpButton" href="#" class="nav-link text-dark font-italic" onclick="helpPage()">
-                    <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i> Help
-                </a>
-            </li>
-        </ul>
-
-
-    </div>
 
 
 
 
-    <div class="page-content p-5" id="content">
 
-        <!-- End vertical navbar -->
-        <!--FINO A QUI TUTTO OK-->
-        <!--INTRO-->
-        <div id="intro">
-            <h4>Ciao, ti trovi nella sezione introduttiva</h4>
-            <p>Per richiedere il supporto di un tecnico attraverso l'applicazione, svolgi i seguenti passi:</p>
-            <ol>
-                <li>Registrati con un username, selezionando la sezione "registrati" del menù a sinistra. Con tale username riconoscibile all'interno del sistema</li>
-                <li>Ora puoi sfruttare le funzionalità dell'app: portati sulla sezione "videochiamata" per eseguire la tua prima videochiamata. Per videochiamare il tuo interlocutore basterà inserire il suo username quando richiesto.
-                </li>
-                <li>Le chiamate che effettui sono registrate automaticamente. Per riprodurle basterà premere "Replay" nella schermata della videochiamata</li>
-                <li>Per condividire file con il tuo interlocutore portati nella sezione "Condividi file" del menù a sinistra</li>
-                <li>Per iniziare una chat con il tuo interlocutore portati nella sezione "chat" del menù a sinistra</li>
-            </ol>
-
-
-        </div>
-
-        <!--REGISTRAZIONE-->
-        <div id="registerForm" class="page-header">
-            <h4>Registrazione</h4>
-            <p>Compila il form per registrarti nel sistema. Gli altri utenti potranno contattarti attraverso l'username che inserirai.</p>
-            <div class="superRow">
-                <label class="control-label" for="name">Username personale</label>
-                <div class="row">
-                    <div class="col-md-5">
-                        <input id="name" name="name" class="form-control" onkeydown="if (event.keyCode == 13) register();" />
-                    </div>
-                    <div class="col-md-7 text-right">
-                        <a id="register" href="#" class="btn btn-primary"><span
-                                        class="glyphicon glyphicon-plus"></span> Registrati</a>
-                    </div>
-                </div>
-            </div>
-            <div class="superRow">
-                <label class="control-label" for="name">Di cosa hai bisogno?</label>
-                <div class="row">
-                    <div class="col-md-5">
-                        <select id="skills" name="name" class="form-control">
-                                <option value="" disabled selected>Scegli l'opzione</option>
-                                <option value="1">Istruzioni di utilizzo</option>
-                                <option value="2">Istruzioni di correzione</option>
-                                <option value="3">Istruzioni di manutenzione</option>
-                            </select>
-                    </div>
-                    <div class="col-md-7 text-right">
-                        <a id="skills_button" href="#" class="btn btn-primary"><span
-                                    class="glyphicon glyphicon-plus"></span> Aggiungi </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-        <!--VIDEOCALL-->
-
-        <div class="row">
-            <div id="videocall">
-                <div class="col-md-5">
-                    <h4>Richiedi assistenza</h4>
-                    <label class="control-label" for="peer">Username destinatario</label>
-                    <div class="row">
-                        <div id="usernameInput" class="col-md-5">
-                            <input id="peer" name="peer" class="form-control" onkeydown="if (event.keyCode == 13) call();">
-                        </div>
-                        <br/> <br/>
-                        <div id="videocallButton">
-                            <a id="call" href="#" class="btn btn-success">
-                                <span class="glyphicon glyphicon-play"></span> Chiama</a>
-                            <a id="terminate" href="#" class="btn btn-danger">
-                                <span class="glyphicon glyphicon-stop"></span> Stop</a>
-                            <a id="play" href="#" class="btn btn-warning">
-                                <span class="glyphicon glyphicon-play-circle"></span>Replay</a>
-                        </div>
-
-                    </div>
-                </div>
-                <div id="video" class="col-md-7">
-                    <div id="videoBig">
-                        <video id="videoOutput" autoplay width="640px" height="448px" poster="./img/webrtc.png"></video>
-                    </div>
-                    <div id="videoSmall">
-                        <video id="videoInput" autoplay width="240px" height="180px" poster="./img/webrtc.png"></video>
-                    </div>
-                </div>
-            </div>
-
+    <div id="page">
+        <div id="section1" class="row">
+            <!--SEZIONE CHE CONTIENE PRIMA PARTE PAGINA: VIDEO, CHAT E CANVAS-->
+            <!--CANVAS-->
             <div id="canvas">
                 <div id="canvas_container">
                     <script src="js/canvas/canvas_designer.js"></script>
@@ -192,7 +78,16 @@
                 </div>
 
             </div>
-
+            <div id="videocall">
+                <div id="video" class="col-md-5">
+                    <div id="videoBig">
+                        <video id="videoOutput" autoplay width="550px" height="370px" poster="./img/webrtc.png"></video>
+                    </div>
+                    <div id="videoSmall">
+                        <video id="videoInput" autoplay width="200px" height="140px" poster="./img/webrtc.png"></video>
+                    </div>
+                </div>
+            </div>
 
             <!--CHAT-->
             <div id="content1">
@@ -212,19 +107,11 @@
         </div>
         </template>
 
-            <!--<script src="js/chat.js"></script>-->
-
-            <!--CANVAS-->
-
-            <!--SCRIPT CHE SERVE PER LA CONNESSIONE ALLA ROOM-->
 
 
-            <script src="js/room_connection/room_manager.js"></script>
 
-            <script src="js/room_connection/connection_manager.js"></script>
-
-
-            <script src="js/canvas/canvas_stream_manager.js"></script>
+        </div>
+        <div class="page-content p-5" id="content">
 
 
 
@@ -237,6 +124,11 @@
 
 
 
+            <div class="row">
+
+
+                <script src="js/room_connection/connection_manager.js"></script>
+                <script src="js/canvas/canvas_stream_manager.js"></script>
 
 
 
@@ -246,17 +138,142 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
 
 
 
         </div>
 
+        <div class="accordion" id="accordionExample">
+
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        + Registrati
+                      </button>
+                    </h2>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <!--REGISTRAZIONE-->
+                        <div id="registerForm" class="page-header">
+                            <h4>Registrazione</h4>
+                            <p>Compila il form per registrarti nel sistema. Gli altri utenti potranno contattarti attraverso l'username che inserirai.</p>
+                            <div class="superRow">
+                                <label class="control-label" for="name">Username personale</label>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <input id="name" name="name" class="form-control" onkeydown="if (event.keyCode == 13) register();" />
+                                    </div>
+                                    <div class="col-md-7 text-right">
+                                        <a id="register" href="#" class="btn btn-primary"><span
+                                                        class="glyphicon glyphicon-plus"></span> Registrati</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="superRow">
+                                <label class="control-label" for="name">Di cosa hai bisogno?</label>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <select id="skills" name="name" class="form-control">
+                                                <option value="" disabled selected>Scegli l'opzione</option>
+                                                <option value="1">Istruzioni di utilizzo</option>
+                                                <option value="2">Istruzioni di correzione</option>
+                                                <option value="3">Istruzioni di manutenzione</option>
+                                            </select>
+                                    </div>
+                                    <div class="col-md-7 text-right">
+                                        <a id="skills_button" href="#" class="btn btn-primary"><span
+                                                    class="glyphicon glyphicon-plus"></span> Aggiungi </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        + Chiama
+                      </button>
+                    </h2>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <!--VIDEOCALL-->
+                    <div class="col-md-5">
+                        <h4>Richiedi assistenza</h4>
+                        <label class="control-label" for="peer">Username destinatario</label>
+                        <div class="row">
+                            <div id="usernameInput" class="col-md-5">
+                                <input id="peer" name="peer" class="form-control" onkeydown="if (event.keyCode == 13) call();">
+                            </div>
+                            <br/> <br/>
+                            <div id="videocallButton">
+                                <a id="call" href="#" class="btn btn-success">
+                                    <span class="glyphicon glyphicon-play"></span> Chiama</a>
+                                <a id="terminate" href="#" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-stop"></span> Stop</a>
+                                <a id="play" href="#" class="btn btn-warning">
+                                    <span class="glyphicon glyphicon-play-circle"></span>Replay</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
+            <!--<div class="card">
+                <div class="card-header" id="headingFour">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            + Help
+                          </button>
+                    </h2>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                    <!--INTRO
+                    <div id="intro">
+                        <h4>Ciao, ti trovi nella sezione introduttiva</h4>
+                        <p>Per richiedere il supporto di un tecnico attraverso l'applicazione, svolgi i seguenti passi:</p>
+                        <ol>
+                            <li>Registrati con un username, selezionando la sezione "registrati" del menù a sinistra. Con tale username riconoscibile all'interno del sistema</li>
+                            <li>Ora puoi sfruttare le funzionalità dell'app: portati sulla sezione "videochiamata" per eseguire la tua prima videochiamata. Per videochiamare il tuo interlocutore basterà inserire il suo username quando richiesto.
+                            </li>
+                            <li>Le chiamate che effettui sono registrate automaticamente. Per riprodurle basterà premere "Replay" nella schermata della videochiamata</li>
+                            <li>Per condividire file con il tuo interlocutore portati nella sezione "Condividi file" del menù a sinistra</li>
+                            <li>Per iniziare una chat con il tuo interlocutore portati nella sezione "chat" del menù a sinistra</li>
+                        </ol>
+
+
+                    </div>
+                </div>
+            </div>-->
+        </div>
     </div>
     <!--FINE PAGE CONTENT-->
 
 
 </body>
 
-</html>s
+</html>

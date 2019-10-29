@@ -116,7 +116,7 @@ window.onload = function() {
     //console = new Console();
     setRegisterState(NOT_REGISTERED);
     var drag = new Draggabilly(document.getElementById('videoSmall'));
-    var drag1 = new Draggabilly(document.getElementById('content1'));
+    //var drag1 = new Draggabilly(document.getElementById('content1'));
     videoInput = document.getElementById('videoInput');
     videoOutput = document.getElementById('videoOutput');
     document.getElementById('name').focus();

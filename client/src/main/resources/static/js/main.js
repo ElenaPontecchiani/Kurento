@@ -7,10 +7,12 @@ function registerPage() { //funzione che fa display solo della parte di registra
     var video = document.getElementById("videocall");
     var file = document.getElementById("file");
     var chat = document.getElementById("content1");
+    var canvas = document.getElementById("canvas");
     intro.style.display = "none";
     register.style.display = "block";
     video.style.display = "none";
     file.style.display = "none";
+    canvas.style.display = "none";
 }
 
 
@@ -20,10 +22,12 @@ function callPage() { //funzione che fa display solo della parte di call
     var video = document.getElementById("videocall");
     var file = document.getElementById("file");
     var chat = document.getElementById("content1");
+    var canvas = document.getElementById("canvas");
     intro.style.display = "none";
     register.style.display = "none";
     video.style.display = "block";
     file.style.display = "none";
+    canvas.style.display = "block";
 }
 
 
@@ -33,10 +37,12 @@ function filePage() { //funzione che fa display solo della parte di file sharing
     var video = document.getElementById("videocall");
     var file = document.getElementById("file");
     var chat = document.getElementById("content1");
+    var canvas = document.getElementById("canvas");
     intro.style.display = "none";
     register.style.display = "none";
     video.style.display = "none";
     file.style.display = "block";
+    canvas.style.display = "none";
 }
 
 function chatPage() { //funzione che fa display solo della parte di chat
@@ -45,12 +51,16 @@ function chatPage() { //funzione che fa display solo della parte di chat
     var video = document.getElementById("videocall");
     var file = document.getElementById("file");
     var chat = document.getElementById("content1");
+    var canvas = document.getElementById("canvas");
     intro.style.display = "none";
     register.style.display = "none";
     video.style.display = "none";
     file.style.display = "none";
     chat.style.display = "block";
+    canvas.style.height = '0em';
 }
+
+
 
 function helpPage() { //funzione che fa display solo della parte di registrazione
     var intro = document.getElementById("intro");
@@ -58,8 +68,10 @@ function helpPage() { //funzione che fa display solo della parte di registrazion
     var video = document.getElementById("videocall");
     var file = document.getElementById("file");
     var chat = document.getElementById("content1");
+    var canvas = document.getElementById("canvas_container");
     intro.style.display = "block";
     register.style.display = "none";
     video.style.display = "none";
     file.style.display = "none";
+    canvas.style.height = '0em';
 }
