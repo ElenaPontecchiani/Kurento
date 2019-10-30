@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<!--DEMO2-->
+<!--DEMO7-->
+<!--PAGINA INTERNA PRINCIPALE PER CHI VIENE AIUTATO-->
 <html>
 
 <head>
@@ -12,18 +13,31 @@
 
     <link rel="stylesheet" href="webjars/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="webjars/ekko-lightbox/dist/ekko-lightbox.min.css">
-    <link rel="stylesheet" href="././css/kurento.css">
+    <!--<link rel="stylesheet" href="webjars/demo-console/index.css">-->
+    <link rel="stylesheet" type="text/css" href="css/kurento.css">
+    <link rel="stylesheet" type="text/css" href="css/widget.css">
 
     <script src="webjars/jquery/dist/jquery.min.js"></script>
     <script src="webjars/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.scaledrone.com/scaledrone.min.js"></script>
     <script src="webjars/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
     <script src="webjars/draggabilly/draggabilly.pkgd.min.js"></script>
     <script src="/webjars/webrtc-adapter/release/adapter.js"></script>
+    <!--<script src="webjars/demo-console/index.js"></script>-->
+    <!--<script src="js/console.js"></script>-->
+    <script src="js/lib/kurento-utils.js"></script>
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="js/videocall&register.js"></script>
+    <script src="js/main.js"></script>
 
-    <script src="././js/lib/kurento-utils.js"></script>
-    <!--LIBRERIA PER FILE SHARING-->
-    <script src="https://unpkg.com/peerjs@1.0.0/dist/peerjs.min.js"></script>
-    <title>Benvenuto!</title>
+    <!--SCRIPT CANVAS-->
+    <script src="js/canvas/canvas-designer-widget.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.489/build/pdf.min.js"></script>
+    <script src="https://www.webrtc-experiment.com/common.js" async></script>
+    <script src="dev/webrtc-handler.js"></script>
+    <script src="https://rtcmulticonnection.herokuapp.com/dist/RTCMultiConnection.min.js"></script>
+    <script src="https://rtcmulticonnection.herokuapp.com/socket.io/socket.io.js"></script>
+    <title>Demo</title>
 </head>
 
 <body>
@@ -32,23 +46,232 @@
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
-                    <a class="navbar-brand" href="./">Remote guidance application</a>
+                    <a class="navbar-brand" href="./">Richiedi assitenza remota</a>
+                </div>
+
+                <div id="superior_room">
+                    Numero di utenti connessi alla room: <b id="number-of-connected-users">0</b>
+
+                    <div id="hide-on-datachannel-opened">
+                        Apri la tua room: <b id="room-id"> </b>
+
+                        <button id="open-room">Apri</button>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
-    <div class="container">
-        <div class="page-header">
-            <h1>Benvenuto!</h1>
-            <p>Scopri la nostra app di assistenza remota, offri o richiedi supporto tecnico! </p>
-        </div>
-        <div id="indexButton" class="row">
-            <a id="request" href="helperMain.html" class="btn btn-primary"><span
-                    class="glyphicon glyphicon-plus"></span> Fornisci assistenza</a>
-            <a id="offer" href="helpedMain.html" class="btn btn-primary"><span
-                    class="glyphicon glyphicon-plus"></span> Richiedi assistenza</a>
+
+
+    <!-- Vertical navbar -->
+
+    <div class="vertical-nav bg-white" id="sidebar">
+
+
+        <div class="accordion" id="accordionExample">
+
+
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed vertical-menu" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                + Chiama
+                              </button>
+                    </h2>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <!--VIDEOCALL-->
+                    <div class="superRow">
+
+                        <label class="control-label" for="peer">Username destinatario</label>
+                        <div class="row">
+                            <div id="usernameInput" class="col-md-5">
+                                <input id="peer" name="peer" class="form-control" onkeydown="if (event.keyCode == 13) call();">
+                            </div>
+
+                            <div id="callDiv" class=" col-md-7 text-right">
+                                <a id="call" href="#" class="btn btn-success">
+                                    <span class="glyphicon glyphicon-play"></span> Chiama</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="superRow">
+
+                        <label class="control-label">Opzioni chiamata</label>
+                        <div class="row">
+                            <div id="videocallButton">
+                                <a id="terminate" href="#" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-stop"></span> Stop</a>
+                                <a id="play" href="#" class="btn btn-warning">
+                                    <span class="glyphicon glyphicon-play-circle"></span>Replay</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-header" id="headingFour">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed vertical-menu" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    + Help
+                                  </button>
+                    </h2>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                    <!--INTRO-->
+
+                </div>
+            </div>
+
+
+
+            <div class="card">
+                <div class="card-header" id="headingFive">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed vertical-menu" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    + Chat
+                                  </button>
+                    </h2>
+                    <!--CHAT-->
+                    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                        <div id="content1">
+                            <div class="messages">
+
+
+                            </div>
+                            <form id="formChat" class="footer" onsubmit="return false;">
+                                <input type="text" placeholder="Scrivi..">
+                                <button id="textSubmit" class="btn btn-primary" type="submit">Invia</button>
+                            </form>
+                        </div>
+
+                        <template data-template="message">
+                            <div class="message">
+                            <div class="message__bubble"></div>
+                            </div>
+                            </template>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+            <!--<div class="card">
+                <div class="card-header" id="headingSix">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed vertical-menu" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                        + Canvas
+                                      </button>
+                    </h2>
+                    <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+                        <div id="canvas">
+                            <div id="canvas_container">
+                                <script src="js/canvas/canvas_designer.js"></script>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>-->
+
 
         </div>
+
+
     </div>
+
+
+
+
+    <div class="page-content p-5" id="content">
+
+        <!-- End vertical navbar -->
+
+
+
+
+
+
+        <!--VIDEOCALL+canvas-->
+
+        <div class="row">
+
+            <div id="video" class="col-md-7">
+                <div id="videoBig">
+                    <video id="videoOutput" autoplay width="800px" height="470px" poster="./img/webrtc.png"></video>
+                </div>
+                <div id="videoSmall">
+                    <video id="videoInput" autoplay width="280px" height="200px" poster="./img/webrtc.png"></video>
+                </div>
+            </div>
+
+            <div id="canvas">
+                <div id="canvas_container">
+                    <script src="js/canvas/canvas_designer.js"></script>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="js/room_connection/connection_manager.js"></script>
+    <script src="js/canvas/canvas_stream_manager.js"></script>
+
+
+
+
+    <!--FINE PAGE CONTENT-->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLabel">Benvenuto!</h2>
+                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>-->
+                </div>
+                <div class="modal-body">
+                    <!--REGISTRAZIONE-->
+
+                    <div id="registerForm" class="page-header">
+
+                        <p>Compila il form per registrarti nel sistema. Gli altri utenti potranno contattarti attraverso l'username che inserirai.</p>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="superRow">
+                        <label class="control-label" for="name">Username personale</label>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <input id="name" name="name" class="form-control" onkeydown="if (event.keyCode == 13) register();" />
+                            </div>
+                            <div class="col-md-7 text-right">
+                                <a id="register" href="#" class="btn btn-primary" data-dismiss="modal"><span
+                                                                    class="glyphicon glyphicon-plus"></span> Registrati</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </body>
+
 </html>

@@ -120,6 +120,7 @@ window.onload = function() {
     videoInput = document.getElementById('videoInput');
     videoOutput = document.getElementById('videoOutput');
     document.getElementById('name').focus();
+    $('#exampleModal').modal('show');
 }
 
 window.onbeforeunload = function() {
