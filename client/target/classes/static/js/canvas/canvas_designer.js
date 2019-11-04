@@ -1,8 +1,14 @@
 //PRIMA TUTTE LE VARIABILI
 //CANVAS DESIGNER
 var designer = new CanvasDesigner();
-designer.widgetHtmlURL = 'https://www.webrtc-experiment.com/Canvas-Designer/widget.html';
+
+designer.widgetHtmlURL = 'https://51a07e50-50f7-4935-9397-1b6f138f005d.htmlpasta.com'; //quello mio che va
+//quello originale per vedere se va undo-->non va
+
 designer.widgetJsURL = 'https://www.webrtc-experiment.com/Canvas-Designer/widget.js';
+
+
+
 designer.addSyncListener(function(data) {
     connection.send(data);
 });

@@ -1,5 +1,6 @@
 var ws = new WebSocket('wss://' + location.host + '/call');
-var videoInput;
+/*var videoInput = $("#CanvasId").contents().find("#video");
+videoInput.src = "https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4";*/
 var videoOutput;
 var webRtcPeer;
 var from;
@@ -115,9 +116,9 @@ function enableButton(id, functionName) {
 window.onload = function() {
     //console = new Console();
     setRegisterState(NOT_REGISTERED);
-    var drag = new Draggabilly(document.getElementById('videoSmall'));
+    var drag = new Draggabilly(document.getElementById('videoBig'));
     //var drag1 = new Draggabilly(document.getElementById('content1'));
-    videoInput = document.getElementById('videoInput');
+    //videoInput = document.getElementById('videoInput');
     videoOutput = document.getElementById('videoOutput');
     document.getElementById('name').focus();
     $('#exampleModal').modal('show');
@@ -208,7 +209,7 @@ function startCommunication(message) {
 function playResponse(message) {
     if (message.response != 'accepted') {
         hideSpinner(videoOutput);
-        document.getElementById('videoSmall').style.display = 'block';
+        //document.getElementById('videoSmall').style.display = 'block';
         alert(message.error);
         document.getElementById('peer').focus();
         setCallState(POST_CALL);
@@ -236,11 +237,12 @@ function incomingCall(message) {
     setCallState(DISABLED);
     if (confirm('User ' + message.from +
             ' is calling you. Do you accept the call?')) {
-        showSpinner(videoInput, videoOutput);
+        //showSpinner(videoInput, videoOutput);
+        showSpinner(videoOutput);
 
         from = message.from;
         var options = {
-            localVideo: videoInput,
+            //localVideo: videoInput,
             remoteVideo: videoOutput,
             onicecandidate: onIceCandidate
         }
@@ -300,10 +302,11 @@ function call() {
         return;
     }
     setCallState(DISABLED);
-    showSpinner(videoInput, videoOutput);
+    //showSpinner(videoInput, videoOutput);
+    showSpinner(videoOutput);
 
     var options = {
-        localVideo: videoInput,
+        //localVideo: videoInput,
         remoteVideo: videoOutput,
         onicecandidate: onIceCandidate
     }
@@ -340,7 +343,7 @@ function play() {
         return;
     }
 
-    document.getElementById('videoSmall').style.display = 'none';
+    //document.getElementById('videoSmall').style.display = 'none';
     setCallState(DISABLED);
     showSpinner(videoOutput);
 
@@ -371,8 +374,9 @@ function onOfferPlay(error, offerSdp) {
 //ABORT DELLA RIPRODUZIONE
 function playEnd() {
     setCallState(POST_CALL);
-    hideSpinner(videoInput, videoOutput);
-    document.getElementById('videoSmall').style.display = 'block';
+    //hideSpinner(videoInput, videoOutput);
+    hideSpinner(videoOutput);
+    //document.getElementById('videoSmall').style.display = 'block';
 }
 
 //STOP DELLA CHIAMATA, CHIUDE LA CONNESSIONE PER LA CHIAMATA
@@ -390,8 +394,9 @@ function stop(message) {
             sendMessage(message);
         }
     }
-    hideSpinner(videoInput, videoOutput);
-    document.getElementById('videoSmall').style.display = 'block';
+    //hideSpinner(videoInput, videoOutput);
+    hideSpinner(videoOutput);
+    //document.getElementById('videoSmall').style.display = 'block';
 }
 
 function sendMessage(message) {

@@ -169,7 +169,7 @@ form.addEventListener('submit', () => {
     insertMessageToDOM(data, true);
 });
 
-insertMessageToDOM({ content: 'Registrati e contatta un utente per iniziare a chattare!' });
+insertMessageToDOM({ content: 'Apri per iniziare a chattare!' });
 
 
 document.getElementById("room-id").innerHTML = chatHash;
@@ -179,13 +179,9 @@ document.getElementById("room-id").innerHTML = chatHash;
 //ROOM MANAGER
 document.getElementById('open-room').onclick = function() { //quando premo bottone
     var roomid = chatHash;
-    //if (!roomid.length) return alert('Please enter roomid.');
-
     this.disabled = true;
-
     connection.open(roomid, onOpenRoom);
-    //forse da cambiare questo, provare a inserire un p dove setto tx
-    this.parentNode.innerHTML = '<a id="share_room" href="#' + roomid + '" target="_blank">Condividi il link con i tuoi interlocutori!</a>';
+    this.parentNode.innerHTML = '<a id="share_room" href="#' + roomid + '" target="_blank">Condividi il link della room!</a>';
 };
 
 

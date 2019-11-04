@@ -47,8 +47,8 @@ video,
 div#videoSmall {
     padding: 0px;
     position: absolute;
-    top: 15px;
-    left: 400px;
+    left: 889px;
+    top: 84px;
     cursor: pointer;
     z-index: 10;
     padding: 0px;
@@ -219,7 +219,7 @@ nav #stdbar li {
     width: calc(90% - 17rem);
     margin-left: 25rem;
     transition: all 0.4s;
-    padding: 0em 6em;
+    padding: 3em 6em;
     /*mette contenuto registrazione un po' più centrato*/
 }
 
@@ -230,22 +230,6 @@ nav #stdbar li {
 #fileShare {
     margin-top: 2em;
 }
-
-
-/*ROBA PER FARE PAGINA MAIN INIZIALE**/
-
-
-/*#videocall,*/
-
-
-/*
-#file,
-#content1,
-#intro {
-    display: none;
-    margin: 3em 0 0 0;
-}
-*/
 
 #name,
 #skills {
@@ -275,13 +259,6 @@ nav #stdbar li {
 }
 
 
-/*PER NASCONDERE DEMO CONSOLE, DA METTERE SOLO QUANDO VOGLIO VEDERE SE FUNZIA TUTTO OK*/
-
-.democonsole {
-    display: none;
-}
-
-
 /*PER PAGINA VIDEOCALL*/
 
 #usernameInput {
@@ -305,13 +282,13 @@ nav #stdbar li {
     border-radius: 3px;
     height: 48vh;
     max-height: 22em;
-    width: 100vw;
-    max-width: 22em;
+    width: 18em;
+    max-width: 18em;
     display: flex;
     flex-direction: column;
     left: 0;
-    bottom: -17px;
     position: relative;
+    margin: 0em;
 }
 
 .messages {

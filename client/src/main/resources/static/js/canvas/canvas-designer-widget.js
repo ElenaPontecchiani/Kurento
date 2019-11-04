@@ -2,6 +2,7 @@ function CanvasDesigner() {
     var designer = this;
     designer.iframe = null;
 
+
     var tools = {
         line: true,
         arrow: true,
@@ -109,6 +110,7 @@ function CanvasDesigner() {
         callback = callback || function() {};
 
         designer.iframe = document.createElement('iframe');
+        designer.iframe.id = "CanvasId";
 
         // designer load callback
         designer.iframe.onload = function() {
@@ -119,8 +121,8 @@ function CanvasDesigner() {
         designer.iframe.src = designer.widgetHtmlURL + '?widgetJsURL=' + designer.widgetJsURL + '&tools=' + JSON.stringify(tools) + '&selectedIcon=' + selectedIcon + '&icons=' + JSON.stringify(designer.icons);
 
 
-        designer.iframe.style.height = '370px';
-        designer.iframe.style.width = '360px';
+        designer.iframe.style.height = '470px';
+        designer.iframe.style.width = '870px';
         designer.iframe.style.border = '1px solid #ccc';
         designer.iframe.style.margin = '0em 0em 0em 2em';
 
