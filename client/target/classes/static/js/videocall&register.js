@@ -12,6 +12,8 @@ const NOT_REGISTERED = 0;
 const REGISTERING = 1;
 const REGISTERED = 2;
 
+
+
 //SETTER STATO DELA REGISTRAZIONE
 function setRegisterState(nextState) {
     switch (nextState) {

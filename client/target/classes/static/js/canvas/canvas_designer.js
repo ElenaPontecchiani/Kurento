@@ -27,7 +27,7 @@ if (localStorage.getItem('undo-options')) {
 }
 
 document.getElementById('btn-undo').onclick = function() {
-    if (undoOptions.value === 'Pulisci tutta la lavagna') {
+    if (undoOptions.value === 'All Shapes') {
         designer.undo('all');
     } else if (undoOptions.value === 'Last Shape') {
         designer.undo(-1);

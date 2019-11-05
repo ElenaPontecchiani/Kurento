@@ -122,9 +122,9 @@ function CanvasDesigner() {
 
 
         designer.iframe.style.height = '470px';
-        designer.iframe.style.width = '870px';
+        designer.iframe.style.width = '830px';
         designer.iframe.style.border = '1px solid #ccc';
-        designer.iframe.style.margin = '0em 0em 0em 2em';
+        designer.iframe.style.margin = 'auto';
 
 
 

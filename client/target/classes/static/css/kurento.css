@@ -169,7 +169,6 @@ textarea {
     padding-top: 4em;
     min-width: 13rem;
     width: 30rem;
-    height: 100rem;
     position: fixed;
     top: 0;
     left: 0;
@@ -219,8 +218,7 @@ nav #stdbar li {
     width: calc(90% - 17rem);
     margin-left: 25rem;
     transition: all 0.4s;
-    padding: 3em 6em;
-    /*mette contenuto registrazione un po' più centrato*/
+    padding: 1em 8em;
 }
 
 .container {
@@ -282,8 +280,8 @@ nav #stdbar li {
     border-radius: 3px;
     height: 48vh;
     max-height: 22em;
-    width: 18em;
-    max-width: 18em;
+    width: 17em;
+    max-width: 17em;
     display: flex;
     flex-direction: column;
     left: 0;
@@ -336,9 +334,12 @@ nav #stdbar li {
 input {
     border: none;
     flex-grow: 1;
-    padding: 0 1em;
-    font-size: 1.1em;
+    padding: 0 0.4em;
     background: transparent;
+}
+
+#mex_input {
+    width: 60%;
 }
 
 button {
@@ -364,7 +365,7 @@ button {
 /*VERTICAL MENU CARD*/
 
 .card {
-    margin: 0.7em;
+    margin: 0.4em;
     border: 1px solid #ccc;
     background-color: rgba(143, 148, 153, 0.137);
 }
@@ -397,6 +398,6 @@ button {
     text-align: right;
 }
 
-#canvas_container {
-    margin: 3em 0em 0em 0em;
+#canvas {
+    width: 830px;
 }
