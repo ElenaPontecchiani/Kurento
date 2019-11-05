@@ -380,3 +380,19 @@ button {
 .collapse.in {
     margin: 1em 1em 1em 1em;
 }
+
+
+/*BOTTONI UNDO/EXPORT*/
+
+.extra-controls {
+    float: right;
+}
+
+.modal-header .close {
+    margin: -1rem -1rem -1rem auto;
+}
+
+#undo-footer,
+#export-footer {
+    text-align: right;
+}

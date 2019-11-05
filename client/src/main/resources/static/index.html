@@ -165,11 +165,6 @@
                 </div>
             </div>
 
-
-
-
-
-
         </div>
 
 
@@ -179,90 +174,94 @@
     <!-- End vertical navbar -->
 
     <div class="page-content p-5" id="content">
-
-
-
-
-
-
-
-
         <!--VIDEOCALL+canvas-->
-
         <div class="row">
-
-
             <div id="canvas">
-                <div class="extra-controls">
-                    <button id="export-as-image">Export as Image</button>
-                    <button id="btn-display-undo-popup">Undo</button>
-                </div>
-
-                <div id="light" class="white_content">
-                    <button id="btn-close-undo-popup" style="float:right;">x</button>
-
-                    <select id="undo-options" size="4">
-                            <option>Last Shape</option>
-                            <option>All Shapes</option>
-                            <option>Last Multiple</option>
-                            <option disabled>Specific Range</option>
-                        </select>
-
-                    <div style="display: none;margin-top: 20px;margin-bottom: 20px;margin-right: 12px;float: right;">
-                        Digit/Number:<br>
-                        <input type="text" id="number-of-shapes-to-undo" style="padding: 0;width: 90px;text-align: center;border-radius: 0;margin-top: 6px;">
-                    </div>
-
-                    <br><br><br>
-
-                    <button id="btn-undo" style="float:right;">Undo</button>
-                </div>
-
-                <div id="dataURL-popup" class="white_content">
-                    <button id="btn-close-dataURL-popup" style="float:right;">x</button>
-
-                    <select id="data-url-format" size="4">
-                            <option>image/png</option>
-                            <option>image/jpeg</option>
-                            <option>image/gif</option>
-                            <option>image/webp</option>
-                        </select>
-
-                    <a id="link-to-image" target="_blank" download="image.png"></a>
-
-                    <br><br><br><br><br>
-
-                    <button id="btn-getDataURL" style="float:right;">Get DataURL</button>
-                </div>
-
-
-
-
-
-
-
-
                 <div id="canvas_container">
                     <script src="js/canvas/canvas_designer.js"></script>
 
 
+                </div>
+                <!--UNDO/EXPORT-->
+                <div class="extra-controls">
+                    <button id="export-as-image" class="btn btn-info" data-toggle="modal" data-target="#export-modal">Scarica come immagine</button>
+                    <button id="btn-display-undo-popup" class="btn btn-warning" data-toggle="modal" data-target="#undo-modal">Undo</button>
+                </div>
+                <!--UNDO MODAL-->
+                <div id="undo-modal" class="modal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button id="btn-close-undo-popup" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span></button>
+                                <h3 class="modal-title">Undo</h3>
+                            </div>
+                            <div class="modal-body">
+                                <label for="undo-options">Seleziona l'azione</label>
+                                <select id="undo-options" class="form-control" size="2">
+                                    <option>Last Shape</option>
+                                    <option>All Shapes</option>
+                                </select>
+                                <div style="display: none">
+                                    <input type="text" id="number-of-shapes-to-undo">
+                                </div>
+                            </div>
+                            <div id="undo-footer" class="modal-footer">
+                                <button type="button" data-dismiss="modal" class="btn btn-danger">Close</button>
+                                <button id="btn-undo" class="btn btn-info">Undo</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--EXPORT MODAL-->
+                <div id="export-modal" class=" modal">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button id="btn-close-dataURL-popup" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span></button>
+                                <h3 class="modal-title">Export</h3>
 
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="data-url-format">Seleziona il formato</label>
+                                    <select multiple class="form-control" id="data-url-format" size="4">
+                                            <option>image/png</option>
+                                            <option>image/jpeg</option>
+                                            <option>image/gif</option>
+                                            <option>image/webp</option>
+                                            </select>
+                                </div>
+
+
+                            </div>
+                            <div class="modal-footer" id="export-footer">
+                                <a id="link-to-image" class="btn btn-info" target="_blank" download="image.png">Download</a>
+                                <button id="btn-getDataURL" class="btn btn-success">URL</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Chiudi</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
+
             </div>
 
-
-
-            <div id="videoBig">
-                <video id="videoOutput" autoplay width="280px" height="170px" poster="./img/webrtc.png"></video>
-            </div>
-            <!--<div id="videoSmall">
-                <video id="videoInput" autoplay width="280px" height="200px" poster="./img/webrtc.png"></video>
-            </div>-->
         </div>
 
 
+
+        <div id="videoBig">
+            <video id="videoOutput" autoplay width="280px" height="170px" poster="./img/webrtc.png"></video>
+        </div>
+        <!--<div id="videoSmall">
+                <video id="videoInput" autoplay width="280px" height="200px" poster="./img/webrtc.png"></video>
+            </div>-->
     </div>
+
+
+
 
     <script src="js/room_connection/connection_manager.js"></script>
     <script src="js/canvas/canvas_stream_manager.js"></script>

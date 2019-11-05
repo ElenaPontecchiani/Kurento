@@ -35,24 +35,6 @@
     margin: 9px -20px;
 }
 
-#btn-undo,
-#btn-close-undo-popup,
-#btn-close-dataURL-popup,
-#btn-close-comments-popup,
-#btn-getDataURL {
-    font-size: 1.2em;
-    padding: 2px 9px;
-}
-
-#btn-close-undo-popup,
-#btn-close-dataURL-popup,
-#btn-close-comments-popup {
-    padding: 0 6px;
-    border-radius: 50%;
-    padding-bottom: 1px;
-    color: red;
-}
-
 .white_content select {
     font-size: 1.2em;
     border: 1px solid;
@@ -425,9 +407,9 @@ div#comments-popup {
     width: 40%;
 }
 
-#btn-getDataURL {
-    bottom: 0;
-    margin-top: 3em;
+#link-to-image {
+    display: inline !important;
+    margin: 0em;
 }
 
 
