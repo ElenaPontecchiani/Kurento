@@ -54,184 +54,45 @@ div#videoSmall {
     padding: 0px;
 }
 
-div.dragged {
-    cursor: all-scroll !important;
-    border-color: blue !important;
-    z-index: 10 !important;
-}
 
-div.progress,
-div#bitrate {
-    margin: 0.3em 0em 0em 0em;
-}
-
-div.progress p.label2 {
-    display: inline-block;
-    font-weight: 400;
-    width: 8.2em;
-}
-
-
-/*FILE SHARING*/
+/*SERVE PER CHAT*/
 
 form {
     margin: 0 0 1em 0;
     white-space: nowrap;
-}
-
-input[type="file"] {
-    display: none;
-}
-
-.custom-file-upload {
-    border: 1px solid #ccc;
-    cursor: pointer;
-}
-
-
-/*PROGRESS BAR*/
-
-.progress {
-    height: 2.5em;
-    background-color: #ffff;
-    box-shadow: inset 0 1px 2px rgb(255, 255, 255);
-}
-
-#sendProgress,
-#receiveProgress {
-    vertical-align: middle;
-    width: 25em;
-}
-
-#contenitoreProgress {
-    margin: 1.5em 0em 0em 0em;
-}
-
-.col-md-5 {
-    display: block;
-}
-
-.col-md-12 {
-    padding: 0;
-}
-
-#sharing {
-    float: right;
-}
-
-div#send {
-    margin: 2em 2em 1em 0;
-}
-
-#buttons {
-    margin-top: 1.6em;
-}
-
-#messageHeader {
-    margin-top: 1.6em;
-}
-
-div#sendReceive {
-    border-bottom: 1px solid #eee;
-    margin: 0;
-    padding: 0 0 10px 0;
-}
-
-div#sendReceive>div {
-    display: inline-block;
-    width: calc(50% - 20px);
-}
-
-form {
-    margin: 0 0 1em 0;
-    white-space: nowrap;
-}
-
-form span {
-    font-weight: 300;
-    margin: 0 1em 0 0;
-    white-space: normal;
-}
-
-textarea {
-    color: #444;
-    font-size: 0.9em;
-    font-weight: 300;
-    height: 7.0em;
-    padding: 5px;
-    width: calc(100% - 10px);
 }
 
 
 /*SETTAGGIO MENU VERTICALE*/
 
 .vertical-nav {
-    padding-top: 4em;
+    padding-top: 4.5em;
     min-width: 13rem;
     width: 30rem;
     position: fixed;
     top: 0;
     left: 0;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.4s;
-}
-
-nav {
-    width: 17em;
-    /*background-color: #c7c7c7;*/
-    box-shadow: 3px 2px 4px rgba(0, 0, 0, .3);
-    position: relative;
-    text-align: center;
-}
-
-ul {
-    list-style: none;
-    text-decoration: none;
-}
-
-nav #stdbar li a {
-    display: block;
-    padding: 1.2em;
-    height: 100%;
-    background-color: #fafafa;
-    text-decoration: none;
-}
-
-nav #stdbar li a:hover {
-    background-color: #0277bd;
-    color: white;
-}
-
-nav #stdbar li a:active {
-    background-color: rgb(48, 100, 153);
-    color: white;
-}
-
-nav #stdbar li {
-    margin: 0.5em 0;
+    background-color: #1d5faa;
+    border-color: #0f529e;
 }
 
 
 /*PAGINA PRINCIPALE*/
 
 .page-content {
-    width: calc(90% - 17rem);
+    /*width: calc(90% - 17rem);*/
     margin-left: 25rem;
     transition: all 0.4s;
-    padding: 1em 8em;
+    padding: 2em 8em;
+    background-color: #74A9D478;
 }
 
-.container {
-    width: 100% !important;
-}
 
-#fileShare {
-    margin-top: 2em;
-}
+/*per modal benevenuto*/
 
-#name,
-#skills {
-    width: 20em;
+#name {
+    width: 30em;
 }
 
 .page-header {
@@ -243,45 +104,18 @@ nav #stdbar li {
     text-align: left;
 }
 
-#infoFile,
-#progress {
-    width: 100%;
-}
-
-#intro {
-    margin-top: 3em;
-}
-
-#indexButton {
-    margin: 0em;
-}
-
-
-/*PER PAGINA VIDEOCALL*/
-
-#usernameInput {
-    width: 60%;
-}
-
-#callDiv {
-    width: 30%;
-}
-
-#videocallButton {
-    padding-left: 15px;
-}
-
 
 /*ROBA PER CHAT*/
 
 #content1 {
-    box-shadow: rgba(156, 172, 172, 0.2) 0px 2px 2px, rgba(156, 172, 172, 0.2) 0px 4px 4px, rgba(156, 172, 172, 0.2) 0px 8px 8px, rgba(156, 172, 172, 0.2) 0px 16px 16px, rgba(156, 172, 172, 0.2) 0px 32px 32px, rgba(156, 172, 172, 0.2) 0px 64px 64px;
-    background-color: rgba(60, 142, 215, 0.41);
+    /*box-shadow: rgba(156, 172, 172, 0.2) 0px 2px 2px, rgba(156, 172, 172, 0.2) 0px 4px 4px, rgba(156, 172, 172, 0.2) 0px 8px 8px, rgba(156, 172, 172, 0.2) 0px 16px 16px, rgba(156, 172, 172, 0.2) 0px 32px 32px, rgba(156, 172, 172, 0.2) 0px 64px 64px;*/
+    /*background-color: rgba(60, 142, 215, 0.41);*/
+    background-color: #74A9D478;
     border-radius: 3px;
     height: 48vh;
     max-height: 22em;
-    width: 17em;
-    max-width: 17em;
+    width: 19em;
+    max-width: 19em;
     display: flex;
     flex-direction: column;
     left: 0;
@@ -320,7 +154,7 @@ nav #stdbar li {
 }
 
 .message--mine .message__bubble {
-    background: rgba(208, 138, 214, 0.61);
+    background: rgba(201, 228, 52, 0.753);
     margin: 0.2em;
 }
 
@@ -342,23 +176,9 @@ input {
     width: 60%;
 }
 
-button {
-    border: none;
-    background: transparent;
-    padding: 0 1em;
-    font-size: 1.1em;
-    cursor: pointer;
-}
-
 #textSubmit {
     margin-right: 0.5em;
     margin-top: 0.5em;
-}
-
-#command_bar {
-    width: 20%;
-    float: left;
-    margin: 0.3em;
 }
 
 
@@ -366,12 +186,16 @@ button {
 
 .card {
     margin: 0.4em;
-    border: 1px solid #ccc;
-    background-color: rgba(143, 148, 153, 0.137);
+    border: 1px solid transparent;
+    background-color: #317dd4;
 }
 
 .card h2 {
     text-align: center;
+}
+
+.card button {
+    color: white;
 }
 
 .vertical-menu {
@@ -379,7 +203,7 @@ button {
 }
 
 .collapse.in {
-    margin: 1em 1em 1em 1em;
+    margin: 1em 0.1em 1em 0.1em;
 }
 
 
@@ -400,4 +224,56 @@ button {
 
 #canvas {
     width: 830px;
+}
+
+
+/*settaggio colori*/
+
+.navbar-inverse {
+    background-color: #1d5faa;
+    border-color: transparent;
+    border-bottom: 0.1em solid #134885;
+}
+
+
+/*serve per navbar*/
+
+.container {
+    width: 100% !important;
+}
+
+#title {
+    font-size: 1.6em;
+    margin: 0.3em 0 0.3em -1em;
+}
+
+.btn-link:hover {
+    color: black;
+}
+
+.navbar-inverse .navbar-text,
+#title {
+    color: #E3F2FD;
+}
+
+#collapseThree,
+#collapseFour {
+    text-align: center
+}
+
+#second {
+    margin: 1.3em 0 0.2em 0;
+}
+
+
+/*per room manager*/
+
+#superior_room {
+    float: right;
+    margin: 0.3em 0 0 0;
+    padding: 15px 0 15px 15px;
+}
+
+#open-room {
+    background: #AAA;
 }
