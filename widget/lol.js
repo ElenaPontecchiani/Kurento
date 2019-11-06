@@ -876,19 +876,19 @@
             function decorateDragLastPath() {
                 var context = getContext("drag-last-path"),
                     image = new Image;
-                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "DragLastPath") }, image.src = 'https://cdn1.imggmi.com/uploads/2019/11/6/d914ad30d54c5aa2fc51c97aa7f19bf7-full.png'
+                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "DragLastPath") }, image.src = data_uris.dragSingle
             }
 
             function decorateDragAllPaths() {
                 var context = getContext("drag-all-paths"),
                     image = new Image;
-                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "DragAllPaths") }, image.src = 'https://cdn1.imggmi.com/uploads/2019/11/6/7d478e7b3f2bf139bec38a4d3e29e4a1-full.png'
+                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "DragAllPaths") }, image.src = data_uris.dragMultiple
             }
 
             function decorateLine() {
                 var context = getContext("line"),
                     image = new Image;
-                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "Line") }, image.src = 'https://cdn1.imggmi.com/uploads/2019/11/6/447484347e4ad5edcae9422ba939d50b-full.png'
+                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "Line") }, image.src = 'https://cdn1.imggmi.com/uploads/2019/11/6/2927656bff6f9754d21025a4695c5ee0-full.png'
                     //image.src = data_uris.line 
 
 
@@ -904,7 +904,7 @@
             function decorateArrow() {
                 var context = getContext("arrow"),
                     image = new Image;
-                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "Arrow") }, image.src = 'https://cdn1.imggmi.com/uploads/2019/11/6/f4be5790f4cf06aa245cfdd90d1c74fd-full.png'
+                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "Arrow") }, image.src = data_uris.arrow
             }
 
             function decoreZoomUp() {
@@ -932,7 +932,7 @@
                     ],
                     context = getContext("pencil-icon"),
                     image = new Image;
-                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "Pencil") }, image.src = 'https://cdn1.imggmi.com/uploads/2019/11/6/f30993624e909a9c6ee5fc14be262674-full.png';
+                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "Pencil") }, image.src = 'https://cdn1.imggmi.com/uploads/2019/11/6/3d358ee59e24c52d0eb20cf09a73af6e-full.png';
                 var pencilContainer = find("pencil-container"),
                     pencilColorContainer = find("pencil-fill-colors"),
                     strokeStyleText = find("pencil-stroke-style"),
@@ -968,7 +968,7 @@
                     ],
                     context = getContext("marker-icon"),
                     image = new Image;
-                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "Marker") }, image.src = 'https://cdn1.imggmi.com/uploads/2019/11/6/c53d267be7420e9a658538a65b68872c-full.png';
+                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "Marker") }, image.src = data_uris.marker;
                 var markerContainer = find("marker-container"),
                     markerColorContainer = find("marker-fill-colors"),
                     strokeStyleText = find("marker-stroke-style"),
@@ -996,43 +996,43 @@
             function decorateEraser() {
                 var context = getContext("eraser-icon"),
                     image = new Image;
-                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "Eraser") }, image.src = 'https://cdn1.imggmi.com/uploads/2019/11/6/5ed055a0c5b540201db070758f57ef88-full.png'
+                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "Eraser") }, image.src = data_uris.eraser
             }
 
             function decorateText() {
                 var context = getContext("text-icon"),
                     image = new Image;
-                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "Text") }, image.src = 'https://cdn1.imggmi.com/uploads/2019/11/6/3938bf4f977e4089de4594a6d8df3138-full.png'
+                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "Text") }, image.src = data_uris.text
             }
 
             function decorateImage() {
                 var context = getContext("image-icon"),
                     image = new Image;
-                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "Image") }, image.src = 'https://cdn1.imggmi.com/uploads/2019/11/6/b7b58b8963d43926a8994ca834f0c99b-full.png'
+                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "Image") }, image.src = data_uris.image
             }
 
             function decoratePDF() {
                 var context = getContext("pdf-icon"),
                     image = new Image;
-                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "Pdf") }, image.src = 'https://cdn1.imggmi.com/uploads/2019/11/6/f6d871e73902f564716bbb9c3a9ce515-full.png'
+                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "Pdf") }, image.src = data_uris.pdf
             }
 
             function decorateArc() {
                 var context = getContext("arc"),
                     image = new Image;
-                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "Arc") }, image.src = 'https://cdn1.imggmi.com/uploads/2019/11/6/b6f8859c6d207c3f1af31e544320f5e1-full.png'
+                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "Arc") }, image.src = data_uris.arc
             }
 
             function decorateRect() {
                 var context = getContext("rectangle"),
                     image = new Image;
-                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "Rectangle") }, image.src = 'https://cdn1.imggmi.com/uploads/2019/11/6/5584c45fb303482fd4a1dc516fe27ab9-full.png'
+                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "Rectangle") }, image.src = data_uris.rectangle
             }
 
             function decorateQuadratic() {
                 var context = getContext("quadratic-curve"),
                     image = new Image;
-                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "QuadraticCurve") }, image.src = 'https://cdn1.imggmi.com/uploads/2019/11/6/0f88531a9b3061dd59a536a7aac75ce7-full.png'
+                image.onload = function() { context.drawImage(image, 4, 4, 32, 32), bindEvent(context, "QuadraticCurve") }, image.src = data_uris.quadratic
             }
 
             function decorateBezier() {
