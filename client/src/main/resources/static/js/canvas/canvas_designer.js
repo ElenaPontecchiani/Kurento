@@ -1,7 +1,7 @@
 //CANVAS DESIGNER
 var designer = new CanvasDesigner();
 
-designer.widgetHtmlURL = 'https://51a07e50-50f7-4935-9397-1b6f138f005d.htmlpasta.com'; //quello mio che va
+designer.widgetHtmlURL = 'https://0744fe88-5af3-4f3e-a847-699340cf4477.htmlpasta.com';
 
 designer.widgetJsURL = 'https://www.webrtc-experiment.com/Canvas-Designer/widget.js';
 

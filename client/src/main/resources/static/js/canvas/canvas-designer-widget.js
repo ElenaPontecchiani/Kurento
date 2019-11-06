@@ -227,6 +227,6 @@ function CanvasDesigner() {
         });
     };
 
-    designer.widgetHtmlURL = 'widget.html';
-    designer.widgetJsURL = 'widget.min.js';
+    //designer.widgetHtmlURL = 'widget.html';
+    //designer.widgetJsURL = 'widget.min.js';
 }
