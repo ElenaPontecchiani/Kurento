@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./img/kurento.png" type="image/png" />
+    <!--CSS-->
+    <!--File nella cartella css-->
+    <link rel="stylesheet" href="webjars/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="webjars/ekko-lightbox/dist/ekko-lightbox.min.css">
+    <!--bootstrap-->
+    <link rel="stylesheet" type="text/css" href="css/kurento.css">
+    <link rel="stylesheet" type="text/css" href="css/widget.css">
+
+    <!--SCRIPT JS-->
+    <!--librerie di supporto-->
+    <script src="webjars/jquery/dist/jquery.min.js"></script>
+    <script src="webjars/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+    <title>Demo</title>
+</head>
+
+<body>
+    <header>
+        <!--HEADER SUPERIORE-->
+        <div id="superior_navbar" class="navbar navbar-inverse navbar-expand-lg navbar-fixed-top">
+            <h1 id="title" class="navbar-brand">Richiedi assitenza remota</h1>
+
+        </div>
+    </header>
+
+
+    <!--VERTICAL NAVBAR-->
+    <!--mettere le voci: registrazione, call, chat, canvas, room -->
+    <div id="accordionExample" class="vertical-nav bg-white accordion">
+        <!--room-->
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed vertical-menu" type="button"> + Registrazione
+                    </button>
+                </h2>
+            </div>
+
+        </div>
+        <!--chiamata-->
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed vertical-menu" type="button">
+                                    + La tua room
+                                  </button>
+                </h2>
+            </div>
+
+        </div>
+        <!--chat-->
+        <div class="card">
+            <div class="card-header" id="headingThree">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed vertical-menu" type="button">
+                                    + Videocall
+                                  </button>
+                </h2>
+            </div>
+        </div>
+        <!--help-->
+        <div class="card">
+            <div class="card-header" id="headingFour">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed vertical-menu" type="button">
+                                + Chat
+                              </button>
+                </h2>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header" id="headingFive">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed vertical-menu" type="button">
+                                    + Canvas
+                                  </button>
+                </h2>
+            </div>
+        </div>
+    </div>
+    <!-- FINE VERTICAL NAVBAR -->
+
+    <!--CONTENUTO PAGINA-->
+    <div id="content">
+        <div id="registrationHelp">
+            <h2>Registrazione</h2>
+            <p>La prima cosa che devi fare per accedere all'applicazione è registrarti con un username univoco con il quale sarai riconosciuto all'interno del sistema. Con tale username gli utenti ti potranno videochiamare e contattare. Il form per l'inserimento
+                dell'username appare attraverso un pop-up quando apri la pagina. Una volta inserito l'username scelto clicca su registrati. Senza l'inserimento dell'username non potrai accedere alle funzionalità dell'applicazione.
+            </p>
+
+        </div>
+        <div id="roomHelp">
+            <h2>La tua room</h2>
+            <p>Una volta registrato nel sistema, per poter comunicare con gli altri utenti e dovrai aprire una room attraverso la quale sarà possibile scambiare dati. Una volta aperta la room per fare in modo che altri utenti si connettano con te basterà
+                condividere il link della room agli stessi, attraverso il bottone che ti trovi sulla navbar laterale di sinistra. Quando gli altri utenti apriranno il link sarete connessi e potrete scambiare dati e usufruire di tutte le funzionalità dell'applicazione.
+            </p>
+
+
+        </div>
+        <div id="videocall">
+            <h2>Videocall</h2>
+            <p>
+                La videocall permette di comunicare real-time con un altro utente via video. Per videochiamare un altro utente basterà inserire l'username dell'utente nel form che trovi nella seconda voce del manù di sinistra, nell'etichetta "Username destinatario".
+                Una volta fatto ciò basterà premere "Chiama". La tua richiesta sarà quindi inoltrata all'utente, al quale comparirà un form che chiede se accettare o meno la connessione. In caso accetti la videochiamata prenderà inizio, in caso contrario
+                ti comparirà un messaggio di errore che ti indica la mancata connessione a causa del rifiuto del destinatario.
+            </p>
+            <p>
+                Quando vuoi terminare la videochiamata sarà sufficiente premere sul bottone Stop per fermare lo stream video. Qualisiasi tra i due utenti può fermare la videochiamata.
+            </p>
+            <p>
+                Tutte le videochiamate effettuate con l'app sono automaticamente registrate all'interno della sesisone instaurata nella room. Questo significa che è possibile in qualisiasi momento visualizzare e riprodurre una chiamata precedentemente effettuata all'interno
+                della room per rivedrela. Per fare ciò basta inserire l'username dell' utente con il quale è stata effettuata la videochiamata e premere su Rec (pulsante giallo di fianco a Stop). L'inserimento dell'username avviene nello stesso form usato
+                per l'inoltro della chiamata.
+            </p>
+
+
+        </div>
+
+        <div id="chatHelp">
+            <h2>Chat</h2>
+            <p>
+                La chat è una funzionalità che ti permette di comunicare real-time via messaggi con il tuo interlocutore. Come le altre funnzionalità, la chat si sblocca solo quando si viene correttamente registrati e si apre una room. Per mandare un messaggio al tuo
+                interlocutore basterà inserire il test nel form di inserimento e premere su invia.
+            </p>
+
+
+        </div>
+        <div id="canvasHelp">
+            <h2>Canvas</h2>
+            <p>La canvas è una funzionalitgà che permette la comunicazione real-time attraverso una lavagna che visualizza in contemporanea i tuoi disegni e quelli del tuo interlocutore. Come le altre funzionalità viene sbloccata solo seguito della registrazione
+                e dell'apertura della room. La canvas possiede i seguenti strumenti:
+                <ul>
+                    <li>Strumenti di disegno, quali: matita, pennarello;</li>
+                    <li>Strumenti per la visualizzazione di file: in formato pdf e png, che sono ridimensionabili. Nel caso dei pdf è possibile sfogliare le pagine;</li>
+                    <li>Drag and drop per spostare l'area di disegno;</li>
+                    <li>Strumenti di disegno di forme geometriche, quali: linee, frecce, cerchi, quadrati e archi;</li>
+                    <li>Strumento per l'inserimento di testo;</li>
+                </ul>
+            </p>
+            <p>
+                Inoltre in basso a destra si trovano dei comandi extra che ti consentono, rispettivamente, di esportare quello che disegni come immagine (nei formati png, jpg, gif, webp) e di esguire l'undo delle operazioni di disegno (dell'ultima figura o di tutte le
+                figure per pulire completamente la lavagna).
+            </p>
+            <p>
+                La canvas funziona in due modalità differenti. Quando non è attiva una videochiamata lo sfondo su cui si va a disegnare è bianco, quando invece è attiva lo sfondo è la videochiamata stessa. In questo modo l'utente è in grado di inserire elementi di realtà
+                aumentata all'interno dello stream video, in modo da arricchire l'esperienza di assistenza, fornendo uno strumento più semplice e intuitivo per fornire comandi, condividere documenti etc.
+            </p>
+
+
+        </div>
+
+
+
+    </div>
+
+</body>
+
+</html>

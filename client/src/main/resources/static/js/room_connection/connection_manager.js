@@ -169,7 +169,7 @@ form.addEventListener('submit', () => {
     insertMessageToDOM(data, true);
 });
 
-insertMessageToDOM({ content: 'Apri per iniziare a chattare!' });
+insertMessageToDOM({ content: 'Apri la room per iniziare a chattare!' });
 
 
 document.getElementById("room-id").innerHTML = chatHash;

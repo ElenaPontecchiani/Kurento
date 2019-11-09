@@ -1,21 +1,16 @@
-/**PER SETTAGGIO COSE CHE BOOTSTRAP NON RIESCE A GESTIRE*/
-
 @CHARSET "UTF-8";
+
+/*generale*/
+
 html {
     position: relative;
     min-height: 100%;
 }
 
-body {
-    padding-top: 3em;
-}
 
+/*VIDEO*/
 
-/*PARTE PER LA CONSOLE*/
-
-video,
-#console,
-.democonsole {
+video {
     display: none;
     font-size: 14px;
     line-height: 1.42857143;
@@ -34,9 +29,6 @@ video,
 #videoInput {
     display: block !important;
 }
-
-
-/*VIDEO*/
 
 #videoBig {
     top: 0;
@@ -62,52 +54,7 @@ form {
     white-space: nowrap;
 }
 
-
-/*SETTAGGIO MENU VERTICALE*/
-
-.vertical-nav {
-    padding-top: 4.5em;
-    min-width: 13rem;
-    width: 30rem;
-    position: fixed;
-    top: 0;
-    left: 0;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
-    background-color: #1d5faa;
-    border-color: #0f529e;
-}
-
-
-/*PAGINA PRINCIPALE*/
-
-.page-content {
-    /*width: calc(90% - 17rem);*/
-    margin-left: 25rem;
-    transition: all 0.4s;
-    padding: 2em 8em;
-    background-color: #74A9D478;
-}
-
-
-/*per modal benevenuto*/
-
-#name {
-    width: 30em;
-}
-
-.page-header {
-    margin: 0em;
-    border: 0em;
-}
-
-.modal-footer {
-    text-align: left;
-}
-
-
-/*ROBA PER CHAT*/
-
-#content1 {
+#chat {
     /*box-shadow: rgba(156, 172, 172, 0.2) 0px 2px 2px, rgba(156, 172, 172, 0.2) 0px 4px 4px, rgba(156, 172, 172, 0.2) 0px 8px 8px, rgba(156, 172, 172, 0.2) 0px 16px 16px, rgba(156, 172, 172, 0.2) 0px 32px 32px, rgba(156, 172, 172, 0.2) 0px 64px 64px;*/
     /*background-color: rgba(60, 142, 215, 0.41);*/
     background-color: #fff;
@@ -182,7 +129,25 @@ input {
 }
 
 
-/*VERTICAL MENU CARD*/
+/*SETTAGGIO MENU VERTICALE*/
+
+.navbar-inverse {
+    background-color: #1d5faa;
+    border-color: transparent;
+    border-bottom: 0.1em solid #134885;
+}
+
+.vertical-nav {
+    margin: 4.5em 0 0 0;
+    min-width: 13rem;
+    width: 30rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    background-color: #1d5faa;
+    border-color: #0f529e;
+}
 
 .card {
     margin: 0.4em;
@@ -206,8 +171,60 @@ input {
     margin: 1em 0.1em 1em 0.1em;
 }
 
+#title {
+    font-size: 1.6em;
+    margin: 0.3em 0 0.3em 0em;
+}
 
-/*BOTTONI UNDO/EXPORT*/
+.btn-link:hover,
+.btn-link:focus {
+    color: black;
+}
+
+.navbar-inverse .navbar-text,
+#title {
+    color: #E3F2FD;
+}
+
+.center {
+    text-align: center;
+}
+
+#second {
+    margin: 1.3em 0 0.2em 0;
+}
+
+#superior_room {
+    float: right;
+    margin: 0.3em 0.5em 0 0;
+    padding: 15px 0 15px 15px;
+}
+
+#share_room {
+    color: #001ccc;
+    text-decoration: underline;
+}
+
+#share_room:hover {
+    color: #000000;
+    text-decoration: none;
+}
+
+#accordionExample {
+    overflow: scroll;
+    height: 93%;
+}
+
+
+/*PAGE CONTENT*/
+
+#content {
+    /*width: calc(90% - 17rem);*/
+    transition: all 0.4s;
+    padding: 2em 8em;
+    margin: 3em 0 0 25rem;
+    background-color: #74A9D478;
+}
 
 .extra-controls {
     float: right;
@@ -227,54 +244,21 @@ input {
 }
 
 
-/*settaggio colori*/
+/*MODAL VARI*/
 
-.navbar-inverse {
-    background-color: #1d5faa;
-    border-color: transparent;
-    border-bottom: 0.1em solid #134885;
+
+/*registrazione*/
+
+#name {
+    width: 30em;
 }
 
-
-/*serve per navbar*/
-
-.container {
-    width: 100% !important;
+#registerForm {
+    margin: 0em;
+    border: 0em;
+    padding: 0em;
 }
 
-#title {
-    font-size: 1.6em;
-    margin: 0.3em 0 0.3em -1em;
-}
-
-.btn-link:hover {
-    color: black;
-}
-
-.navbar-inverse .navbar-text,
-#title {
-    color: #E3F2FD;
-}
-
-#collapseThree,
-#collapseFour,
-#collapseSix {
-    text-align: center
-}
-
-#second {
-    margin: 1.3em 0 0.2em 0;
-}
-
-
-/*per room manager*/
-
-#superior_room {
-    float: right;
-    margin: 0.3em 0 0 0;
-    padding: 15px 0 15px 15px;
-}
-
-#open-room {
-    background: #AAA;
+.modal-footer {
+    text-align: left;
 }
