@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<!--DEMO12-->
-
 <html>
+<!--DEMO 14-->
 
 <head>
     <meta charset="utf-8">
@@ -10,34 +9,32 @@
     <meta http-equiv="expires" content="0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="./img/kurento.png" type="image/png" />
-
+    <!--CSS-->
+    <!--File nella cartella css-->
     <link rel="stylesheet" href="webjars/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="webjars/ekko-lightbox/dist/ekko-lightbox.min.css">
-    <!--<link rel="stylesheet" href="webjars/demo-console/index.css">-->
+    <!--bootstrap-->
     <link rel="stylesheet" type="text/css" href="css/kurento.css">
     <link rel="stylesheet" type="text/css" href="css/widget.css">
 
+    <!--SCRIPT JS-->
+    <!--librerie di supporto-->
     <script src="webjars/jquery/dist/jquery.min.js"></script>
     <script src="webjars/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdn.scaledrone.com/scaledrone.min.js"></script>
     <script src="webjars/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
     <script src="webjars/draggabilly/draggabilly.pkgd.min.js"></script>
     <script src="/webjars/webrtc-adapter/release/adapter.js"></script>
-    <!--<script src="webjars/demo-console/index.js"></script>-->
-    <!--<script src="js/console.js"></script>-->
     <script src="js/lib/kurento-utils.js"></script>
     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <!--script registrazione e inoltro call-->
     <script src="js/videocall&register.js"></script>
-    <script src="js/main.js"></script>
-
-
-
-
-    <!--SCRIPT CANVAS-->
+    <!--script canvas-->
     <script src="js/canvas/canvas-designer-widget.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.489/build/pdf.min.js"></script>
     <script src="https://www.webrtc-experiment.com/common.js" async></script>
     <script src="dev/webrtc-handler.js"></script>
+    <!--script connessione room-->
     <script src="https://rtcmulticonnection.herokuapp.com/dist/RTCMultiConnection.min.js"></script>
     <script src="https://rtcmulticonnection.herokuapp.com/socket.io/socket.io.js"></script>
     <title>Demo</title>
@@ -45,187 +42,133 @@
 
 <body>
     <header>
-        <div class="navbar navbar-inverse navbar-expand-lg navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
-                    <h1 id="title" class="navbar-brand">Richiedi assitenza remota</h1>
-                </div>
-
-                <div id="superior_room" class="navbar-text">
-                    Numero di utenti connessi alla room: <b id="number-of-connected-users">0</b>
-
-
-                </div>
+        <!--HEADER SUPERIORE-->
+        <div id="superior_navbar" class="navbar navbar-inverse navbar-expand-lg navbar-fixed-top">
+            <h1 id="title" class="navbar-brand">Richiedi assitenza remota</h1>
+            <div id="superior_room" class="navbar-text">
+                <p>Numero di utenti connessi alla room:
+                    <b id="number-of-connected-users">0</b></p>
             </div>
         </div>
     </header>
 
 
-    <!-- Vertical navbar -->
-
-    <div class="vertical-nav bg-white" id="sidebar" style="overflow:scroll; height:600px;">
-
-
-        <div class="accordion" id="accordionExample">
-
-
-            <div class="card">
-                <div class="card-header" id="headingThree">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link collapsed vertical-menu" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+    <!--VERTICAL NAVBAR-->
+    <div id="accordionExample" class="vertical-nav bg-white accordion">
+        <!--room-->
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed vertical-menu" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                 + La tua room
                               </button>
-                    </h2>
-                </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                    <p>Condividi l'id della tua room per connetterti con altri utenti</p>
-                    <div id="hide-on-datachannel-opened">
-
-                        <p>L'id della tua room è: <b id="room-id"> </b></p>
-
-                        <button id="open-room" class="btn btn-light"><span
+                </h2>
+            </div>
+            <div id="collapseOne" class="collapse center" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <p>Condividi l'id della tua room per connetterti con altri utenti</p>
+                <div id="hide-on-datachannel-opened">
+                    <p>L'id della tua room è: <b id="room-id"> </b></p>
+                    <button id="open-room" class="btn btn-info"><span
                             class="glyphicon glyphicon-share-alt"></span> Ottieni link condivisibile</button>
-                    </div>
-
-
-
-
-
                 </div>
             </div>
-
-
-            <div class="card">
-                <div class="card-header" id="headingFour">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link collapsed vertical-menu" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+        </div>
+        <!--chiamata-->
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed vertical-menu" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                     + Chiama
                                   </button>
-                    </h2>
-                </div>
-                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-                    <!--VIDEOCALL-->
-                    <div class="superRow">
-
-                        <p>Username destinatario</p>
-                        <div>
-                            <!--<div id="usernameInput" class="col-md-5">-->
-                            <input id="peer" name="peer" class="form-control" onkeydown="if (event.keyCode == 13) call();">
-                            <!--</div>-->
-
-
-                        </div>
-                    </div>
-                    <div id="second" class="superRow">
-
-                        <p>Opzioni chiamata</p>
-                        <div>
-                            <div id="videocallButton">
-                                <a id="call" href="#" class="btn btn-success">
-                                    <span class="glyphicon glyphicon-play"></span> Chiama</a>
-                                <a id="terminate" href="#" class="btn btn-danger">
-                                    <span class="glyphicon glyphicon-stop"></span> Stop</a>
-                                <a id="play" href="#" class="btn btn-warning">
-                                    <span class="glyphicon glyphicon-play-circle"></span>Rec</a>
-                            </div>
-                        </div>
-                    </div>
-
+                </h2>
+            </div>
+            <div id="collapseTwo" class="collapse center" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <p>Username destinatario</p>
+                <input id="peer" name="peer" class="form-control" onkeydown="if (event.keyCode == 13) call();">
+                <br/>
+                <p>Opzioni chiamata</p>
+                <div>
+                    <a id="call" href="#" class="btn btn-info">
+                        <span class="glyphicon glyphicon-play"></span> Chiama</a>
+                    <a id="terminate" href="#" class="btn btn-info">
+                        <span class="glyphicon glyphicon-stop"></span> Stop</a>
+                    <a id="play" href="#" class="btn btn-info">
+                        <span class="glyphicon glyphicon-play-circle"></span> Rec</a>
                 </div>
             </div>
-
-
-
-            <div class="card">
-                <div class="card-header" id="headingFive">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link collapsed vertical-menu" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+        </div>
+        <!--chat-->
+        <div class="card">
+            <div class="card-header" id="headingThree">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed vertical-menu" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                     + Chat
                                   </button>
-                    </h2>
-                    <!--CHAT-->
-                    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
-                        <div id="content1">
-                            <div class="messages">
-
-
-                            </div>
-                            <form id="formChat" class="footer" onsubmit="return false;">
-                                <input id="mex_input" type="text" placeholder="Scrivi..">
-                                <button id="textSubmit" class="btn btn-primary" type="submit"><span
-                                    class="glyphicon glyphicon-arrow-right"></span> Invia</button>
-                            </form>
+                </h2>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div id="chat">
+                        <div class="messages">
                         </div>
+                        <form id="formChat" class="footer" onsubmit="return false;">
+                            <input id="mex_input" type="text" placeholder="Scrivi..">
+                            <button id="textSubmit" class="btn btn-info" type="submit"><span
+                                    class="glyphicon glyphicon-arrow-right"></span> Invia</button>
+                        </form>
+                    </div>
 
-                        <template data-template="message">
+                    <template data-template="message">
                             <div class="message">
                             <div class="message__bubble"></div>
                             </div>
                             </template>
-                    </div>
-
-
                 </div>
             </div>
-
-
-            <div class="card">
-                <div class="card-header" id="headingSix">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link collapsed vertical-menu" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+        </div>
+        <!--help-->
+        <div class="card">
+            <div class="card-header" id="headingFour">
+                <h2 class="mb-0">
+                    <a href="help.html">
+                        <button class="btn btn-link collapsed vertical-menu" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                                 + Help
-                              </button>
-                    </h2>
-                </div>
-                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
-
-
-
-
-
-                </div>
+                              </button></a>
+                </h2>
             </div>
 
         </div>
-
-
     </div>
-
-
-    <!-- End vertical navbar -->
+    <!-- FINE VERTICAL NAVBAR -->
 
     <div class="page-content p-5" id="content">
         <!--VIDEOCALL+canvas-->
         <div class="row">
             <div id="canvas">
+                <!--contenitore lavagna-->
                 <div id="canvas_container">
                     <script src="js/canvas/canvas_designer.js"></script>
-
-
                 </div>
-                <!--UNDO/EXPORT-->
+                <!--comandi undo/export-->
                 <div class="extra-controls">
                     <button id="export-as-image" class="btn btn-info" data-toggle="modal" data-target="#export-modal"><span
-                        class="glyphicon glyphicon-save"></span> Scarica come immagine</button>
+                            class="glyphicon glyphicon-save"></span> Scarica come immagine</button>
                     <button id="btn-display-undo-popup" class="btn btn-info" data-toggle="modal" data-target="#undo-modal"><span
-                        class="glyphicon glyphicon-erase"> </span> Undo</button>
+                            class="glyphicon glyphicon-erase"> </span> Undo</button>
                 </div>
-                <!--UNDO MODAL-->
+                <!--modal undo-->
                 <div id="undo-modal" class="modal" tabindex="-1" role="dialog">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button id="btn-close-undo-popup" type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span></button>
+                                                <span aria-hidden="true">&times;</span></button>
                                 <h3 class="modal-title">Undo</h3>
                             </div>
                             <div class="modal-body">
                                 <label for="undo-options">Seleziona l'azione</label>
                                 <select id="undo-options" class="form-control" size="2">
-                                    <option>Last Shape</option>
-                                    <option>All Shapes</option>
-                                </select>
+                                        <option>Last Shape</option>
+                                        <option>All Shapes</option>
+                                    </select>
                                 <div style="display: none">
                                     <input type="text" id="number-of-shapes-to-undo">
                                 </div>
@@ -237,28 +180,25 @@
                         </div>
                     </div>
                 </div>
-                <!--EXPORT MODAL-->
+                <!--modal export-->
                 <div id="export-modal" class=" modal">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button id="btn-close-dataURL-popup" type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span></button>
+                                            <span aria-hidden="true">&times;</span></button>
                                 <h3 class="modal-title">Export</h3>
-
                             </div>
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="data-url-format">Seleziona il formato</label>
                                     <select multiple class="form-control" id="data-url-format" size="4">
-                                            <option>image/png</option>
-                                            <option>image/jpeg</option>
-                                            <option>image/gif</option>
-                                            <option>image/webp</option>
-                                            </select>
+                                                <option>image/png</option>
+                                                <option>image/jpeg</option>
+                                                <option>image/gif</option>
+                                                <option>image/webp</option>
+                                                </select>
                                 </div>
-
-
                             </div>
                             <div class="modal-footer" id="export-footer">
                                 <a id="link-to-image" class="btn btn-info" target="_blank" download="image.png">Download</a>
@@ -273,9 +213,6 @@
             </div>
 
         </div>
-
-
-
         <div id="videoBig">
             <video id="videoOutput" autoplay width="280px" height="170px" poster="./img/webrtc.png"></video>
         </div>
@@ -283,56 +220,43 @@
                 <video id="videoInput" autoplay width="280px" height="200px" poster="./img/webrtc.png"></video>
             </div>-->
     </div>
-
-
-
-
     <script src="js/room_connection/connection_manager.js"></script>
     <script src="js/canvas/canvas_stream_manager.js"></script>
+    <!--FINE PAGE CONTENT-->
 
 
 
 
     <!--FINE PAGE CONTENT-->
 
-    <!-- Modal -->
+    <!-- MODAL REGISTRAZIONE -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h2 class="modal-title" id="exampleModalLabel">Benvenuto!</h2>
-                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>-->
                 </div>
                 <div class="modal-body">
-                    <!--REGISTRAZIONE-->
-
                     <div id="registerForm" class="page-header">
-
                         <p>Compila il form per registrarti nel sistema. Gli altri utenti potranno contattarti attraverso l'username che inserirai.</p>
-
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <div class="superRow">
-                        <label class="control-label" for="name">Username personale</label>
-                        <div class="row">
-                            <div class="col-md-5">
-                                <input id="name" name="name" class="form-control" onkeydown="if (event.keyCode == 13) register();" />
-                            </div>
-                            <div class="col-md-7 text-right">
-                                <a id="register" href="#" class="btn btn-primary" data-dismiss="modal"><span
+                    <label class="control-label" for="name">Username personale</label>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <input id="name" name="name" class="form-control" onkeydown="if (event.keyCode == 13) register();" />
+                        </div>
+                        <div class="col-md-7 text-right">
+                            <a id="register" href="#" class="btn btn-primary" data-dismiss="modal"><span
                                                                     class="glyphicon glyphicon-plus"></span> Registrati</a>
-                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
-
-
 </body>
 
 </html>

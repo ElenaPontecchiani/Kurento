@@ -7,6 +7,10 @@ html {
     min-height: 100%;
 }
 
+body {
+    background-color: #74A9D478;
+}
+
 
 /*VIDEO*/
 
@@ -216,7 +220,7 @@ input {
 }
 
 
-/*PAGE CONTENT*/
+/*PAGE CONTENT E CONTENTHELP*/
 
 #content {
     /*width: calc(90% - 17rem);*/
@@ -224,6 +228,13 @@ input {
     padding: 2em 8em;
     margin: 3em 0 0 25rem;
     background-color: #74A9D478;
+}
+
+#contentHelp {
+    width: 80%;
+    padding: 4.5em 1em 1em 1em;
+    margin: auto;
+    background-color: white;
 }
 
 .extra-controls {
