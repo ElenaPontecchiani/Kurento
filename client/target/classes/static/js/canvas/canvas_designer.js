@@ -5,7 +5,8 @@ var designer = new CanvasDesigner();
 //designer.widgetHtmlURL = 'https://matchablecanaandog.htmlpasta.com'; //va con videoBig come id video
 //designer.widgetHtmlURL = 'https://passibleantelope.htmlpasta.com';//non va
 //designer.widgetHtmlURL = 'https://repugnantcapybara.htmlpasta.com' //vuoto
-designer.widgetHtmlURL = 'Desktop/STAGE/demo/DEMO2_PIU_RECENTE15.0.acanvasD+call+chat/src/main/resources/static/js/canvas.widget.html' //vuoto
+designer.widgetHtmlURL = 'https://elenapontecchiani.github.io/Kurento/client/src/main/resources/static/widget.html' //vuoto
+
 
 designer.widgetJsURL = 'https://www.webrtc-experiment.com/Canvas-Designer/widget.js';
 

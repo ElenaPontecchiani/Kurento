@@ -5,7 +5,7 @@ var designer = new CanvasDesigner();
 //designer.widgetHtmlURL = 'https://matchablecanaandog.htmlpasta.com'; //va con videoBig come id video
 //designer.widgetHtmlURL = 'https://passibleantelope.htmlpasta.com';//non va
 //designer.widgetHtmlURL = 'https://repugnantcapybara.htmlpasta.com' //vuoto
-designer.widgetHtmlURL = 'https://cdn.jsdelivr.net/gh/ElenaPontecchiani/Kurento/client/src/main/resources/static/widget.html' //vuoto
+designer.widgetHtmlURL = 'https://elenapontecchiani.github.io/Kurento/client/src/main/resources/static/widget.html' //vuoto
 
 
 designer.widgetJsURL = 'https://www.webrtc-experiment.com/Canvas-Designer/widget.js';

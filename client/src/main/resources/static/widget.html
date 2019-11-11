@@ -9,6 +9,18 @@
 
 
     <meta name="description" content="HTML5 Canvas Designer | Muaz Khan – A tool aimed to give you a full-fledged drawing surface and also auto generate appropriate code for you in different formats! Generator/Tool/Editor – 2D API/Context">
+    <!--SCRIPT CHE SERVONO-->
+    <script src="webjars/jquery/dist/jquery.min.js"></script>
+    <script src="webjars/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script src="webjars/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
+
+    <script src="/webjars/webrtc-adapter/release/adapter.js"></script>
+
+    <script src="js/lib/kurento-utils.js"></script>
+
+    <script src="js/videocall&register.js"></script>
+
 
 
 
@@ -537,16 +549,44 @@
             cursor: pointer;
         }
         
-        #video {
+        #videoOutput {
             width: 100%;
+        }
+        
+        #formRegistrazione {
+            padding-left: 10em;
         }
     </style>
 </head>
 
 <body>
-    <div>
+    <div id="formRegistrazione">
 
-        <video id="video" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"></video>
+        <div class="col-md-5">
+            <input id="name" name="name" class="form-control" onkeydown="if (event.keyCode == 13) register();" />
+        </div>
+        <div class="col-md-7 text-right">
+            <a id="register" href="#" class="btn btn-primary" data-dismiss="modal"><span
+                                                    class="glyphicon glyphicon-plus"></span> Registrati</a>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <div>
+        <div id="videoBig">
+            <video id="videoOutput" autoplay width="400px" height="300px" poster="./img/general/webrtc.png"></video>
+        </div>
+        <!--<div id="videoSmall">
+            <video id="videoInput" autoplay width="280px" height="200px" poster="./img/webrtc.png"></video>
+        </div>-->
+
+        <!--<video id="video" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"></video>-->
 
 
 
