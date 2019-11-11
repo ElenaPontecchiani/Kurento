@@ -40,7 +40,7 @@ video {
     z-index: 1;
 }
 
-div#videoSmall {
+div#videoBig {
     padding: 0px;
     position: absolute;
     left: 889px;
@@ -272,4 +272,64 @@ input {
 
 .modal-footer {
     text-align: left;
+}
+
+
+/*HELP PAGE*/
+
+#registrationImage {
+    width: 50em;
+    margin: 0 10em;
+}
+
+#room1Image {
+    width: 25em;
+    margin: 0 4em;
+}
+
+#room2Image {
+    width: 31em;
+}
+
+#videocall1Image {
+    width: 25em;
+}
+
+#videocall2Image {
+    width: 43em;
+}
+
+#videocall3Image {
+    width: 25em;
+    margin: 0 22em;
+}
+
+#videocall4Image {
+    width: 25em;
+    margin: 0 22em;
+}
+
+#chatImage {
+    width: 25em;
+    margin: 0 22em;
+}
+
+#canvas1Image {
+    width: 30em;
+    margin: 0 20em;
+}
+
+#canvas2Image {
+    width: 30em;
+    margin: 0 20em;
+}
+
+#canvas3Image {
+    width: 30em;
+    margin: 0 2em;
+}
+
+#canvas4Image {
+    width: 30em;
+    margin: 0 2.5em;
 }

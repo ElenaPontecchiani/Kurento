@@ -1,7 +1,12 @@
 //CANVAS DESIGNER
 var designer = new CanvasDesigner();
 
-designer.widgetHtmlURL = 'https://0744fe88-5af3-4f3e-a847-699340cf4477.htmlpasta.com';
+//designer.widgetHtmlURL = 'https://0744fe88-5af3-4f3e-a847-699340cf4477.htmlpasta.com'; //QUELLO CHE VA
+//designer.widgetHtmlURL = 'https://matchablecanaandog.htmlpasta.com'; //va con videoBig come id video
+//designer.widgetHtmlURL = 'https://passibleantelope.htmlpasta.com';//non va
+//designer.widgetHtmlURL = 'https://repugnantcapybara.htmlpasta.com' //vuoto
+designer.widgetHtmlURL = 'https://cdn.jsdelivr.net/gh/ElenaPontecchiani/Kurento/client/src/main/resources/static/widget.html' //vuoto
+
 
 designer.widgetJsURL = 'https://www.webrtc-experiment.com/Canvas-Designer/widget.js';
 
@@ -29,7 +34,7 @@ if (localStorage.getItem('undo-options')) {
 document.getElementById('btn-undo').onclick = function() {
     if (undoOptions.value === 'All Shapes') {
         designer.undo('all');
-    } else if (undoOptions.value === 'Last Shape') {
+    } else {
         designer.undo(-1);
     }
 };
@@ -56,6 +61,8 @@ function getDataURL(callback) {
         callback(dataURL, format);
     });
 }
+
+
 
 
 //LINK IMAGE/DOWNLOAD
