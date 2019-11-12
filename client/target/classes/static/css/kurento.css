@@ -32,6 +32,7 @@ video {
 #videoOutput,
 #videoInput {
     display: block !important;
+    margin: 2em auto;
 }
 
 #videoBig {
@@ -40,7 +41,7 @@ video {
     z-index: 1;
 }
 
-div#videoBig {
+div#videoSmall {
     padding: 0px;
     position: absolute;
     left: 889px;

@@ -1,13 +1,10 @@
 //CANVAS DESIGNER
 var designer = new CanvasDesigner();
 
-//designer.widgetHtmlURL = 'https://0744fe88-5af3-4f3e-a847-699340cf4477.htmlpasta.com'; //QUELLO CHE VA
-//designer.widgetHtmlURL = 'https://matchablecanaandog.htmlpasta.com'; //va con videoBig come id video
-//designer.widgetHtmlURL = 'https://passibleantelope.htmlpasta.com';//non va
-//designer.widgetHtmlURL = 'https://repugnantcapybara.htmlpasta.com' //vuoto
-designer.widgetHtmlURL = 'https://elenapontecchiani.github.io/Kurento/client/src/main/resources/static/widget.html' //vuoto
-
-
+//designer.widgetHtmlURL = 'https://0744fe88-5af3-4f3e-a847-699340cf4477.htmlpasta.com'; quello che va
+//designer.widgetHtmlURL = 'https://impressivefather.htmlpasta.com';
+//designer.widgetHtmlURL = 'https://puppyishrockhyrax.htmlpasta.com';
+designer.widgetHtmlURL = 'https://depictivegreyhound.htmlpasta.com'; //sfondo nero e chiusura stream
 designer.widgetJsURL = 'https://www.webrtc-experiment.com/Canvas-Designer/widget.js';
 
 

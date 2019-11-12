@@ -9,18 +9,6 @@
 
 
     <meta name="description" content="HTML5 Canvas Designer | Muaz Khan – A tool aimed to give you a full-fledged drawing surface and also auto generate appropriate code for you in different formats! Generator/Tool/Editor – 2D API/Context">
-    <!--SCRIPT CHE SERVONO-->
-    <script src="webjars/jquery/dist/jquery.min.js"></script>
-    <script src="webjars/bootstrap/dist/js/bootstrap.min.js"></script>
-
-    <script src="webjars/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
-
-    <script src="/webjars/webrtc-adapter/release/adapter.js"></script>
-
-    <script src="js/lib/kurento-utils.js"></script>
-
-    <script src="js/videocall&register.js"></script>
-
 
 
 
@@ -140,7 +128,7 @@
         
         .design-surface {
             background-color: transparent;
-            top: 5em;
+            top: 0;
             position: fixed;
         }
         
@@ -549,56 +537,18 @@
             cursor: pointer;
         }
         
-        #videoOutput {
+        #video {
             width: 100%;
         }
-        
-        #formRegistrazione {
-            padding-left: 10em;
-        }
+        /* #pencil-container {
+            display: none;
+        }*/
     </style>
 </head>
 
 <body>
-    <!--<div id="formRegistrazione">
-
-        <div class="col-md-5">
-            <input id="name" name="name" class="form-control" onkeydown="if (event.keyCode == 13) register();" />
-        </div>
-        <div class="col-md-7 text-right">
-            <a id="register" href="#" class="btn btn-primary" data-dismiss="modal"><span
-                                                    class="glyphicon glyphicon-plus"></span> Registrati</a>
-        </div>
-        <div>
-            <input id="peer" name="peer" class="form-control" onkeydown="if (event.keyCode == 13) call();">
-            <a id="call" href="#" class="btn btn-info">
-                <span class="glyphicon glyphicon-play"></span> Chiama</a>
-            <a id="terminate" href="#" class="btn btn-info">
-                <span class="glyphicon glyphicon-stop"></span> Stop</a>
-            <a id="play" href="#" class="btn btn-info">
-                <span class="glyphicon glyphicon-play-circle"></span> Rec</a>
-        </div>
-    </div>-->
-
-
-
-
-
-
-
-
     <div>
-        <div id="videoBig">
-            <video id="videoOutput" autoplay width="400px" height="300px" poster="./img/general/webrtc.png"></video>
-        </div>
-        <!--<div id="videoSmall">
-            <video id="videoInput" autoplay width="280px" height="200px" poster="./img/webrtc.png"></video>
-        </div>-->
-
-        <!--<video id="video" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"></video>-->
-
-
-
+        <video id="video" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"></video>
     </div>
     <section class="design-surface">
         <canvas id="temp-canvas"></canvas>
@@ -608,23 +558,85 @@
     <!-- toolbox -->
 
     <section id="tool-box" class="tool-box">
-        <button id="lol">+</button>
+        <button id="lol" onclick="MyFunction()">+</button>
+        <button id="lol2" onclick="MyFunction2()">CC</button>
+
+
+
         <script>
-            const constraints = {
-                video: true
-            };
+            function MyFunction() {
+                const video = document.getElementById('video');
+                const button = document.getElementById('lol');
+                let currentStream;
 
-            const video = document.querySelector('video');
+                function stopMediaTracks(stream) {
+                    stream.getTracks().forEach(track => {
+                        track.stop();
+                    });
+                    document.getElementById('video').style.display = "none"
+                }
 
+                button.addEventListener('click', event => {
+                    if (typeof currentStream !== 'undefined') {
+                        stopMediaTracks(currentStream);
+                    }
+                    const videoConstraints = {};
 
-            document.querySelector("#lol").onclick = function(event) {
+                    const constraints = {
+                        video: videoConstraints,
+                        audio: false
+                    };
+                    navigator.mediaDevices
+                        .getUserMedia(constraints)
+                        .then(stream => {
+                            setTimeout(function() {
 
-                navigator.mediaDevices.getUserMedia(constraints).
-                then((stream) => {
-                    video.srcObject = stream
+                                currentStream = stream;
+                                video.srcObject = stream;
+
+                            }, 3000);
+                        });
                 });
+
             }
         </script>
+
+        <script>
+            function MyFunction2() {
+                var div = document.getElementById('pencil-container');
+                div.style.display = "block"
+
+
+            }
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

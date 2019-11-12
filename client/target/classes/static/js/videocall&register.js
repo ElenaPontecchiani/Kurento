@@ -118,7 +118,7 @@ function enableButton(id, functionName) {
 window.onload = function() {
     //console = new Console();
     setRegisterState(NOT_REGISTERED);
-    var drag = new Draggabilly(document.getElementById('videoBig'));
+    //var drag = new Draggabilly(document.getElementById('videoBig'));
     //var drag1 = new Draggabilly(document.getElementById('content1'));
     //videoInput = document.getElementById('videoInput');
     videoOutput = document.getElementById('videoOutput');
@@ -429,7 +429,7 @@ function showSpinner() {
 function hideSpinner() {
     for (var i = 0; i < arguments.length; i++) {
         arguments[i].src = '';
-        arguments[i].poster = './img/webrtc.png';
+        arguments[i].poster = './img/general/webrtc.png';
         arguments[i].style.background = '';
     }
 }
