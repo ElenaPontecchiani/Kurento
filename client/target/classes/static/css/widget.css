@@ -1,3 +1,5 @@
+/*SETTAGGIO CANVAS*/
+
 .design-surface {
     background-color: rgba(60, 142, 215, 0.001) !important;
     z-index: 100 !important;
@@ -15,40 +17,24 @@
 /* toolbox */
 
 .tool-box {
-    border-right: 1px solid #E5E5E5;
     position: absolute;
     top: 0;
     width: 4em;
-    height: 6em;
     background-color: #FBFBFB;
-    overflow: hidden;
     height: 100%;
-    overflow: hidden;
     overflow-y: auto;
-}
-
-.tool-box canvas:hover {
-    box-shadow: none;
-    background: #eeeeee;
-}
-
-.selected-shape {
-    background: #eeeeee!important;
 }
 
 
 /* select */
 
 .allow-select {
-    -webkit-user-select: initial;
-    -moz-user-select: initial;
     user-select: initial
 }
 
 
-/* arc */
+/* gestione pdf */
 
-.arc-range-container,
 #pdf-page-container {
     position: absolute;
     z-index: 1000;
@@ -68,38 +54,7 @@
 }
 
 
-/* context menu */
-
-.btn-007 {
-    font-family: Verdana, arial, helvetica, sans-serif;
-    font-weight: normal;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px;
-    padding: 2px 3px;
-    text-decoration: none;
-    color: rgb(27, 26, 26);
-    display: inline-block;
-    box-shadow: rgb(255, 255, 255) 1px 1px 0px 0px inset;
-    text-shadow: none;
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0.05, rgb(241, 241, 241)), to(rgb(230, 230, 230)));
-    font-size: 13px;
-    border: 1px solid red;
-    outline: none;
-}
-
-.btn-007:hover,
-.btn-007:focus {
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(5%, rgb(221, 221, 221)), to(rgb(250, 250, 250)));
-    border: 1px solid rgb(142, 142, 142);
-}
-
-.btn-007[disabled] {
-    background: rgb(249, 249, 249);
-    border: 1px solid rgb(218, 207, 207);
-    color: rgb(197, 189, 189);
-}
+/* selezione font */
 
 .fontSelect {
     position: relative;
@@ -243,15 +198,6 @@
 }
 
 
-/*ACTION BAR A SINISTRA*/
-
-#command_bar {
-    width: 20%;
-    float: left;
-    margin: 0.3em;
-}
-
-
 /*POP UP PER UNDO*/
 
 #numberUndo {
@@ -260,6 +206,9 @@
     float: right;
     width: 40%;
 }
+
+
+/*POP UP PER EXPORT*/
 
 #link-to-image {
     display: inline !important;

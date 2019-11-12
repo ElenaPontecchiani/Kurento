@@ -12,6 +12,14 @@ body {
 }
 
 
+/*NAVBAR SUPERIORE*/
+
+#title {
+    font-size: 1.6em;
+    margin: 0.3em 0 0.3em 0em;
+}
+
+
 /*VIDEO*/
 
 video {
@@ -35,22 +43,6 @@ video {
     margin: 2em auto;
 }
 
-#videoBig {
-    top: 0;
-    left: 0;
-    z-index: 1;
-}
-
-div#videoSmall {
-    padding: 0px;
-    position: absolute;
-    left: 889px;
-    top: 84px;
-    cursor: pointer;
-    z-index: 10;
-    padding: 0px;
-}
-
 
 /*SERVE PER CHAT*/
 
@@ -60,8 +52,6 @@ form {
 }
 
 #chat {
-    /*box-shadow: rgba(156, 172, 172, 0.2) 0px 2px 2px, rgba(156, 172, 172, 0.2) 0px 4px 4px, rgba(156, 172, 172, 0.2) 0px 8px 8px, rgba(156, 172, 172, 0.2) 0px 16px 16px, rgba(156, 172, 172, 0.2) 0px 32px 32px, rgba(156, 172, 172, 0.2) 0px 64px 64px;*/
-    /*background-color: rgba(60, 142, 215, 0.41);*/
     background-color: #fff;
     border-radius: 3px;
     height: 48vh;
@@ -176,11 +166,6 @@ input {
     margin: 1em 0.1em 1em 0.1em;
 }
 
-#title {
-    font-size: 1.6em;
-    margin: 0.3em 0 0.3em 0em;
-}
-
 .btn-link:hover,
 .btn-link:focus {
     color: black;
@@ -193,10 +178,6 @@ input {
 
 .center {
     text-align: center;
-}
-
-#second {
-    margin: 1.3em 0 0.2em 0;
 }
 
 #superior_room {
@@ -224,23 +205,22 @@ input {
 /*PAGE CONTENT E CONTENTHELP*/
 
 #content {
-    /*width: calc(90% - 17rem);*/
-    transition: all 0.4s;
+    transition: all 0.2s;
     padding: 2em 8em;
     margin: 3em 0 0 25rem;
     background-color: #74A9D478;
 }
 
-#contentHelp {
-    width: 80%;
-    padding: 4.5em 1em 1em 1em;
-    margin: auto;
-    background-color: white;
-}
-
 .extra-controls {
     float: right;
 }
+
+#canvas {
+    width: 830px;
+}
+
+
+/*MODAL (REG, EXPORT, UNDO)*/
 
 .modal-header .close {
     margin: -1rem -1rem -1rem auto;
@@ -250,16 +230,6 @@ input {
 #export-footer {
     text-align: right;
 }
-
-#canvas {
-    width: 830px;
-}
-
-
-/*MODAL VARI*/
-
-
-/*registrazione*/
 
 #name {
     width: 30em;
@@ -277,6 +247,13 @@ input {
 
 
 /*HELP PAGE*/
+
+#contentHelp {
+    width: 80%;
+    padding: 4.5em 1em 1em 1em;
+    margin: auto;
+    background-color: white;
+}
 
 #registrationImage {
     width: 50em;
@@ -300,26 +277,14 @@ input {
     width: 43em;
 }
 
-#videocall3Image {
-    width: 25em;
-    margin: 0 22em;
-}
-
-#videocall4Image {
-    width: 25em;
-    margin: 0 22em;
-}
-
+#videocall3Image,
+#videocall4Image,
 #chatImage {
     width: 25em;
     margin: 0 22em;
 }
 
-#canvas1Image {
-    width: 30em;
-    margin: 0 20em;
-}
-
+#canvas1Image,
 #canvas2Image {
     width: 30em;
     margin: 0 20em;
